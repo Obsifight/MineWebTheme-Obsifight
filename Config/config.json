@@ -1,0 +1,11 @@
+{
+    "name": "ObsiFight",
+    "slug": "Obsifight",
+    "author": "Eywek",
+    "version": "2.0.0",
+    "apiID": -1,
+    "configurations": {},
+    "supported": {
+        "eywek.shop.1": "0.4.0"
+    }
+}
