@@ -52,7 +52,11 @@
         <?= $this->element('navbar') ?>
 
       <!-- Header -->
-        <?= $this->element('header') ?>
+      <?php
+      if(!isset($header) || $header) {
+        echo $this->element('header');
+      }
+      ?>
 
       <!-- Flash -->
       <?php if(!empty($flash_messages)) { ?>
