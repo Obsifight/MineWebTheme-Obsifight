@@ -62,7 +62,7 @@
 						</div>
 
 						<div class="margiv-top10">
-							<button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> Sauvegarder les données</button>
+							<button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> Enregistrer mon numéro</button>
 						</div>
 
 					</form>
