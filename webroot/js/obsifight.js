@@ -117,3 +117,15 @@ e.length > 0 && loadScript("/theme/Obsifight/js/jquery.easypiechart.min.js", fun
     }), jQuery("span", this).attr("style", "line-height:" + t + "px !important; height:" + t + "px; width:" + t + "px"), jQuery("i", this).attr("style", "line-height:" + t + "px !important; height:" + t + "px; width:" + t + "px")
   })
 })
+
+function _sideNav() {
+    jQuery("div.side-nav").each(function() {
+        var e = jQuery("ul", this);
+        jQuery("button", this).bind("click", function() {
+            e.slideToggle(300)
+        })
+    }), jQuery("div.side-nav>ul>li>a.dropdown-toggle").bind("click", function(e) {
+        e.preventDefault(), jQuery(this).next("ul").slideToggle(200), jQuery(this).closest("li").toggleClass("active")
+    })
+}
+_sideNav();

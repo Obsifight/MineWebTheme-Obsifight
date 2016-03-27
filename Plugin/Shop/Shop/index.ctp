@@ -41,6 +41,12 @@
 <section>
   <div class="container">
 
+		<?php if(!empty($flash_messages)) { ?>
+			<div class="container" style="margin-top:-50px;">
+				<?= $flash_messages ?>
+			</div>
+		<?php } ?>
+
   	<div class="row">
 
   		<!-- LEFT -->
@@ -62,37 +68,8 @@
             echo ($i == 0) ? ' style="display:block"' : ' style="display:none"';
             echo '>';
 
-            $category_rank_id = 3;
+            $category_rank_id = 1;
             $cond_ranks = ($category_id == $category_rank_id);
-            $ranks_desc = array(
-              '<ul class="list-unstyled">
-                <li><i class="fa fa-check text-success"></i> ipsum dolor sit amet</li>
-                <li><i class="fa fa-check text-success"></i> consectetur adipiscing</li>
-                <li><i class="glyphicon glyphicon-remove text-danger"></i> tempor incididunt ut</li>
-                <li><i class="fa fa-check text-success"></i> dolore magna aliqua</li>
-                <li><i class="glyphicon glyphicon-remove text-danger"></i> enim ad minim veniam</li>
-                <li><i class="fa fa-check text-success"></i> nostrud exercitation</li>
-                <li><i class="glyphicon glyphicon-remove text-danger"></i> ullamco laboris nisi ut</li>
-              </ul>',
-              '<ul class="list-unstyled">
-                <li><i class="fa fa-check text-success"></i> ipsum dolor sit amet</li>
-                <li><i class="fa fa-check text-success"></i> consectetur adipiscing</li>
-                <li><i class="glyphicon glyphicon-remove text-danger"></i> tempor incididunt ut</li>
-                <li><i class="fa fa-check text-success"></i> dolore magna aliqua</li>
-                <li><i class="glyphicon glyphicon-remove text-danger"></i> enim ad minim veniam</li>
-                <li><i class="fa fa-check text-success"></i> nostrud exercitation</li>
-                <li><i class="glyphicon glyphicon-remove text-danger"></i> ullamco laboris nisi ut</li>
-              </ul>',
-              '<ul class="list-unstyled">
-                <li><i class="fa fa-check text-success"></i> ipsum dolor sit amet</li>
-                <li><i class="fa fa-check text-success"></i> consectetur adipiscing</li>
-                <li><i class="glyphicon glyphicon-remove text-danger"></i> tempor incididunt ut</li>
-                <li><i class="fa fa-check text-success"></i> dolore magna aliqua</li>
-                <li><i class="glyphicon glyphicon-remove text-danger"></i> enim ad minim veniam</li>
-                <li><i class="fa fa-check text-success"></i> nostrud exercitation</li>
-                <li><i class="glyphicon glyphicon-remove text-danger"></i> ullamco laboris nisi ut</li>
-              </ul>'
-            ); // Pour les rangs
             $ranks = array();
 
             foreach ($search_items as $k => $v) {
@@ -148,65 +125,75 @@
 
             if($cond_ranks) { // On affiche le truc perso
 
-              echo '<div class="table-responsive">';
-                echo '<table class="shop-compare table table-bordered" style="border: 0!important;">';
-                  echo '<tbody>';
-                    echo '<tr>';
-                      echo '<td class="text-right shop-compare-title" style="background:transparent;border: 0!important;"></td>';
+							$ranks_desc = Configure::read('Obsi.shop.ranks.desc');
 
-                        foreach ($ranks as $id => $data) {
 
-                          echo '<td class="text-center">';
-                            echo '<a class="shop-compare-item display-item" data-item-id="'.$id.'" href="#">';
-                              echo '<img class="img-responsive" src="'.$data['img'].'" alt="shop first image">';
-                            echo '</a>';
-                          echo '</td>';
 
-                        }
+							echo '<div class="row mega-price-table">';
 
-                    echo '</tr>';
-                    echo '<tr>';
+								echo '<div class="col-md-3 col-sm-6 hidden-sm hidden-xs pricing-desc">';
+									echo '<div class="pricing-title">';
+										echo '<h3>Grades</h3>';
+										echo '<p class="text-muted">Pour chaque budget</p>';
+									echo '</div>';
+									echo '<ul class="list-unstyled">';
+										foreach ($ranks_desc as $carac => $spec) {
+											echo '<li>'.$carac.'</li>';
+										}
+									echo '</ul>';
+								echo '</div>';
 
-                      echo '<td class="text-right shop-compare-title">Prix</td>';
+								$i_item = 0;
+								foreach ($ranks as $id => $data) {
 
-                      foreach ($ranks as $id => $data) {
+									echo '<div class="col-md-3 col-sm-6 block">';
+										echo '<div class="pricing">';
 
-                        echo '<td class="text-center size-20">'.$data['price'].' '.$Configuration->getMoneyName().'</td>';
+											echo '<div class="pricing-head">';
+												echo '<h3>'.$data['name'].'</h3>';
+												echo '<small>1 mois</small>';
+											echo '</div>';
 
-                      }
+											echo '<h4>';
+												echo $data['price'].'<sup>'.$Configuration->getMoneyName().'</sup>';
+											echo '</h4>';
 
-                    echo '</tr>';
+										echo '</div>';
 
-                    echo '<tr>';
+										echo '<ul class="pricing-table list-unstyled">';
 
-                      echo '<td class="text-right shop-compare-title">Caractéristiques</td>';
+											foreach ($ranks_desc as $carac => $spec) {
 
-                      foreach ($ranks_desc as $k => $data) {
-                        echo '<td>';
-                          echo $data;
-                        echo '</td>';
-                      }
+												echo '<li>';
 
-                    echo '</tr>';
+													$bool = $spec[$i_item];
+													if(is_bool($bool)) {
+														if($bool) {
+															echo '<span class="item-have"></span>';
+														} else {
+															echo '<span class="item-no-have"></span>';
+														}
+													} else {
+														echo '<div class="text-center">'.$bool.'</div>';
+													}
 
-                    echo '<tr class="text-center">';
+													echo '<span class="hidden-md hidden-lg">'.$carac.'</span>';
 
-                      echo '<td class="text-right shop-compare-title" style="background:transparent;border: 0!important;"><!-- leave empty --></td>';
+												echo '</li>';
 
-                        foreach ($ranks as $id => $data) {
+											}
 
-                          echo '<td>';
-                            echo '<a class="btn btn-red btn-3d nomargin display-item" data-item-id="'.$id.'"><i class="fa fa-cart-plus"></i> Acheter</a>';
-                          echo '</td>';
+										echo '</ul>';
 
-                        }
+										echo '<a href="#" class="btn btn-primary fullwidth display-item" data-item-id="'.$id.'">Acheter</a>';
 
-                    echo '</tr>';
+									echo '</div>';
 
-                  echo '</tbody>';
-                echo '</table>';
-              echo '</div>';
+								$i_item++;
 
+								}
+
+							echo '</div>';
 
             }
 
@@ -224,6 +211,36 @@
   			</ul>
 
   		</div>
+
+			<style media="screen">
+				span.item-have {
+					background: transparent url('/theme/obsifight/img/item-have.png') no-repeat;
+					-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+					filter: alpha(opacity=100);
+					-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+					filter: alpha(opacity=100);
+					opacity: 1;
+					width: 18px;
+					height: 18px;
+					display: block;
+					margin-right:auto;
+					margin-left: auto;
+				}
+
+				span.item-no-have {
+					background: transparent url('/theme/obsifight/img/item-no-have.png') no-repeat;
+					-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
+					filter: alpha(opacity=20);
+					-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
+					filter: alpha(opacity=20);
+					opacity: 0.2;
+					width: 18px;
+					height: 18px;
+					display: block;
+					margin-right:auto;
+					margin-left: auto;
+				}
+			</style>
 
 
   		<!-- RIGHT -->

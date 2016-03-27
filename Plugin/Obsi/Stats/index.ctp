@@ -317,6 +317,7 @@
               colorByPoint: true,
               <?php
               echo "data: [";
+              if(isset($peakTimes['hours'])) {
                 foreach ($peakTimes['hours'] as $hour => $players) {
 
                   echo "{";
@@ -325,6 +326,7 @@
                   echo "},";
 
                 }
+              }
               echo "]";
 
               ?>
@@ -379,6 +381,7 @@
           colorByPoint: true,
           <?php
           echo "data: [";
+          if(isset($peakTimes['days'])) {
             foreach ($peakTimes['days'] as $day => $players) {
 
               echo "{";
@@ -387,6 +390,7 @@
               echo "},";
 
             }
+          }
           echo "]";
 
           ?>

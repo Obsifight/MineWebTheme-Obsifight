@@ -59,7 +59,7 @@
       ?>
 
       <!-- Flash -->
-      <?php if(!empty($flash_messages)) { ?>
+      <?php if(!empty($flash_messages) && ($this->params['controller'] !== 'shop' || $this->params['action'] != 'index')) { ?>
         <div class="container" style="margin-top:25px;margin-bottom:-70px;">
           <?= $flash_messages ?>
         </div>

@@ -47,9 +47,9 @@
     </p>
 
     <p class="text-center">
-      <a href="http://dev.obsifight.eywek.fr/downloads/ObsiFight.exe"><?= $this->Html->image('windows.png') ?></a>
-      <a href="http://dev.obsifight.eywek.fr/downloads/ObsiFight.jar"><?= $this->Html->image('mac.png') ?></a>
-      <a href="http://dev.obsifight.eywek.fr/downloads/ObsiFight.jar"><?= $this->Html->image('linux.png') ?></a>
+      <a href="<?= $this->Html->url('/dl/ObsiFight.exe') ?>"><?= $this->Html->image('windows.png') ?></a>
+      <a href="<?= $this->Html->url('/dl/ObsiFight.jar') ?>"><?= $this->Html->image('mac.png') ?></a>
+      <a href="<?= $this->Html->url('/dl/ObsiFight.jar') ?>"><?= $this->Html->image('linux.png') ?></a>
     </p>
 
 	</div>
