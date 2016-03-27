@@ -69,6 +69,7 @@
             echo '>';
 
             $category_rank_id = 1;
+						$category_item_id = 5;
             $cond_ranks = ($category_id == $category_rank_id);
             $ranks = array();
 
@@ -85,38 +86,60 @@
 
                 } else {
 
-                  echo '<div class="col-sm-4 col-lg-4 col-md-4">';
-                    echo '<div class="thumbnail">';
-                      if(isset($v['Item']['img_url'])) {
-                        echo '<img src="'.$v['Item']['img_url'].'" alt="">';
-                      }
-                      echo '<div class="caption">';
+									if($v['Item']['category'] == $category_item_id) {
 
-                        echo '<div class="text-center">';
-                          echo '<div class="heading-title heading-border-bottom heading-color" style="display: inline-block;">';
-                          	echo '<h3 style="padding:0;">'.before_display($v['Item']['name']).'</h3>';
-                          echo '</div>';
-                        echo '</div>';
+										echo '<div class="col-md-12">';
+											echo '<div class="thumbnail" style="position:relative;">';
+												echo '<img style="margin-bottom:0;" src="';
+													echo (empty($v['Item']['img_url'])) ? 'http://placeholdit.imgix.net/~text?txtsize=14&txt=646x200&w=646&h=200' : $v['Item']['img_url'];
+												echo '" class="pull-right">';
+												echo '<div class="caption" style="position:absolute;bottom:5px;right:5px;">';
+													echo '<div class="btn-group" role="group">';
+														echo '<button data-item-id="'.$v['Item']['id'].'" class="btn btn-primary btn-3d display-item">Acheter</button>';
+														echo '<button class="btn btn-default disabled" disabled>'.$v['Item']['price'].' '.$Configuration->getMoneyName().'</button>';
+													echo '</div>';
+													echo '<div class="clearfix"></div>';
+												echo '</div>';
+												echo '<div class="clearfix"></div>';
+											echo '</div>';
+										echo '</div>';
 
-                        echo '<div class="text-center">';
-                          echo '<div class="btn-group" role="group">';
-                            if($isConnected AND $Permissions->can('CAN_BUY')) {
-                              echo '<button type="button" class="btn btn-3d btn-success display-item" data-item-id="'.$v['Item']['id'].'">';
-                                echo $Lang->get('SHOP__BUY');
-                              echo '</button>';
-                            }
-                            echo '<button type="button" class="btn btn-teal disabled" disabled>';
-                              echo $v['Item']['price'];
-                              echo ($v['Item']['price'] == 1) ? ' '.$singular_money : ' '.$plural_money;
-                            echo '</button>';
-                          echo '</div>';
-                        echo '</div>';
+									} else {
 
-                        echo '<div class="clearfix"></div>';
+	                  echo '<div class="col-sm-4 col-lg-4 col-md-4">';
+	                    echo '<div class="thumbnail">';
+	                      if(isset($v['Item']['img_url'])) {
+	                        echo '<img src="'.$v['Item']['img_url'].'" alt="">';
+	                      }
+	                      echo '<div class="caption">';
 
-                      echo '</div>';
-                    echo '</div>';
-                  echo '</div>';
+	                        echo '<div class="text-center">';
+	                          echo '<div class="heading-title heading-border-bottom heading-color" style="display: inline-block;">';
+	                          	echo '<h3 style="padding:0;">'.before_display($v['Item']['name']).'</h3>';
+	                          echo '</div>';
+	                        echo '</div>';
+
+	                        echo '<div class="text-center">';
+	                          echo '<div class="btn-group" role="group">';
+	                            if($isConnected AND $Permissions->can('CAN_BUY')) {
+	                              echo '<button type="button" class="btn btn-3d btn-success display-item" data-item-id="'.$v['Item']['id'].'">';
+	                                echo $Lang->get('SHOP__BUY');
+	                              echo '</button>';
+	                            }
+	                            echo '<button type="button" class="btn btn-teal disabled" disabled>';
+	                              echo $v['Item']['price'];
+	                              echo ($v['Item']['price'] == 1) ? ' '.$singular_money : ' '.$plural_money;
+	                            echo '</button>';
+	                          echo '</div>';
+	                        echo '</div>';
+
+	                        echo '<div class="clearfix"></div>';
+
+	                      echo '</div>';
+	                    echo '</div>';
+	                  echo '</div>';
+
+									}
 
                 }
 
