@@ -1,5 +1,11 @@
 <section>
   <div class="container">
+
+    <div class="alert alert-info">
+      Vous ne savez pas <b>comment voter</b> ? C'est simple !
+      <a href="#" data-toggle="modal" data-target="#tutorial" class="btn btn-info pull-right btn-sm" style="margin-top: -8px;">Voir le tutoriel</a>
+    </div>
+
     <div class="block-center">
 
       <div class="row process-wizard process-wizard-danger margin-bottom-60">
@@ -311,3 +317,46 @@
 
   </div>
 </section>
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" id="tutorial">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+        <h4 class="modal-title">Tutoriel de vote</h4>
+      </div>
+      <div class="modal-body">
+        <p>Voici le tutoriel vidéo pour vous expliquer comment voter simplement !</p>
+        <div class="player-vid"></div>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<?= $this->Html->script('html5-video-player') ?>
+<?= $this->Html->css('html5-video-player') ?>
+<script type="text/javascript">
+$(document).ready(function() {
+  $('.player-vid').html5_video({
+    source : {
+      "video/mp4"  : "http://obsifight.net/video/tutorial_vote.mp4",
+    },
+    title: 					'',
+    color: 					'#A94545',
+    width: 					false,
+    poster: 				'/theme/Obsifight/img/tutorial_vote_poster.jpg',
+    buffering_text: 		'Chargement...',
+    autoplay: 				false,
+    play_control: 			true,
+    time_indicator: 		true,
+    volume_control: 		false,
+    share_control: 			false,
+    fullscreen_control: 	true,
+    dblclick_fullscreen: 	true,
+
+    volume: 				0.0,
+
+    show_controls_on_load: 	true,
+    show_controls_on_pause: true,
+  });
+
+});
+</script>
