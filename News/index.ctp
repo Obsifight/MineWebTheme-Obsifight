@@ -179,3 +179,8 @@
       $('#form-comment-fade-out').fadeOut(150)
     }
 </script>
+<style media="screen">
+	p {
+		margin-bottom: 15px;
+	}
+</style>
