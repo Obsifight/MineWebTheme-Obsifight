@@ -64,7 +64,7 @@
             $category_name = $value['Category']['name'];
             $category_id = $value['Category']['id'];
 
-            echo '<div data-category-id='.$category_id.' class="category"';
+            echo '<div data-category-id="'.$category_id.'" class="category"';
             echo ($i == 0) ? ' style="display:block"' : ' style="display:none"';
             echo '>';
 
@@ -75,7 +75,7 @@
             $ranks = array();
 
 						if($category_id == $category_options_id) {
-							echo '<ul class="list-group>';
+							echo '<ul class="list-group">';
 						}
 
             foreach ($search_items as $k => $v) {
@@ -117,7 +117,7 @@
 												echo '<span class="pull-right">';
 													echo '<button class="btn btn-primary btn-3d display-item" style="margin-top:-5px;" data-item-id="'.$v['Item']['id'].'">Acheter</button>';
 												echo '</span>';
-											echo '</h4>'
+											echo '</h4>';
 										echo '</li>';
 
 									} else {
