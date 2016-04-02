@@ -74,10 +74,16 @@
 
           		<div class="row">
 
-                <div class="col-sm-3 text-center">
+                <div class="col-sm-2 text-center">
           				<i class="fa fa-money text-center" style="margin-right:0px;float:none;"></i>
           				<h3 id="user_money"><?= $user['money'] ?></h3>
           				<p><?= ucfirst($Configuration->getMoneyName()) ?></p>
+          			</div>
+
+								<div class="col-sm-2 text-center">
+          				<i class="fa fa-money text-center" style="margin-right:0px;float:none;"></i>
+          				<h3><?= (isset($user['obsi-event_money'])) ? $user['obsi-event_money'] : '0' ?></h3>
+          				<p>Points events</p>
           			</div>
 
           			<div class="col-sm-2 text-center">
@@ -86,7 +92,7 @@
           				<p>Votes</p>
           			</div>
 
-          			<div class="col-sm-3 text-center">
+          			<div class="col-sm-2 text-center">
           				<i class="fa fa-gift text-center" style="margin-right:0px;float:none;"></i>
           				<h3><?= (isset($user['rewards_waited'])) ? $user['rewards_waited'] : '0' ?></h3>
           				<p>Récompenses en attentes</p>

@@ -70,8 +70,13 @@
 
             $category_rank_id = 1;
 						$category_item_id = 5;
+						$category_options_id = 17;
             $cond_ranks = ($category_id == $category_rank_id);
             $ranks = array();
+
+						if($category_id == $category_options_id) {
+							echo '<ul class="list-group>';
+						}
 
             foreach ($search_items as $k => $v) {
 
@@ -103,6 +108,17 @@
 												echo '<div class="clearfix"></div>';
 											echo '</div>';
 										echo '</div>';
+
+									} else if($v['Item']['category'] == $category_options_id) {
+
+										echo '<li class="list-group-item">';
+											echo '<h4 class="list-group-item-heading">';
+												echo $v['Item']['name'];
+												echo '<span class="pull-right">';
+													echo '<button class="btn btn-primary btn-3d display-item" style="margin-top:-5px;" data-item-id="'.$v['Item']['id'].'">Acheter</button>';
+												echo '</span>';
+											echo '</h4>'
+										echo '</li>';
 
 									} else {
 
@@ -145,6 +161,10 @@
 
               }
             }
+
+						if($category_id == $category_options_id) {
+							echo '</ul>';
+						}
 
             if($cond_ranks) { // On affiche le truc perso
 

@@ -45,7 +45,7 @@
 .resp .resp-title {
     height: 70px;
     z-index: 999;
-    background: url(../images/title_bg.png) repeat-x top left;
+    /*background: url(../images/title_bg.png) repeat-x top left;*/
     position: absolute;
     top: 0;
     left: 0;
