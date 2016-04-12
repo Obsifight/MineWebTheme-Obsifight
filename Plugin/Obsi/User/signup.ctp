@@ -39,6 +39,7 @@
 									<i class="ico-append fa fa-envelope"></i>
 									<input type="email" name="email" placeholder="<?= $Lang->get('USER__EMAIL') ?>">
 									<b class="tooltip tooltip-bottom-right">Nécessaire pour vérifier votre compte</b>
+									<input type="hidden" name="email_valided" value="0">
 								</label>
 
 								<label class="input">
@@ -131,44 +132,88 @@
 	</div>
 
 </section>
+<?= $this->Html->script('mailgun_validator') ?>
 <script type="text/javascript">
 
 $(document).ready(function() {
 
-  $('form#signup input[name="pseudo"]').keyup(debounce(function(e){
-      if(this.value.length > 4) {
-        var el = $(this);
-        $.get("<?= $this->Html->url(array('action' => 'check_pseudo')) ?>/"+this.value, function(data) {
-          if(data.statut) {
-            el.removeClass('error');
-            toastr.clear();
-          } else {
-            el.addClass('error');
-            toastr["error"]("Ce pseudo est déjà utilisé !", "Erreur !");
-          }
-        });
+  $('form#signup input[name="pseudo"]').focusout(function(e){
+    var el = $(this);
+    $.get("<?= $this->Html->url(array('action' => 'check_pseudo')) ?>/"+this.value, function(data) {
+      if(data.statut) {
+        el.removeClass('error');
+        toastr.clear();
+      } else {
+        el.addClass('error');
+        toastr["error"]("Ce pseudo est déjà utilisé !", "Erreur !");
       }
-  }, 200));
+    });
+  });
 
-  $('form#signup input[name="email"]').keyup(debounce(function(e){
-      if(this.value.length > 4) {
-        if(validateEmail(this.value)) {
-          var el = $(this);
-          $.get("<?= $this->Html->url(array('action' => 'check_email')) ?>/"+this.value, function(data) {
-            if(data.statut) {
-              el.removeClass('error');
-              toastr.clear();
-            } else {
-              el.addClass('error');
-              toastr["error"](data.error, "Erreur !");
-            }
-          });
+  $('form#signup input[name="email"]').focusout(function(e){
+		var el = $(this);
+    if(validateEmail(this.value)) {
+      $.get("<?= $this->Html->url(array('action' => 'check_email')) ?>/"+this.value, function(data) {
+        if(data.statut) {
+
+				 //Trim string and autocorrect whitespace issues
+				 var elementValue = el.val();
+				 elementValue = $.trim(elementValue);
+				 el.val(elementValue);
+
+				 //Attach event to options
+				 var options = {
+						api_key: 'pubkey-0f5491e5250a78af0ac7d2e413d1e394',
+						in_progress: function(e) {
+							$('input[name="email_valided"]').val('0');
+							console.log('In progress: ', e);
+						},
+						success: function(e) {
+							console.log('Success call: ', e);
+							if(e.is_valid) {
+								$('input[name="email_valided"]').val('1');
+								console.log('Success validation: ', e);
+								toastr.clear();
+								toastr["info"]("Votre email est bien valide !", "Vérification");
+							} else {
+								$('input[name="email_valided"]').val('0');
+								console.log('Error validation: ', e);
+								toastr.clear();
+								toastr["error"]("Votre email est invalide !", "Erreur !");
+							}
+						},
+						error: function(e) {
+							if(e !== 0) {
+								$('input[name="email_valided"]').val('0');
+								console.log('Error: ', e);
+								toastr.clear();
+								toastr["error"]("Votre email est invalide ! "+e, "Erreur !");
+							} else { // erreurs internes
+								$('input[name="email_valided"]').val('1');
+							}
+						},
+					}
+
+				 options.e = e;
+
+				 run_validator(elementValue, options, el);
+
+
+
+          el.removeClass('error');
+          toastr.clear();
         } else {
+					$('input[name="email_valided"]').val('0');
           el.addClass('error');
-          toastr["error"]("Votre email n'a pas un format valide !", "Erreur !");
+          toastr["error"](data.error, "Erreur !");
         }
-      }
-  }, 200));
+      });
+    } else {
+			$('input[name="email_valided"]').val('0');
+      el.addClass('error');
+      toastr["error"]("Votre email n'a pas un format valide !", "Erreur !");
+    }
+  });
 
   $('form#signup input[name="password"]').keyup(debounce(function(e){
 
@@ -235,22 +280,19 @@ $(document).ready(function() {
 
   }, 200));
 
-  $('form#signup input[name="password_confirmation"]').keyup(debounce(function(e){
+  $('form#signup input[name="password_confirmation"]').focusout(function(e){
     var el = $(this);
     var val = el.val();
 
-    if(val.length > 3) {
-
-      if(val != $('form#signup input[name="password"]').val()) {
-        el.addClass('error');
-        toastr.clear();
-        toastr["error"]("Vos mots de passe ne sont pas identiques !", "Erreur !");
-      } else {
-        el.removeClass('error');
-        toastr.clear();
-      }
+    if(val != $('form#signup input[name="password"]').val()) {
+      el.addClass('error');
+      toastr.clear();
+      toastr["error"]("Vos mots de passe ne sont pas identiques !", "Erreur !");
+    } else {
+      el.removeClass('error');
+      toastr.clear();
     }
-  }, 200));
+  });
 
 });
 
@@ -259,6 +301,9 @@ function checkData(data) {
   if(!data['terms']) {
     return {statut:false, msg:'Vous devez accepter le réglement'};
   }
+	if($('input[name="email_valided"]').val() != '1') {
+		return {statut:false, msg:'Vous devez avoir un email valide'};
+	}
 
 }
 

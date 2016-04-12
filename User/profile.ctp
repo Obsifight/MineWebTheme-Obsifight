@@ -199,86 +199,91 @@
 
 				<!-- ObsiGuard TAB -->
 				<div class="tab-pane fade" id="obsiguard">
+					<?php if($confirmed) { ?>
+						<div class="callout alert alert-success margin-bottom-30">
 
-					<div class="callout alert alert-success margin-bottom-30">
-
-						<div class="row">
-
-							<div class="col-md-8 col-sm-8"><!-- left text -->
-								<h4>Voulez-vous <?= ($obsiguardStatus) ? 'désactiver' : 'activer' ?> <strong>ObsiGuard</strong> ?</h4>
-								<p>
-									Cette fonctionnalité vous permet plus de sécurité sur votre compte.
-									<br><a href="#">En savoir plus</a>.
-								</p>
-							</div><!-- /left text -->
-
-
-							<div class="col-md-4 col-sm-4 text-right"><!-- right btn -->
-								<a id="toggleObsiguard" data-status="<?= ($obsiguardStatus) ? '1' : '0' ?>" class="btn btn-<?= ($obsiguardStatus) ? 'danger' : 'success' ?> btn-lg"><?= ($obsiguardStatus) ? 'Désactiver' : 'Activer' ?></a>
-							</div><!-- /right btn -->
-
-						</div>
-
-					</div>
-
-					<div id="obsiguardManage" style="display:<?= ($obsiguardStatus) ? 'block' : 'none' ?>;">
-						<div id="addIP-ajax-msg"></div>
-						<table class="table">
-							<thead>
-								<tr>
-									<th>Vos adresses IPs</th>
-									<th>Action</th>
-								</tr>
-							</thead>
-							<tbody id="ipList">
-								<?php
-
-								if(isset($obsiguardIPs)) {
-									foreach ($obsiguardIPs as $key => $value) {
-
-										echo '<tr id="'.$key.'">';
-											echo '<td>'.$value.'</td>';
-											echo '<td>';
-												echo '<button data-ip-id="'.$key.'" type="button" class="btn btn-danger deleteIP">'.$Lang->get('GLOBAL__DELETE').'</button>';
-											echo '</td>';
-										echo '</tr>';
-
-									}
-								}
-
-								?>
-								<tr>
-									<td>
-										<div class="form-group">
-											<input type="text" class="form-control" name="ip" placeholder="IP">
-										</div>
-									</td>
-									<td>
-										<button onClick="addIP(this)" id="btn-add-ip" class="btn btn-success">Ajouter</button>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-						<p>Votre adresse IP : <i><?= $ip ?></i></p>
-
-						<div class="callout alert alert-info margin-top-30">
 							<div class="row">
-								<div class="col-md-12 col-sm-12"><!-- left text -->
-									<h4>
-										<label class="checkbox" style="font-size: 18px;font-weight:500;">
-											<input type="checkbox" name="dynamic_ip"<?= (isset($obsiguardDynamicIPStatus) && $obsiguardDynamicIPStatus) ? ' checked' : '' ?>>
-											<i></i> &nbsp;&nbsp;J'ai une IP dynamique.
-										</label>
-									</h4>
+
+								<div class="col-md-8 col-sm-8"><!-- left text -->
+									<h4>Voulez-vous <?= ($obsiguardStatus) ? 'désactiver' : 'activer' ?> <strong>ObsiGuard</strong> ?</h4>
 									<p>
-										<small>Si vous activez cette option, toute les IPs que vous avez configurée deviendront des plages d'IPs qui seront autorisés.<br> Par exemple : pour l'IP 127.0.0.1, toutes les IPs 127.0.0.* seront autorisées.</small>
+										Cette fonctionnalité vous permet plus de sécurité sur votre compte.
+										<br><a href="#">En savoir plus</a>.
 									</p>
 								</div><!-- /left text -->
+
+
+								<div class="col-md-4 col-sm-4 text-right"><!-- right btn -->
+									<a id="toggleObsiguard" data-status="<?= ($obsiguardStatus) ? '1' : '0' ?>" class="btn btn-<?= ($obsiguardStatus) ? 'danger' : 'success' ?> btn-lg"><?= ($obsiguardStatus) ? 'Désactiver' : 'Activer' ?></a>
+								</div><!-- /right btn -->
+
 							</div>
 
 						</div>
 
-					</div>
+						<div id="obsiguardManage" style="display:<?= ($obsiguardStatus) ? 'block' : 'none' ?>;">
+							<div id="addIP-ajax-msg"></div>
+							<table class="table">
+								<thead>
+									<tr>
+										<th>Vos adresses IPs</th>
+										<th>Action</th>
+									</tr>
+								</thead>
+								<tbody id="ipList">
+									<?php
+
+									if(isset($obsiguardIPs)) {
+										foreach ($obsiguardIPs as $key => $value) {
+
+											echo '<tr id="'.$key.'">';
+												echo '<td>'.$value.'</td>';
+												echo '<td>';
+													echo '<button data-ip-id="'.$key.'" type="button" class="btn btn-danger deleteIP">'.$Lang->get('GLOBAL__DELETE').'</button>';
+												echo '</td>';
+											echo '</tr>';
+
+										}
+									}
+
+									?>
+									<tr>
+										<td>
+											<div class="form-group">
+												<input type="text" class="form-control" name="ip" placeholder="IP">
+											</div>
+										</td>
+										<td>
+											<button onClick="addIP(this)" id="btn-add-ip" class="btn btn-success">Ajouter</button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							<p>Votre adresse IP : <i><?= $ip ?></i></p>
+
+							<div class="callout alert alert-info margin-top-30">
+								<div class="row">
+									<div class="col-md-12 col-sm-12"><!-- left text -->
+										<h4>
+											<label class="checkbox" style="font-size: 18px;font-weight:500;">
+												<input type="checkbox" name="dynamic_ip"<?= (isset($obsiguardDynamicIPStatus) && $obsiguardDynamicIPStatus) ? ' checked' : '' ?>>
+												<i></i> &nbsp;&nbsp;J'ai une IP dynamique.
+											</label>
+										</h4>
+										<p>
+											<small>Si vous activez cette option, toute les IPs que vous avez configurée deviendront des plages d'IPs qui seront autorisés.<br> Par exemple : pour l'IP 127.0.0.1, toutes les IPs 127.0.0.* seront autorisées.</small>
+										</p>
+									</div><!-- /left text -->
+								</div>
+
+							</div>
+
+						</div>
+					<?php } else { ?>
+						<div class="alert alert-danger">
+							Vous ne pouvez pas utiliser ObsiGuard tant que vous n'avez pas confirmé votre email. 
+						</div>
+					<?php } ?>
 
 				</div>
 				<!-- /ObsiGuard TAB -->
