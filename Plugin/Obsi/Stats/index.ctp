@@ -118,7 +118,7 @@
 
             <div class="col-md-4">
               <div class="stats-block">
-                <h4 class="countTo" data-speed="5000"><?= $banner_server ?></h4>
+                <h4 class="countTo" data-speed="5000"><?= $server_infos['getPlayerCount'] ?></h4>
                 <p>Joueurs en ligne</p>
               </div>
             </div>

@@ -97,7 +97,7 @@
 
 		<div class="col-xs-6 col-sm-3">
 			<i class="fa fa-child fa-4x"></i>
-			<h2 class="countTo font-raleway" data-speed="5000"><?= ($banner_server) ? $banner_server : '0' ?></h2>
+			<h2 class="countTo font-raleway" data-speed="5000"><?= ($server_infos) ? $server_infos['getPlayerCount'] : '0' ?></h2>
 			<p>Joueurs connectés actuellement</p>
 		</div>
 

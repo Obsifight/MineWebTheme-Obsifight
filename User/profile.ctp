@@ -2,6 +2,11 @@
 	<div class="container">
 
 		<?= $Module->loadModules('user_profile_messages') ?>
+		<?php
+    $flash_messages = $this->Session->flash();
+    if(!empty($flash_messages)) {
+      echo $flash_messages;
+    } ?>
 
 		<!-- RIGHT -->
 		<div class="col-lg-9 col-md-9 col-lg-push-3 col-md-push-3 margin-bottom-80">
@@ -281,7 +286,7 @@
 						</div>
 					<?php } else { ?>
 						<div class="alert alert-danger">
-							Vous ne pouvez pas utiliser ObsiGuard tant que vous n'avez pas confirmé votre email. 
+							Vous ne pouvez pas utiliser ObsiGuard tant que vous n'avez pas confirmé votre email.
 						</div>
 					<?php } ?>
 
