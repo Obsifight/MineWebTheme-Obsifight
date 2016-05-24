@@ -41,7 +41,9 @@
 <section>
   <div class="container">
 
-		<?php if(!empty($flash_messages)) { ?>
+		<?php
+		$flash_messages = $this->Session->flash();
+		if(!empty($flash_messages)) { ?>
 			<div class="container" style="margin-top:-50px;">
 				<?= $flash_messages ?>
 			</div>

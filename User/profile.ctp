@@ -166,6 +166,7 @@
               </div>
               <div class="clearfix"></div>
   					</form>
+						<small><a href="<?= $this->Html->url(array('controller' => 'skin', 'action' => 'delete', 'plugin' => 'obsi')) ?>">Je souhaite supprimer mon skin</a></small>
           <?php } else { ?>
             <div class="alert alert-danger">
               <b>Erreur : </b> Vous ne pouvez pas modifier votre skin, il vous faut au minimum 3 votes ou avoir acheté la fonctionnalité "Skin" sur la boutique.
@@ -192,6 +193,7 @@
               </div>
               <div class="clearfix"></div>
   					</form>
+						<small><a href="<?= $this->Html->url(array('controller' => 'cape', 'action' => 'delete', 'plugin' => 'obsi')) ?>">Je souhaite supprimer ma cape</a></small>
           <?php } else { ?>
             <div class="alert alert-danger">
               <b>Erreur : </b> Vous ne pouvez pas modifier votre cape, il vous faut avoir acheté la fonctionnalité "Cape" sur la boutique.
