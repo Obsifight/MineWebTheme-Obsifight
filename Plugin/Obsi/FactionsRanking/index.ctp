@@ -7,7 +7,7 @@
 
     <div class="alert alert-info margin-bottom-10">
       <b>Informations</b> Le classement s'actualise toutes les 2 heures.<br>
-      <small>Dernière actualisation à HH:ii</small>
+      <small>Dernière actualisation à <?= date('H\hi', strtotime($lastUpdate)) ?></small>
     </div>
 
     <table class="table table-vertical-middle dataTable">
