@@ -20,8 +20,9 @@
           <th>Morts</th>
           <th>Ratio</th>
           <th>Pièces d'or</th>
-          <th>Events end gagnés</th>
-          <th>Events KingZombie gagnés</th>
+          <th>Events end</th>
+          <th>Events KingZombie</th>
+          <th>Guerre</th>
           <th>Points</th>
 				</tr>
 			</thead>
@@ -67,6 +68,7 @@
           { data: 'golds_pieces' },
           { data: 'end_events' },
           { data: 'kingzombie_events' },
+          { data: 'factions_war' },
           { data: 'points' }
         ]
       });
