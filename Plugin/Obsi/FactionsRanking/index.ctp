@@ -7,23 +7,17 @@
 
     <div class="alert alert-info margin-bottom-10">
       <b>Informations</b> Le classement s'actualise toutes les 2 heures.<br>
-      <small>Dernière actualisation à <?= date('H\hi', strtotime($lastUpdate)) ?></small>
+      <small>Dernière actualisation à <?= date('H\hi', strtotime($lastUpdate)) ?><a class="pull-right" data-toggle="modal" data-target="#points_calcul" href="#">Voir la table des valeurs</a></small>
     </div>
 
     <table class="table table-vertical-middle dataTable">
 			<thead>
 				<tr>
-					<th>#</th>
-					<th>Nom</th>
-					<th>Chef</th>
-					<th>Tués</th>
-          <th>Morts</th>
-          <th>Ratio</th>
-          <th>Pièces d'or</th>
-          <th>Events end</th>
-          <th>Events KingZombie</th>
-          <th>Guerre</th>
-          <th>Points</th>
+          <?php
+          foreach ($factionsData as $th) {
+            echo '<th>'.$th['tableName'].'</th>';
+          }
+          ?>
 				</tr>
 			</thead>
 			<tbody>
@@ -59,17 +53,11 @@
         },
         ajax: '<?= $this->Html->url(array('action' => 'get')) ?>',
         'columns': [
-          { data: 'position' },
-          { data: 'name' },
-          { data: 'leader' },
-          { data: 'kills' },
-          { data: 'deaths' },
-          { data: 'ratio' },
-          { data: 'golds_pieces' },
-          { data: 'end_events' },
-          { data: 'kingzombie_events' },
-          { data: 'factions_war' },
-          { data: 'points' }
+          <?php
+          foreach ($factionsData as $th) {
+            echo "{ data: '".addslashes($th['ajaxName'])."' },";
+          }
+          ?>
         ]
       });
     });
@@ -79,3 +67,78 @@
     float: right;
   }
 </style>
+
+<div class="modal modal-medium fade" id="points_calcul" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span>&times;</span><span class="sr-only">Fermer</span></button>
+        <h4 class="modal-title">Calcul des points</h4>
+      </div>
+      <div class="modal-body">
+
+        <?php
+
+        $pointsCalculDivided = array_chunk($pointsCalcul, 4);
+
+        foreach ($pointsCalculDivided as $table) {
+
+          echo '<table class="table table-hover">';
+            echo '<thead>';
+              echo '<tr class="info">';
+
+                foreach ($table as $th) {
+                  echo '<th>'.$th['title'].'</th>';
+                }
+
+              echo '</tr>';
+            echo '</thead>';
+            echo '<tbody>';
+
+              $tr = array();
+
+              foreach ($table as $column) {
+                $i = 0;
+
+                foreach ($column['td'] as $key => $value) {
+
+                  if(!isset($tr[$i])) {
+                    $tr[$i] = array();
+                  }
+
+                  $tr[$i] = array_merge($tr[$i], array(array($key => $value)));
+
+                  $i++;
+                }
+
+              }
+
+              foreach ($tr as $k => $datas) {
+
+                echo '<tr>';
+
+                  foreach ($datas as $key => $v) {
+
+                    foreach ($v as $for => $value) {
+
+                      echo '<td>'.$for.' :<br>'.$value.'</td>';
+
+                    }
+
+                  }
+
+                echo '</tr>';
+
+              }
+
+            echo '</tbody>';
+          echo '</table>';
+
+        }
+
+        ?>
+
+      </div>
+    </div>
+  </div>
+</div>
