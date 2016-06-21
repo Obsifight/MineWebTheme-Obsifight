@@ -182,21 +182,21 @@
     <div class="text-center">
   		<ul class="margin-top-80 social-icons list-unstyled list-inline">
   			<li>
-  				<a target="_blank" href="#">
+  				<a target="_blank" href="<?= $facebook_link ?>">
   					<i class="fa fa-facebook"></i>
   					<h4>Facebook</h4>
   					<span>Aimez-nous</span>
   				</a>
   			</li>
   			<li>
-  				<a target="_blank" href="#">
+  				<a target="_blank" href="<?= $twitter_link ?>">
   					<i class="fa fa-twitter"></i>
   					<h4>Twitter</h4>
   					<span>Suivez-nous</span>
   				</a>
   			</li>
   			<li>
-  				<a target="_blank" href="#">
+  				<a target="_blank" href="<?= $youtube_link ?>">
   					<i class="fa fa-youtube"></i>
   					<h4>Youtube</h4>
   					<span>Nos vidéos</span>

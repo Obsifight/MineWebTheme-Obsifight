@@ -7,7 +7,7 @@
 			<button class="btn btn-mobile" data-toggle="collapse" data-target=".nav-main-collapse">
 				<i class="fa fa-bars"></i>
 			</button>
-      
+
 			<!-- Logo -->
 			<a class="logo pull-left" href="<?= $this->Html->url('/') ?>">
         <?= $this->Html->image('logo.png', array('alt' => 'obsilogo')) ?>
@@ -27,12 +27,20 @@
             <?php
             if(isset($nav) && !empty($nav)) {
 
+							$count = count($nav);
+							$i = 0;
               foreach ($nav as $key => $value) { // On parcours la navbar
+								$i++;
 
                 if(empty($value['Navbar']['submenu'])) { // Menu normal
 
                   echo '<li>';
-                    echo '<a href="'.$value['Navbar']['url'].'">'.$value['Navbar']['name'].'</a>';
+                    echo '<a href="'.$value['Navbar']['url'].'">';
+										echo $value['Navbar']['name'];
+										if($count == $i) {
+											echo '<span style="font-size:10px;position:absolute;" class="label label-danger hidden-xs hidden-sm">NOUVEAU</span>';
+										}
+										echo '</a>';
                   echo '</li>';
 
                 } else { // Sous-menu

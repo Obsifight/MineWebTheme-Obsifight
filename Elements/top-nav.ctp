@@ -1,7 +1,28 @@
 <div id="topBar">
   <div class="container">
 
-    <!-- right -->
+    <ul class="top-links list-inline pull-left">
+      <li>
+        <a target="_blank" href="<?= $facebook_link ?>" style="color:#3B5998;">
+          <i style="opacity:1;" class="fa fa-facebook"></i>
+          Facebook
+        </a>
+      </li>
+      <li>
+        <a target="_blank" href="<?= $twitter_link ?>" style="color:#4099FF;">
+          <i style="opacity:1;" class="fa fa-twitter"></i>
+          Twitter
+        </a>
+      </li>
+      <li>
+        <a target="_blank" href="<?= $youtube_link ?>" style="color:#bb0000;">
+          <i style="opacity:1;" class="fa fa-youtube"></i>
+          YouTube
+        </a>
+      </li>
+    </ul>
+
+
     <ul class="top-links list-inline pull-right">
 
       <?php if($isConnected) { ?>
