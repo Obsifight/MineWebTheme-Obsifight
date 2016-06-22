@@ -9,7 +9,8 @@
 					<a href="http://obsifight.net/wiki">Wiki</a> |
 					<a href="http://obsifight.fr/forum/index.php?threads/c-g-u-dobsifight.15819/">CGU & CGV</a> |
 					<a href="http://status.obsifight.fr">Statut</a> |
-					<a href="http://obsifight.net/stats">Stats</a>
+					<a href="http://obsifight.net/stats">Stats</a> |
+					<a href="http://incidents.obsifight.net">Incidents</a>
 				</div>
 			</div>
 
