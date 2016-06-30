@@ -20,6 +20,14 @@
           YouTube
         </a>
       </li>
+      <li>
+        <iframe id="radio" src="http://moveradio.fr/assets/obsifight" width="auto" height="30px" style="margin-bottom:-12px;"></iframe>
+        <script type="text/javascript">
+          /*$('#radio').load(function () {
+            $('audio').pause();
+          });*/
+        </script>
+      </li>
     </ul>
 
 
