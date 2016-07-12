@@ -50,6 +50,15 @@
           </ul>
         </li>
 
+        <li>
+          <a href="#" onclick="notification.markAllAsSeen(1)" class="dropdown-toggle hidden-xs" data-toggle="dropdown" aria-expanded="true" id="notification-indicator">
+            <i class="fa fa-bell-o"></i>
+          </a>
+          <ul class="dropdown-menu" style="padding-right: 20px;padding-left: 20px;width: 350px;left: auto;right: 80px;margin-top: 10px;">
+            <div id="notification-container"></div>
+          </ul>
+        </li>
+
       <?php } else { ?>
         <li><a href="#" data-toggle="modal" data-target="#login"><?= $Lang->get('USER__LOGIN') ?></a></li>
         <li><a href="<?= $this->Html->url('/signup') ?>"><i class="fa fa-sign-in"></i>  <?= $Lang->get('USER__REGISTER') ?></a></li>

@@ -20,6 +20,16 @@
               <input type="password" class="form-control" name="password" placeholder="<?= $Lang->get('USER__PASSWORD_LABEL') ?>">
             </div>
           </div>
+
+          <div class="form-group">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-10">
+  						<label class="checkbox nomargin" style="padding-top:0;"><input class="checked-agree" type="checkbox" name="remember_me"><i></i>
+                <?= $Lang->get('USER__REMEMBER_ME') ?>
+              </label>
+            </div>
+					</div>
+
           <center><a data-dismiss="modal" href="#" data-toggle="modal" data-target="#lostpasswd"><?= $Lang->get('USER__PASSWORD_FORGOT_LABEL') ?></a></center>
       </div>
       <div class="modal-footer">
