@@ -54,7 +54,7 @@
           <a href="#" onclick="notification.markAllAsSeen(1)" class="dropdown-toggle hidden-xs" data-toggle="dropdown" aria-expanded="true" id="notification-indicator">
             <i class="fa fa-bell-o"></i>
           </a>
-          <ul class="dropdown-menu" style="padding-right: 20px;padding-left: 20px;width: 350px;left: auto;right: 80px;margin-top: 10px;">
+          <ul class="dropdown-menu" style="padding-right: 20px;padding-left: 20px;width: 250px;">
             <div id="notification-container"></div>
           </ul>
         </li>
