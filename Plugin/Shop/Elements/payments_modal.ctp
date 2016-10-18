@@ -64,7 +64,7 @@
               <br>
             </div>
           <?php } ?>
-          <?php if($paysafecard_enabled) { ?>
+          <?php if(/*$paysafecard_enabled*/false) { ?>
             <a class="btn btn-info btn-block" data-toggle="collapse" href="#PaySafeCard" aria-expanded="false" aria-controls="PaySafeCard">PaySafeCard</a>
             <br>
             <div class="collapse" id="PaySafeCard">
