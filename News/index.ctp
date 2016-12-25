@@ -124,8 +124,8 @@
 						<h4>Dernières actualités</h4>
 					</div>
 					<ul class="list-group list-group-bordered list-group-noicon uppercase">
-            <?php if(isset($NewsList) && !empty($NewsList)) { ?>
-              <?php foreach ($NewsList as $key => $value) { ?>
+            <?php if(isset($search_news) && !empty($search_news)) { ?>
+              <?php foreach ($search_news as $key => $value) { ?>
                 <li class="list-group-item"><a href="<?= $this->Html->url(array($value['News']['slug'])) ?>"><?= $value['News']['title'] ?></a></li>
               <?php } ?>
             <?php } else { ?>

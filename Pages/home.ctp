@@ -31,7 +31,7 @@
         </p>
 
         <p>
-          Mais surtout, <b>ObsiFight</b>, c'est un serveur garanti sans aucun lag, même avec 300 connectés, pour un PvP optimal !<br>
+          Mais surtout, <b>ObsiFight</b>, c'est un serveur garanti sans aucun lag, même avec 500 connectés, pour un PvP optimal !<br>
           Rejoignez-nous, et devenez le plus fort !
         </p>
 
@@ -72,13 +72,14 @@
 	<div class="container">
 
 		<div class="text-center">
-			<h3 class="nomargin">Nous sommes actuellement en version 5 !</h3>
+			<h3 class="nomargin">Nous sommes actuellement en version 6 !</h3>
 			<p class="font-lato weight-300 lead nomargin-top">Découvrez dès maintenant notre trailer</p>
 
       <div class="col-md-3 hidden-sm hidden-xs"></div>
       <div class="col-md-6">
         <div class="embed-responsive embed-responsive-16by9">
-          <iframe class="embed-responsive-item" width="560" height="315" src="https://www.youtube.com/embed/CloOsij2nls?autoplay=0&amp;loop=1&amp;autohide=1&amp;controls=0&amp;theme=light" frameborder="0" allowfullscreen=""></iframe>
+          <!--<iframe class="embed-responsive-item" width="560" height="315" src="https://www.youtube.com/embed/CloOsij2nls?autoplay=0&amp;loop=1&amp;autohide=1&amp;controls=0&amp;theme=light" frameborder="0" allowfullscreen=""></iframe>-->
+          <h3><em>SOON...</em></h3>
         </div>
       </div>
       <div class="col-md-3 hidden-sm hidden-xs"></div>
