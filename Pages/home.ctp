@@ -78,8 +78,7 @@
       <div class="col-md-3 hidden-sm hidden-xs"></div>
       <div class="col-md-6">
         <div class="embed-responsive embed-responsive-16by9">
-          <!--<iframe class="embed-responsive-item" width="560" height="315" src="https://www.youtube.com/embed/CloOsij2nls?autoplay=0&amp;loop=1&amp;autohide=1&amp;controls=0&amp;theme=light" frameborder="0" allowfullscreen=""></iframe>-->
-          <h3><em>SOON...</em></h3>
+          <iframe class="embed-responsive-item" width="560" height="315" src="https://www.youtube.com/embed/42ELBJ4E_wE?autoplay=0&amp;loop=1&amp;autohide=1&amp;controls=0&amp;theme=light" frameborder="0" allowfullscreen=""></iframe>
         </div>
       </div>
       <div class="col-md-3 hidden-sm hidden-xs"></div>

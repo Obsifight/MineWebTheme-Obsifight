@@ -34,7 +34,7 @@
             if(in_array($value, $usersOnlines)) {
               echo ' style="border-color:#27ae60;" ';
             }
-            echo 'data-toggle="tooltip" data-placement="top" title="'.$value.'" src="'.$this->Html->url(array('controller' => 'ObsiAPI', 'action' => 'getHeadSkin', 'plugin' => 'obsi', $value, '64')).'" class="img-rounded staff-img" alt="">';
+            echo 'data-toggle="tooltip" data-placement="top" title="'.$value.'" src="http://web.skins.obsifight.fr/head/'.$value.'" class="img-rounded staff-img" alt="">';
           echo '</a>';
         }
         ?>
@@ -50,7 +50,7 @@
             if(in_array($value, $usersOnlines)) {
               echo ' style="border-color:#27ae60;" ';
             }
-            echo 'data-toggle="tooltip" data-placement="top" title="'.$value.'" src="'.$this->Html->url(array('controller' => 'ObsiAPI', 'action' => 'getHeadSkin', 'plugin' => 'obsi', $value, '64')).'" class="img-rounded staff-img" alt="">';
+            echo 'data-toggle="tooltip" data-placement="top" title="'.$value.'" src="http://web.skins.obsifight.fr/head/'.$value.'" class="img-rounded staff-img" alt="">';
           echo '</a>';
         }
         ?>
@@ -66,7 +66,7 @@
             if(in_array($value, $usersOnlines)) {
               echo ' style="border-color:#27ae60;" ';
             }
-            echo 'data-toggle="tooltip" data-placement="top" title="'.$value.'" src="'.$this->Html->url(array('controller' => 'ObsiAPI', 'action' => 'getHeadSkin', 'plugin' => 'obsi', $value, '64')).'" class="img-rounded staff-img" alt="">';
+            echo 'data-toggle="tooltip" data-placement="top" title="'.$value.'" src="http://web.skins.obsifight.fr/head/'.$value.'" class="img-rounded staff-img" alt="">';
           echo '</a>';
         }
         ?>
@@ -82,7 +82,7 @@
             if(in_array($value, $usersOnlines)) {
               echo ' style="border-color:#27ae60;" ';
             }
-            echo 'data-toggle="tooltip" data-placement="top" title="'.$value.'" src="'.$this->Html->url(array('controller' => 'ObsiAPI', 'action' => 'getHeadSkin', 'plugin' => 'obsi', $value, '64')).'" class="img-rounded staff-img" alt="">';
+            echo 'data-toggle="tooltip" data-placement="top" title="'.$value.'" src="http://web.skins.obsifight.fr/head/'.$value.'" class="img-rounded staff-img" alt="">';
           echo '</a>';
         }
         ?>
@@ -98,7 +98,7 @@
             if(in_array($value, $usersOnlines)) {
               echo ' style="border-color:#27ae60;" ';
             }
-            echo 'data-toggle="tooltip" data-placement="top" title="'.$value.'" src="'.$this->Html->url(array('controller' => 'ObsiAPI', 'action' => 'getHeadSkin', 'plugin' => 'obsi', $value, '64')).'" class="img-rounded staff-img" alt="">';
+            echo 'data-toggle="tooltip" data-placement="top" title="'.$value.'" src="http://web.skins.obsifight.fr/head/'.$value.'" class="img-rounded staff-img" alt="">';
           echo '</a>';
         }
         ?>
