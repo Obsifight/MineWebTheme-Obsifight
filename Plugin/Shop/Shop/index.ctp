@@ -27,7 +27,7 @@
       </div>
       <div class="col-md-3">
         <?php if($isConnected AND $Permissions->can('CREDIT_ACCOUNT')) { ?>
-            <a href="#" data-toggle="modal" data-target="#addmoney" class="btn btn-success btn-3d btn-block"><?= $Lang->get('SHOP__ADD_MONEY') ?></a>
+            <a href="<?= $this->Html->url('/shop/credits/add') ?>" class="btn btn-success btn-3d btn-block"><?= $Lang->get('SHOP__ADD_MONEY') ?></a>
         <?php } ?>
         <?php if($isConnected) { ?>
           <a href="#" data-toggle="modal" data-target="#cart-modal" class="btn btn-primary btn-3d btn-block"><?= $Lang->get('SHOP__BUY_CART') ?></a>

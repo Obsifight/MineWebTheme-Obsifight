@@ -32,7 +32,7 @@
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400%7CRaleway:300,400,500,600,700%7CLato:300,400,400italic,600,700" rel="stylesheet" type="text/css" />
 
-    <?= $this->Html->meta('favicon', '/img/favicon.png', array('type' => 'image/png', 'rel' => 'icon')); ?>
+    <link rel="icon" type="image/png" href="/theme/Obsifight/img/favicon.png" />
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
