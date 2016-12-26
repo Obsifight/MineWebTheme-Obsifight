@@ -177,6 +177,37 @@
             </div>
           </div>
 
+          <div class="step-2-method" data-payment-method="hipay" style="display:none;">
+            <div class="row">
+
+              <?php
+              foreach ($hipayOffers as $offer) {
+                echo '<div class="col-md-3" style="padding: 5px;">';
+                  echo '<a class="btn-pay" data-amount="'.$offer['HipayOffer']['amount'].'" data-credits="'.$offer['HipayOffer']['credits'].'" data-sign="'.$offer['sign'].'" data-website-id="'.$offer['HipayOffer']['website_id'].'" data-data="'.$offer['data'].'">';
+                    echo '<i class="pull-left fa fa-eur"></i>';
+                    echo '<h5>'.$offer['HipayOffer']['amount'].' €</h5>';
+                    echo '<span>Obtenez '.number_format($offer['HipayOffer']['credits'], 0, ',', ' ').' '.$Configuration->getMoneyName().'</span>';
+                  echo '</a>';
+                echo '</div>';
+              }
+              ?>
+
+            </div>
+            <div class="row margin-top-20">
+              <div class="col-md-9">
+                <div class="alert alert-info">
+                  <?= $Lang->get('SHOPPLUS__HIPAY_INFO') ?>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <a href="#" class="btn btn-3d btn-lg btn-reveal btn-red disabled step3" data-payment-method="hipay" style="font-size: 20px;width: 100%;">
+                  <i class="fa fa-credit-card"></i>
+                  <span><?= $Lang->get('SHOPPLUS__BTN_PAY_EMPTY') ?></span>
+                </a>
+              </div>
+            </div>
+          </div>
+
           <div class="step-2-method" data-payment-method="paysafecard" style="display:none;">
 
             <div class="col-md-offset-2 col-md-8 col-sm-offset-1 col-sm-10">
@@ -284,7 +315,20 @@
             </form>
           </div>
 
-          <div class="step-3-method" data-payment-method="hipay" style="display:none;">
+          <div class="step-3-method text-center" data-payment-method="hipay" style="display:none;">
+            <div class="alert alert-info">
+              <?= $Lang->get('SHOPPLUS_HIPAY_INFO_BEFORE_BUY', array('{MONEY_NAME}' => $Configuration->getMoneyName())) ?>
+            </div>
+            <form method="POST" action="https://test-payment.hipay.com/index/form/" method="post">
+              <input type="hidden" name="mode" value="MODE_B">
+              <input type="hidden" name="website_id" value="">
+              <input type="hidden" name="sign" value="">
+              <input type="hidden" name="data" value="">
+              <button type="submit" class="btn btn-3d btn-lg btn-reveal btn-red pay" data-payment-method="hipay" style="font-size: 25px;">
+                <i class="fa fa-credit-card"></i>
+                <span><?= $Lang->get('SHOPPLUS__BTN_PAY_EMPTY') ?></span>
+              </button>
+            </form>
           </div>
 
         </div>
@@ -312,7 +356,7 @@ $(document).ready(function() {
     $('#step-1').fadeOut(150, function () {
       $('a[href="#step-1"]').parent().removeClass('active').addClass('checked')
       // display step 2
-      if (paymentMethod != 'dedipass' && paymentMethod != 'hipay') {
+      if (paymentMethod != 'dedipass') {
         $('.step-2-method[data-payment-method="' + paymentMethod + '"]').fadeIn(150)
         $('#step-2').fadeIn(150)
         $('a[href="#step-2"]').parent().addClass('active').removeClass('disabled')
@@ -345,6 +389,24 @@ $(document).ready(function() {
     $('.step3[data-payment-method="paypal"]').removeClass('disabled')
     $('.step3[data-payment-method="paypal"] span').html('<?= $Lang->get('SHOPPLUS__BTN_PAY') ?>'.replace('{AMOUNT}', amount))
   })
+  // hipay
+  $('.step-2-method[data-payment-method="hipay"] .btn-pay').on('click', function (e) {
+    var btn = $(this)
+    amount = parseFloat(btn.attr('data-amount'))
+    infos.sign = btn.attr('data-sign')
+    infos.data = btn.attr('data-data')
+    infos.website_id = btn.attr('data-website-id')
+    infos.credits = btn.attr('data-credits')
+
+    // edit classess
+    $('.step-2-method[data-payment-method="hipay"] .btn-pay').removeClass('active')
+    btn.addClass('active')
+
+    // edit btn
+    $('.step3[data-payment-method="hipay"]').removeClass('disabled')
+    $('.step3[data-payment-method="hipay"] span').html('<?= $Lang->get('SHOPPLUS__BTN_PAY') ?>'.replace('{AMOUNT}', amount))
+  })
+  // global
   $('.step3').on('click', function (e) {
     e.preventDefault()
     var btn = $(this)
@@ -366,6 +428,15 @@ $(document).ready(function() {
         var alertDiv = $('.step-3-method[data-payment-method="paysafecard"] .alert.alert-info')
         var alertContent = alertDiv.html()
         alertDiv.html(alertContent.replace('{AMOUNT}', amount).replace('{CREDITS}', (amount * parseFloat('<?= $paysafecardCreditFor1 ?>'))))
+      }
+      if (paymentMethod == 'hipay') {
+        $('.step-3-method[data-payment-method="hipay"] form input[name="website_id"]').val(infos.website_id)
+        $('.step-3-method[data-payment-method="hipay"] form input[name="sign"]').val(infos.sign)
+        $('.step-3-method[data-payment-method="hipay"] form input[name="data"]').val(infos.data)
+        // info
+        var alertDiv = $('.step-3-method[data-payment-method="hipay"] .alert.alert-info')
+        var alertContent = alertDiv.html()
+        alertDiv.html(alertContent.replace('{AMOUNT}', amount).replace('{CREDITS}', infos.credits))
       }
       $('.step-3-method[data-payment-method="' + paymentMethod + '"]').fadeIn(150)
       $('#step-3').fadeIn(150)
