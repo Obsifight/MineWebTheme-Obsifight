@@ -129,9 +129,9 @@
               </div>
             <?php endif; ?>
 
-            <?php if($hipayOffers): ?>
-              <div class="col-md-3 price-table" data-payment-method="hipay">
-                <h3><?= $Lang->get('SHOPPLUS__PAYMENT_METHOD_HIPAY_WALLET') ?></h3>
+            <?php if($stripe): ?>
+              <div class="col-md-3 price-table" data-payment-method="stripe">
+                <h3><?= $Lang->get('SHOPPLUS__PAYMENT_METHOD_STRIPE') ?></h3>
                 <p style="padding: 0px;">
                   <?= $this->Html->image('/theme/Obsifight/img/credit-card-logo.png', array('style' => 'height: 150px')) ?>
                 </p>
@@ -177,30 +177,27 @@
             </div>
           </div>
 
-          <div class="step-2-method" data-payment-method="hipay" style="display:none;">
-            <div class="row">
-
-              <?php
-              foreach ($hipayOffers as $offer) {
-                echo '<div class="col-md-3" style="padding: 5px;">';
-                  echo '<a class="btn-pay" data-amount="'.$offer['HipayOffer']['amount'].'" data-credits="'.$offer['HipayOffer']['credits'].'" data-sign="'.$offer['sign'].'" data-website-id="'.$offer['HipayOffer']['website_id'].'" data-data="'.$offer['data'].'">';
-                    echo '<i class="pull-left fa fa-eur"></i>';
-                    echo '<h5>'.$offer['HipayOffer']['amount'].' €</h5>';
-                    echo '<span>Obtenez '.number_format($offer['HipayOffer']['credits'], 0, ',', ' ').' '.$Configuration->getMoneyName().'</span>';
-                  echo '</a>';
-                echo '</div>';
-              }
-              ?>
-
-            </div>
-            <div class="row margin-top-20">
-              <div class="col-md-9">
-                <div class="alert alert-info">
-                  <?= $Lang->get('SHOPPLUS__HIPAY_INFO') ?>
+          <div class="step-2-method" data-payment-method="stripe" style="display:none;">
+            <div class="col-md-offset-2 col-md-8 col-sm-offset-1 col-sm-10">
+              <div class="form-group">
+                <label><?= $Lang->get('SHOPPLUS__STRIPE_FORM__AMOUNT') ?></label>
+                <div class="input-group">
+                  <input class="form-control input-lg" type="number" step="1.00" min="5" name="amount" value="5">
+                  <div class="input-group-addon">€</div>
                 </div>
               </div>
-              <div class="col-md-3">
-                <a href="#" class="btn btn-3d btn-lg btn-reveal btn-red disabled step3" data-payment-method="hipay" style="font-size: 20px;width: 100%;">
+
+              <div class="form-group">
+                <label><?= $Lang->get('SHOPPLUS__STRIPE_FORM__CREDITS', array('{MONEY_NAME}' => $Configuration->getMoneyName())) ?></label>
+                <div class="input-group">
+                  <input class="form-control input-lg" type="number" name="credits" value="<?= (isset($stripeCreditFor1)) ? floatval($stripeCreditFor1) * 5 : '' ?>" disabled>
+                  <div class="input-group-addon"><?= $Configuration->getMoneyName() ?></div>
+                </div>
+              </div>
+
+              <?= $this->Html->image('/theme/Obsifight/img/stripe-logo.png', array('height' => '40px')) ?>
+              <div class="pull-right">
+                <a href="#" class="btn btn-3d btn-lg btn-reveal btn-red step3" data-payment-method="stripe" style="font-size: 20px;width: 100%;">
                   <i class="fa fa-credit-card"></i>
                   <span><?= $Lang->get('SHOPPLUS__BTN_PAY_EMPTY') ?></span>
                 </a>
@@ -315,20 +312,67 @@
             </form>
           </div>
 
-          <div class="step-3-method text-center" data-payment-method="hipay" style="display:none;">
-            <div class="alert alert-info">
-              <?= $Lang->get('SHOPPLUS_HIPAY_INFO_BEFORE_BUY', array('{MONEY_NAME}' => $Configuration->getMoneyName())) ?>
+          <div class="step-3-method" data-payment-method="stripe" style="display:none;">
+            <div class="success-message"></div>
+            <div id="stripe-hide-after-success">
+              <div class="alert alert-info">
+                <?= $Lang->get('SHOPPLUS_STRIPE_INFO_BEFORE_BUY', array('{MONEY_NAME}' => $Configuration->getMoneyName())) ?>
+              </div>
+
+              <div class="row text-center">
+                <div class="col-md-offset-2 col-md-4">
+                  <div class="card-wrapper"></div>
+                  <span style="color:#2C9600;margin-top:10px;display:block;" data-toggle="tooltip" data-placement="top" title="<?= $Lang->get('SHOPPLUS_STRIPE_INFO_SECURITY_PLUS_BEFORE_BUY') ?>">
+                    <i class="fa fa-lock"></i>&nbsp;
+                    <?= $Lang->get('SHOPPLUS_STRIPE_INFO_SECURITY_BEFORE_BUY') ?>
+                  </span>
+                </div>
+                <form class="stripe">
+                  <div class="col-md-4">
+                    <div class="panel panel-default">
+                      <div class="panel-body">
+                        <div class="error-message"></div>
+                        <div class="row">
+                          <div class="col-xs-7 col-md-7">
+                            <div class="form-group">
+                              <label for="cardNumber"><?= $Lang->get('SHOPPLUS__STRIPE_FORM_NUMBER') ?></label>
+                              <input type="text" class="form-control" name="number" placeholder="<?= $Lang->get('SHOPPLUS__STRIPE_FORM_NUMBER') ?>" required autofocus>
+                            </div>
+                          </div>
+                          <div class="col-xs-5 col-md-5 pull-right">
+                            <div class="form-group">
+                              <label for="cardNumber"><?= $Lang->get('SHOPPLUS__STRIPE_FORM_NAME') ?></label>
+                              <input type="text" class="form-control" name="name" placeholder="<?= $Lang->get('SHOPPLUS__STRIPE_FORM_NAME') ?>" required>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row" style="margin-bottom:0px;">
+                          <div class="col-xs-7 col-md-7">
+                            <div class="form-group">
+                              <label for="expityMonth"><?= $Lang->get('SHOPPLUS__STRIPE_FORM_EXPIRY') ?></label>
+                              <input type="text" class="form-control" name="expiry" placeholder="MM/YY" required>
+                            </div>
+                          </div>
+                          <div class="col-xs-5 col-md-5 pull-right">
+                            <div class="form-group">
+                              <label for="cvCode"><?= $Lang->get('SHOPPLUS__STRIPE_FORM_CVC') ?></label>
+                              <input type="text" class="form-control" name="cvc" placeholder="<?= $Lang->get('SHOPPLUS__STRIPE_FORM_CVC') ?>" required>
+                            </div>
+                          </div>
+                        </div>
+                        <small><em class="text-muted"><?= $Lang->get('SHOPPLUS_STRIPE_INFO_BEFORE_BUY_STORE') ?></em></small>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-12 text-center">
+                    <button type="submit" class="btn btn-3d btn-lg btn-reveal btn-red disabled pay" data-payment-method="stripe" style="font-size: 25px;">
+                      <i class="fa fa-credit-card"></i>
+                      <span><?= $Lang->get('SHOPPLUS__BTN_PAY_EMPTY') ?></span>
+                    </button>
+                  </div>
+                </form>
+              </div>
             </div>
-            <form method="POST" action="https://test-payment.hipay.com/index/form/" method="post">
-              <input type="hidden" name="mode" value="MODE_B">
-              <input type="hidden" name="website_id" value="">
-              <input type="hidden" name="sign" value="">
-              <input type="hidden" name="data" value="">
-              <button type="submit" class="btn btn-3d btn-lg btn-reveal btn-red pay" data-payment-method="hipay" style="font-size: 25px;">
-                <i class="fa fa-credit-card"></i>
-                <span><?= $Lang->get('SHOPPLUS__BTN_PAY_EMPTY') ?></span>
-              </button>
-            </form>
           </div>
 
         </div>
@@ -336,6 +380,8 @@
     </div>
   </div>
 </section>
+<?= $this->Html->script('jquery.card') ?>
+<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
 <script type="text/javascript">
 $(document).ready(function() {
   // =====
@@ -389,22 +435,17 @@ $(document).ready(function() {
     $('.step3[data-payment-method="paypal"]').removeClass('disabled')
     $('.step3[data-payment-method="paypal"] span').html('<?= $Lang->get('SHOPPLUS__BTN_PAY') ?>'.replace('{AMOUNT}', amount))
   })
-  // hipay
-  $('.step-2-method[data-payment-method="hipay"] .btn-pay').on('click', function (e) {
-    var btn = $(this)
-    amount = parseFloat(btn.attr('data-amount'))
-    infos.sign = btn.attr('data-sign')
-    infos.data = btn.attr('data-data')
-    infos.website_id = btn.attr('data-website-id')
-    infos.credits = btn.attr('data-credits')
+  // stripe
+  $('.step-2-method[data-payment-method="stripe"] input[name="amount"]').on('change', function (e) {
+    var input = $(this)
+    amount = parseFloat(input.val())
+    var credits = Math.round(amount * parseFloat('<?= (isset($stripeCreditFor1)) ? $stripeCreditFor1 : '' ?>'))
 
-    // edit classess
-    $('.step-2-method[data-payment-method="hipay"] .btn-pay').removeClass('active')
-    btn.addClass('active')
+    // edit credits
+    $('.step-2-method[data-payment-method="stripe"] input[name="credits"]').val(credits)
 
     // edit btn
-    $('.step3[data-payment-method="hipay"]').removeClass('disabled')
-    $('.step3[data-payment-method="hipay"] span').html('<?= $Lang->get('SHOPPLUS__BTN_PAY') ?>'.replace('{AMOUNT}', amount))
+    $('.step3[data-payment-method="stripe"] span').html('<?= $Lang->get('SHOPPLUS__BTN_PAY') ?>'.replace('{AMOUNT}', amount))
   })
   // global
   $('.step3').on('click', function (e) {
@@ -427,14 +468,22 @@ $(document).ready(function() {
         // info
         var alertDiv = $('.step-3-method[data-payment-method="paysafecard"] .alert.alert-info')
         var alertContent = alertDiv.html()
-        alertDiv.html(alertContent.replace('{AMOUNT}', amount).replace('{CREDITS}', (amount * parseFloat('<?= $paysafecardCreditFor1 ?>'))))
+        var credits = Math.round(amount * parseFloat('<?= (isset($paysafecardCreditFor1)) ? $paysafecardCreditFor1 : '' ?>'))
+        alertDiv.html(alertContent.replace('{AMOUNT}', amount).replace('{CREDITS}', credits))
       }
-      if (paymentMethod == 'hipay') {
-        $('.step-3-method[data-payment-method="hipay"] form input[name="website_id"]').val(infos.website_id)
-        $('.step-3-method[data-payment-method="hipay"] form input[name="sign"]').val(infos.sign)
-        $('.step-3-method[data-payment-method="hipay"] form input[name="data"]').val(infos.data)
+      if (paymentMethod == 'stripe') {
+        // amount
+        amount = parseFloat($('.step-2-method[data-payment-method="stripe"] input[name="amount"]').val())
+        infos.credits = parseFloat($('.step-2-method[data-payment-method="stripe"] input[name="credits"]').val())
+        // form
+        $('form.stripe').card({
+          container: '.card-wrapper',
+        });
+        $('[data-toggle="tooltip"]').tooltip()
+        // stripe
+        Stripe.setPublishableKey('<?= (isset($stripePublishableKey)) ? $stripePublishableKey : '' ?>');
         // info
-        var alertDiv = $('.step-3-method[data-payment-method="hipay"] .alert.alert-info')
+        var alertDiv = $('.step-3-method[data-payment-method="stripe"] .alert.alert-info')
         var alertContent = alertDiv.html()
         alertDiv.html(alertContent.replace('{AMOUNT}', amount).replace('{CREDITS}', infos.credits))
       }
@@ -454,6 +503,70 @@ $(document).ready(function() {
       $('.pay[data-payment-method="paypal"]').removeClass('disabled')
     else
       $('.pay[data-payment-method="paypal"]').addClass('disabled')
+  })
+
+  // stripe form inputs
+  $('form.stripe input').on('keyup', function () {
+    if ($('input[name="number"]').val().length >= 18 && $('input[name="name"]').val().length >= 3 && $('input[name="expiry"]').val().length === 9 && $('input[name="cvc"]').val().length >= 3) {
+      var expiry = $('input[name="expiry"]').val().split(' / ')
+      var expiryMonth = expiry[0]
+      var expiryYear = expiry[1]
+      if (
+        expiryYear < ((new Date()).getFullYear() + 10) && // 10years max
+        (
+          (expiryYear == (new Date()).getFullYear() && expiryMonth > ((new Date()).getMonth())) // expire this year but in next months
+          ||
+          (expiryYear > (new Date()).getFullYear()) // expire in future
+        )
+      )
+        $('.pay[data-payment-method="stripe"]').removeClass('disabled')
+      else
+        $('.pay[data-payment-method="stripe"]').addClass('disabled')
+    } else {
+      $('.pay[data-payment-method="stripe"]').addClass('disabled')
+    }
+  })
+
+  $('form.stripe').on('submit', function (e) {
+    e.preventDefault()
+    var form = $(this)
+    var btn = form.find('[type="submit"]')
+    var btnContent = btn.html()
+
+    btn.addClass('disabled')
+    btn.html('<?= $Lang->get('SHOPPLUS__BTN_PAY_LOADING') ?>').removeClass('btn-reveal')
+
+    Stripe.card.createToken({
+      name: form.find('input[name="name"]').val(),
+      number: form.find('input[name="number"]').val().replace(/ /g,''),
+      cvc: form.find('input[name="cvc"]').val(),
+      exp_month: form.find('input[name="expiry"]').val().split(' / ')[0],
+      exp_year: form.find('input[name="expiry"]').val().split(' / ')[1],
+    }, function (status, response) {
+      if (response.error) {
+        form.find('.error-message').hide().html('<div class="alert alert-danger"><b><?= $Lang->get('GLOBAL__ERROR') ?> : </b>' + response.error.message + '</div>').fadeIn(150)
+        btn.removeClass('disabled').html(btnContent).addClass('btn-reveal')
+      } else {
+        // post to check it
+        $.post('<?= $this->Html->url(array('controller' => 'stripe', 'action' => 'charge', 'plugin' => 'ShopPlus')) ?>', {
+          token: response.id,
+          amount: amount,
+          'data[_Token][key]': '<?= $csrfToken ?>'
+        }, function (data) {
+          if (data.status) {
+            $('a[href="#step-3"]').parent().removeClass('active').addClass('checked')
+            $('#stripe-hide-after-success').slideUp(150)
+            $('.step-3-method[data-payment-method="stripe"] .success-message').hide().html('<div class="alert alert-success"><b><?= $Lang->get('GLOBAL__SUCCESS') ?> : </b><b>' + data.msg + '</b></div>').slideDown(150)
+          } else {
+            form.find('.error-message').hide().html('<div class="alert alert-danger"><b><?= $Lang->get('GLOBAL__ERROR') ?> : </b><b>' + data.msg + '</b></div>').fadeIn(150)
+            btn.removeClass('disabled').html(btnContent).addClass('btn-reveal')
+          }
+        }).error(function () {
+          form.find('.error-message').hide().html('<div class="alert alert-danger"><b><?= $Lang->get('GLOBAL__ERROR') ?> : </b><b><?= $Lang->get('ERROR__INTERNAL_ERROR') ?></b></div>').fadeIn(150)
+          btn.removeClass('disabled').html(btnContent).addClass('btn-reveal')
+        })
+      }
+    })
   })
 
 })
