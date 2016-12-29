@@ -1,10 +1,23 @@
-<section>
+<section style="padding-top: 30px;">
   <div class="container">
 
     <div class="alert alert-info">
-      Vous ne savez pas <b>comment voter</b> ? C'est simple !
-      <a href="#" data-toggle="modal" data-target="#tutorial" class="btn btn-info pull-right btn-sm" style="margin-top: -8px;">Voir le tutoriel</a>
+      <p>Nous sommes positionné <b id="rpg-position"><i class="fa fa-refresh fa-spin"></i></b> dans le classement de RPG-Paradize !</p>
+      <p>
+        <em>
+          Vous ne savez pas <b>comment voter</b> ? C'est simple !
+          <a href="#" data-toggle="modal" data-target="#tutorial" class="btn btn-info pull-right btn-sm" style="margin-top: -8px;">Voir le tutoriel</a>
+        </em>
+      </p>
     </div>
+    <script type="text/javascript">
+      $.get('/vote/position', function (data) {
+        if (data.status && data.position)
+          $('#rpg-position').html(data.position)
+        else
+          $('#rpg-position').parent().remove()
+      })
+    </script>
 
     <div class="block-center">
 
