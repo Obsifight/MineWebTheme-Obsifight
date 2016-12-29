@@ -675,6 +675,7 @@
 
   var data = '<?= $onlinePlayers ?>';
   data = JSON.parse(data);
+  data.reverse()
 
   var playersChart = new Highcharts.Chart({
     chart: {
