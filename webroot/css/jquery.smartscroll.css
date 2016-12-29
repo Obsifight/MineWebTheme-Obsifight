@@ -1,0 +1,106 @@
+/* MAIN NAVIGATION */
+nav.smartscroll-nav {
+position: fixed;
+top: 0;
+left: 0;
+background-color: #F8F8F8;
+  border: 1px solid #E7E7E7;
+  z-index: 999;
+  width: 100%;
+  box-shadow: 1px 1px 10px #DDDDDD;
+}
+
+nav.smartscroll-nav > ul:before,
+nav.smartscroll-nav > ul:after {
+  content: " ";
+  display: table;
+}
+
+nav.smartscroll-nav > ul {
+float: left;
+  margin: 0;
+}
+
+nav.smartscroll-nav > ul > li {
+float: left;
+display: block;
+position: relative;
+}
+
+nav.smartscroll-nav > ul > li > a {
+padding: 10px 15px;
+  line-height: 20px;
+  display: block;
+  text-decoration: none;
+  color: #666666;
+}
+
+nav.smartscroll-nav > ul > li > a:hover {
+color: #333333;
+border-bottom: 1px solid #999999;
+}
+
+nav.smartscroll-nav > ul > li.active:hover {
+color: #666666;
+}
+
+nav.smartscroll-nav > ul > li.active {
+border-bottom: 1px solid #000000;
+}
+
+
+/* NAVIGATION CONTROLS */
+nav.smartscroll-controls {
+position: fixed;
+top: 50%;
+left: 0;
+}
+
+
+nav.smartscroll-controls > a {
+display: block;
+margin: 15px;
+}
+
+nav.smartscroll-controls > a.prev {
+border-color: #333333;
+  border-style: solid none none solid;
+  border-width: 2px;
+  width: 30px;
+  height: 30px;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+nav.smartscroll-controls > a.next {
+  border-color: #333333;
+  border-style: none solid solid none;
+  border-width: 2px;
+  width: 30px;
+  height: 30px;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+/* BACK TO TOP ANCHOR */
+a.smartscroll-totop {
+position: fixed;
+bottom: 15px;
+right: 25px;
+border-color: #333333;
+  border-style: solid none none solid;
+  border-width: 2px;
+  width: 30px;
+  height: 30px;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}

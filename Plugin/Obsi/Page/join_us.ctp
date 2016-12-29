@@ -1,4 +1,4 @@
-<section>
+<section id="one" class="section">
 	<div class="container">
 
 		<p class="text-center"><?= $this->Html->image('logo.png') ?></p>
@@ -12,7 +12,7 @@
 
 	</div>
 </section>
-<section class="theme-color">
+<section id="two" class="section theme-color">
 	<div class="container">
 
     <div class="heading-title heading-dotted text-center">
@@ -34,7 +34,7 @@
 
 	</div>
 </section>
-<section class="alternate">
+<section id="three" class="section alternate">
 	<div class="container">
 
     <div class="heading-title heading-dotted text-center">
@@ -54,7 +54,7 @@
 
 	</div>
 </section>
-<section class="padding-xs">
+<section id="four" class="section padding-xs">
 	<div class="container">
 
     <div class="heading-title heading-dotted text-center">
@@ -70,7 +70,7 @@
 
 	</div>
 </section>
-<section class="dark">
+<section id="five" class="section dark">
 	<div class="container">
 
     <div class="heading-title heading-dotted text-center">
@@ -92,3 +92,22 @@
 
 	</div>
 </section>
+<nav class="smartscroll-controls">
+  <a href="#" class="prev scroll"></a>
+  <a href="#" class="next scroll"></a>
+</nav>
+<?= $this->Html->css('jquery.smartscroll') ?>
+<?= $this->Html->script('jquery.smartscroll.min') ?>
+<script type="text/javascript">
+  $(document).smartscroll();
+</script>
+<style media="screen">
+  nav.smartscroll-controls > a.next,
+  nav.smartscroll-controls > a.prev {
+    border-color: #A94545;
+  }
+  nav.smartscroll-controls {
+    left: auto;
+    right: 50px;
+  }
+</style>
