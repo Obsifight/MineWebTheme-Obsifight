@@ -7,17 +7,19 @@
 
     <div class="alert alert-info margin-bottom-10">
       <b>Informations</b> Le classement s'actualise toutes les 2 heures.<br>
-      <small>Dernière actualisation à <?= date('H\hi', strtotime($lastUpdate)) ?><a class="pull-right" data-toggle="modal" data-target="#points_calcul" href="#">Voir la table des valeurs</a></small>
+      <small>Dernière actualisation à <span id="lastModified"> <i class="fa fa-refresh fa-spin"></i></span><a class="pull-right" data-toggle="modal" data-target="#points_calcul" href="#">Voir la table des valeurs</a></small>
     </div>
 
     <table class="table table-vertical-middle dataTable">
 			<thead>
 				<tr>
-          <?php
-          foreach ($factionsData as $th) {
-            echo '<th>'.$th['tableName'].'</th>';
-          }
-          ?>
+          <th>#</th>
+          <th>Nom</th>
+          <th>Tués</th>
+          <th>Morts</th>
+          <th>Power</th>
+          <th>Monnaie</th>
+          <th>Points</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -30,37 +32,48 @@
 <?= $this->Html->script('jquery.dataTables.min.js') ?>
 <?= $this->Html->script('dataTables.bootstrap.min.js') ?>
 <script>
-    $(function () {
-      $('table.dataTable').DataTable({
-        "paging": true,
-        "lengthChange": false,
-        "searching": false,
-        "ordering": false,
-        "info": false,
-        "autoWidth": false,
-        'searching': true,
-        "language": {
-            "infoEmpty": "Aucune factions trouvées",
-            "loadingRecords": "Chargement des factions en cours...",
-            "search":         "Rechercher:",
-            "zeroRecords":    "Aucune factions trouvées",
-            "paginate": {
-                "first":      "Premier",
-                "last":       "Dernier",
-                "next":       "Suivant",
-                "previous":   "Précédent"
-            },
-        },
-        ajax: '<?= $this->Html->url(array('action' => 'get')) ?>',
-        'columns': [
-          <?php
-          foreach ($factionsData as $th) {
-            echo "{ data: '".addslashes($th['ajaxName'])."' },";
-          }
-          ?>
-        ]
-      });
-    });
+$(function () {
+  var table = $('table.dataTable').DataTable({
+    paging: true,
+    lengthChange: false,
+    searching: false,
+    ordering: false,
+    info: false,
+    autoWidth: false,
+    searching: true,
+    language: {
+      infoEmpty: "Aucune factions trouvées",
+      loadingRecords: "Chargement des factions en cours...",
+      search:         "Rechercher:",
+      zeroRecords:    "Aucune factions trouvées",
+      paginate: {
+        first: "Premier",
+        last: "Dernier",
+        next: "Suivant",
+        previous: "Précédent"
+      },
+    },
+  })
+
+  $.get('http://factions.api.obsifight.net/data', function (data, textStatus, jqXHR) {
+    var lastModified = new Date(jqXHR.getResponseHeader('Last-Modified'))
+    lastModified = (lastModified.getHours().length === 1 ? 0 + lastModified.getHours() : lastModified.getHours()) + ':' + (lastModified.getMinutes().length === 1 ? 0 + lastModified.getMinutes() : lastModified.getMinutes())
+    $('#lastModified').html(lastModified)
+
+    for (var i = 0; i < data.length; i++) {
+      table.row.add([
+        (i + 1),
+        data[i].name,
+        data[i].stats.kills,
+        data[i].stats.deaths,
+        data[i].powers.actual,
+        data[i].stats.money,
+        data[i].points
+      ])
+    }
+    table.draw()
+  })
+})
 </script>
 <style media="screen">
   div#DataTables_Table_0_filter.dataTables_filter {
