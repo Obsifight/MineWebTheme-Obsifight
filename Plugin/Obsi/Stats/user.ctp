@@ -4,16 +4,17 @@
 	<div class="container">
 
 		<h1>Statistiques</h1>
-
+    <?php /*
 		<!-- breadcrumbs -->
 		<ol class="breadcrumb">
       <li><a href="<?= $this->Html->url('/') ?>"><?= $Lang->get('GLOBAL__HOME') ?></a></li>
 			<li><a href="<?= $this->Html->url('/stats') ?>">Statistiques</a></li>
       <li class="active"><?= $findUser['User']['pseudo'] ?></li>
 		</ol><!-- /breadcrumbs -->
+    */ ?>
 
 	</div>
-
+  <?php /*
   <div class="container margin-top-30">
 		<div class="row">
 
@@ -45,12 +46,35 @@
 			</div>
 
 		</div>
-  </div>
+  </div>*/ ?>
 
 </section>
 <section>
 	<div class="container">
 
+    <div class="row">
+
+			<div class="col-md-6 col-sm-6 hidden-xs">
+
+				<div class="error-404">
+					Soon
+				</div>
+
+			</div>
+
+			<div class="col-md-6 col-sm-6">
+
+				<h3 class="nomargin">Désolé, <strong>Cette page arrive très bientôt !</strong></h3>
+
+				<div class="divider nomargin-bottom"><!-- divider --></div>
+
+				<a class="size-16 font-lato" href="<?= $this->Html->url('/stats') ?>"><i class="glyphicon glyphicon-menu-left margin-right-10 size-12"></i> Retourner sur les statistiques</a>
+
+			</div>
+
+		</div>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <?php /*
 		<div class="row countTo-md text-center">
 
 			<div class="col-xs-6 col-sm-3">
@@ -78,9 +102,10 @@
 			</div>
 
 		</div>
-
+    */ ?>
 	</div>
 </section>
+<?php /*
 <section class="alternate">
 	<div class="container">
 		<div class="row">
@@ -154,3 +179,4 @@
 		padding-left: 0px;
 	}
 </style>
+*/ ?>
