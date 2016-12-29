@@ -448,7 +448,7 @@
       $('.step3[data-payment-method="paypal"] span').html('<?= $Lang->get('SHOPPLUS__BTN_PAY') ?>'.replace('{AMOUNT}', amount))
     })
     // stripe
-    $('.step-2-method[data-payment-method="stripe"] input[name="amount"]').on('change', function (e) {
+    $('.step-2-method[data-payment-method="stripe"] input[name="amount"]').on('keyup mouseup', function (e) {
       var input = $(this)
       amount = parseFloat(input.val())
       var credits = Math.round(amount * parseFloat('<?= (isset($stripeCreditFor1)) ? $stripeCreditFor1 : '' ?>'))
