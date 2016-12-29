@@ -181,13 +181,13 @@
             <div class="row countTo-lg text-center">
 
             	<div class="col-xs-6 col-sm-4">
-            		<span class="count" style="color:#9b59b6"><span class="countTo" data-speed="3000"><?= $percentageRegisteredUsersOnV5 ?></span>%</span>
-            		<h4>Joueurs inscrit lors de la V5</h4>
+            		<span class="count" style="color:#9b59b6"><span class="countTo" data-speed="3000"><?= $percentageRegisteredUsersOnV6 ?></span>%</span>
+            		<h4>Joueurs inscrit lors de la V6</h4>
             	</div>
 
             	<div class="col-xs-6 col-sm-4">
-            		<span class="count" style="color:#9b59b6"><span class="countTo" data-speed="3000"><?= $percentageConnectedUsersOnV5 ?></span>%</span>
-            		<h4>Joueurs s'étant connecté lors de la V5</h4>
+            		<span class="count" style="color:#9b59b6"><span class="countTo" data-speed="3000"><?= $percentageConnectedUsersOnV6 ?></span>%</span>
+            		<h4>Joueurs s'étant connecté lors de la V6</h4>
             	</div>
 
             	<div class="col-xs-6 col-sm-4">

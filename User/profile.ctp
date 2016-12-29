@@ -304,7 +304,7 @@
 		<div class="col-lg-3 col-md-3 col-lg-pull-9 col-md-pull-9 hidden-sm hidden-xs" id="side-left" style="display:none;">
 
 			<div class="thumbnail text-center">
-				<img src="<?= $this->Html->url(array('controller' => 'ObsiAPI', 'action' => 'getHeadSkin', 'plugin' => 'obsi', $user['pseudo'], '230')) ?>" alt="">
+				<img src="http://web.skins.obsifight.fr/head/<?= $user['pseudo'] ?>/230" alt="">
 			</div>
 
       <div class="box-image text-center">
