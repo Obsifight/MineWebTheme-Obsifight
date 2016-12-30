@@ -7,6 +7,7 @@
     if(!empty($flash_messages)) {
       echo $flash_messages;
     } ?>
+    <div id="faction"></div>
 
 		<!-- RIGHT -->
 		<div class="col-lg-9 col-md-9 col-lg-push-3 col-md-push-3 margin-bottom-80">
@@ -729,4 +730,11 @@ setTimeout(function(){
 	function getProfileData(form) {
 		return {number_phone: form.find('input[name="number_phone"]').val(), confirm_code: form.find('input[name="confirm_code"]').val()}
 	}
+</script>
+<script type="text/javascript">
+  $.get('http://factions.api.obsifight.net/player/is-leader/<?= $user['pseudo'] ?>', function (data) {
+    if (data.status && data.isLeader) {
+      $('#faction').html('<div class="alert alert-info">Tu es le chef d\'une faction, tu peux donc désormais configurer l\'affichage de ta faction sur le site. <a href="/faction/edit" class="pull-right">Configurer l\'affichage de ma faction</a></div>')
+    }
+  })
 </script>

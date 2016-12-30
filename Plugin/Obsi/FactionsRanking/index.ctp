@@ -57,13 +57,13 @@ $(function () {
 
   $.get('http://factions.api.obsifight.net/data', function (data, textStatus, jqXHR) {
     var lastModified = new Date(jqXHR.getResponseHeader('Last-Modified'))
-    lastModified = (lastModified.getHours().length === 1 ? 0 + lastModified.getHours() : lastModified.getHours()) + ':' + (lastModified.getMinutes().length === 1 ? 0 + lastModified.getMinutes() : lastModified.getMinutes())
+    lastModified = (lastModified.getHours().toString().length === 1 ? '0' + lastModified.getHours() : lastModified.getHours()) + 'h' + (lastModified.getMinutes().toString().length === 1 ? '0' + lastModified.getMinutes() : lastModified.getMinutes())
     $('#lastModified').html(lastModified)
 
     for (var i = 0; i < data.length; i++) {
       table.row.add([
         (i + 1),
-        data[i].name,
+        '<img class="img-rounded" onerror="this.style.display=\'none\'" width="32" height="32" src="<?= $this->Html->url('/img/uploads/factions-logo/faction-logo-') ?>' + data[i].id + '.png">&nbsp;&nbsp;' + data[i].name,
         data[i].stats.kills,
         data[i].stats.deaths,
         data[i].powers.actual,
