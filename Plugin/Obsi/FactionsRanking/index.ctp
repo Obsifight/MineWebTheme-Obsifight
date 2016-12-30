@@ -14,6 +14,7 @@
 			<thead>
 				<tr>
           <th>#</th>
+          <th>Logo</th>
           <th>Nom</th>
           <th>Tués</th>
           <th>Morts</th>
@@ -63,7 +64,8 @@ $(function () {
     for (var i = 0; i < data.length; i++) {
       table.row.add([
         (i + 1),
-        '<img class="img-rounded" onerror="this.style.display=\'none\'" width="32" height="32" src="<?= $this->Html->url('/img/uploads/factions-logo/faction-logo-') ?>' + data[i].id + '.png">&nbsp;&nbsp;' + data[i].name,
+        '<img class="img-rounded" onerror="this.src=\'http://web.skins.obsifight.fr/head/' + data[i].players.leader + '\';" width="32" height="32" src="<?= $this->Html->url('/img/uploads/factions-logo/faction-logo-') ?>' + data[i].id + '.png">',
+        data[i].name,
         data[i].stats.kills,
         data[i].stats.deaths,
         data[i].powers.actual,

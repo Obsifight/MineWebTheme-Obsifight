@@ -1,3 +1,40 @@
+<section class="page-header page-header-lg parallax parallax-3" style="padding-top:40px;background-image: url('/theme/Obsifight/img/spawn1.png');/* background-position: 50% 36px;*/">
+	<div class="overlay dark-2"><!-- dark overlay [1 to 9 opacity] --></div>
+
+	<div class="container">
+
+		<h1><?= $title_for_layout ?></h1>
+
+	</div>
+
+  <div class="container animated fadeInRight" style="margin-top:20px;">
+    <div class="row">
+      <div class="col-md-9">
+        <div class="heading-title heading-border">
+    			<h1 style="background-color:transparent;">Le saviez-vous ?</h1>
+    			<p class="font-lato size-19"><?= $didYouKnow[rand(0, (count($didYouKnow)-1))] ?></p>
+    		</div>
+      </div>
+      <div class="col-md-3" style="margin-top: -30px;">
+        <h4 style="padding-bottom: 3px;border-bottom: 2px solid #fff;display: inline-block;">
+          <?= $this->Html->image('badge-first.png', array('width' => '32')) ?>
+          <a href="<?= $this->Html->url('/factions') ?>" style="color: #fff;">Faction en 1<sup>ère</sup> position</a>
+        </h4>
+        <br>
+        <img id="firstFactionLogo" width="64" class="img-rounded" alt="" />
+        <span style="font-size: 20px;margin-left: 10px;" id="firstFactionName"><i class="fa fa-refresh fa-spin"></i> Chargement...</span>
+        <script type="text/javascript">
+          $.get('http://factions.api.obsifight.net/data', function (data) {
+            var faction = data[0]
+            $('#firstFactionName').html(faction.name)
+            $('#firstFactionLogo').attr('src', '<?= $this->Html->url('/img/uploads/factions-logo/faction-logo') ?>' + faction.id + '.png')
+            $('#firstFactionLogo').attr('onerror', 'this.src=\'http://web.skins.obsifight.fr/head/' + faction.players.leader + '\'')
+          })
+        </script>
+      </div>
+    </div>
+	</div>
+</section>
 <section>
   <div class="container">
     <div class="row">
