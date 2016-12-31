@@ -1,4 +1,4 @@
-<section>
+<section style="padding-top: 20px;">
 	<div class="container">
 
 		<?= $Module->loadModules('user_profile_messages') ?>
@@ -321,66 +321,12 @@
 		  </div>
 
       <!-- ===================== -->
-      <?php $secret = 'Vc_kaWejHy_EgM_h063HovZ_'; ?>
-      <meta name="google-signin-client_id" content="908579317485-flhrog8ra4k9qimqdbs296c3hanm21mm.apps.googleusercontent.com">
-      <div id="my-signin2"></div>
-      <script>
-        function onSuccess(googleUser) {
-          console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
-        }
-        function onFailure(error) {
-          console.log(error);
-        }
-        function renderButton() {
-          /*gapi.auth2.init({
-            client_id: '908579317485-flhrog8ra4k9qimqdbs296c3hanm21mm.apps.googleusercontent.com',
-            scope: 'https://www.googleapis.com/auth/youtube.readonly'
-          }).then(function () {
-            console.log('Google API Auth2 initialized!')
-          })*/
-          gapi.signin2.render('my-signin2', {
-            'scope': 'https://www.googleapis.com/auth/youtube.readonly',
-            'width': 240,
-            'height': 50,
-            'longtitle': true,
-            'theme': 'dark',
-            'onsuccess': onSignIn,
-            'onfailure': onFailure
-          });
-        }
-      </script>
-      <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
-
-      <!--<script src="https://apis.google.com/js/platform.js"></script>-->
-      <!--<div class="g-signin2" data-onsuccess="onSignIn"></div>-->
-      <script type="text/javascript">
-      //var options = new gapi.auth2.SigninOptionsBuilder({'scope': 'https://www.googleapis.com/auth/youtube.readonly'})
-      /*$(document).ready(function () {
-        gapi.auth2.init({
-          client_id: '908579317485-flhrog8ra4k9qimqdbs296c3hanm21mm.apps.googleusercontent.com',
-          scope: 'https://www.googleapis.com/auth/youtube.readonly'
-        }).then(function () {
-          console.log('Google API Auth2 initialized!')
-        })
-      })*/
-
-      function onSignIn(googleUser) {
-        // Get data
-        var profile = googleUser.getBasicProfile()
-        var authResponse = googleUser.getAuthResponse()
-        var id_token = authResponse.id_token
-
-        // Display success message
-        toastr.success('Vous vous êtes bien connecté ' + profile.getName() + ' (' + profile.getEmail() + ')')
-
-        // Send to verification for get subs
-        $.post('<?= $this->Html->url(array('controller' => 'google', 'action' => 'auth', 'plugin' => 'obsi')) ?>', {id_token: id_token}, function (data) {
-          if (data.status)
-            toastr.info('Vous avez ' + data.subsCount + ' abonnés sur YouTube !')
-        })
-      }
-      </script>
-
+      <a href="<?= $this->Html->url(array('controller' => 'google', 'action' => 'auth', 'plugin' => 'obsi')) ?>" class="btn btn-block btn-social btn-google">
+      	<i class="fa fa-youtube"></i> Lier mon compte YouTube
+      </a>
+      <p class="text-danger">
+        <small><em>Lier votre compte YouTube vous permet d'obtenir automatiquement le grade YouTubeur en jeu si vous disposez de plus de 750 abonnés.</em></small>
+      </p>
       <!-- ===================== -->
 
 		</div>
