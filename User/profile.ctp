@@ -13,10 +13,11 @@
 		<div class="col-lg-9 col-md-9 col-lg-push-3 col-md-push-3 margin-bottom-80">
 
 			<ul class="nav nav-tabs nav-top-border">
-				<li class="active"><a href="#info" data-toggle="tab">Informations sur le compte</a></li>
-				<li><a href="#password" data-toggle="tab">Modifier mon mot de passe</a></li>
-				<li><a href="#skin_and_cape" data-toggle="tab">Modifier mon skin & ma cape</a></li>
+				<li class="active"><a href="#info" data-toggle="tab">Informations</a></li>
+				<li><a href="#password" data-toggle="tab">Mon mot de passe</a></li>
+				<li><a href="#skin_and_cape" data-toggle="tab">Mon skin & ma cape</a></li>
 				<li><a href="#obsiguard" data-toggle="tab">ObsiGuard</a></li>
+        <li><a href="#two-factor-auth" data-toggle="tab">Double Authentification</a></li>
 			</ul>
 
 			<div class="tab-content margin-top-20">
@@ -295,6 +296,82 @@
 
 				</div>
 				<!-- /ObsiGuard TAB -->
+
+        <!-- TwoFactorAuth TAB -->
+        <div class="tab-pane fade" id="two-factor-auth">
+          <div class="callout alert alert-success margin-bottom-30" id="twoFactorAuthStatus">
+            <div class="row">
+              <div class="col-md-8 col-sm-8"><!-- left text -->
+                <h4>Voulez-vous <span id="twoFactorAuthStatusInfos"><?= ($twoFactorAuthStatus) ? 'désactiver' : 'activer' ?></span> la <strong>double authentification</strong> ?</h4>
+                <p>
+                  Cette fonctionnalité vous permet plus de sécurité sur votre compte site.
+                  <br><a href="#">En savoir plus</a>.
+                </p>
+              </div><!-- /left text -->
+              <div class="col-md-4 col-sm-4 text-right"><!-- right btn -->
+                <a id="toggleTwoFactorAuth" data-status="<?= ($twoFactorAuthStatus) ? '1' : '0' ?>" class="btn btn-<?= ($twoFactorAuthStatus) ? 'danger' : 'success' ?> btn-lg"><?= ($twoFactorAuthStatus) ? 'Désactiver' : 'Activer' ?></a>
+              </div><!-- /right btn -->
+            </div>
+          </div>
+          <div id="twoFactorAuthValid" class="text-center" style="display: none;">
+            <img src="" id="two-factor-auth-qrcode" alt="" />
+            <p>
+              <small class="text-muted">Secret: <em id="two-factor-auth-secret"></em></small>
+            </p>
+
+            <form class="form-horizontal" method="POST" data-ajax="true" action="<?= $this->Html->url(array('plugin' => 'TwoFactorAuth', 'admin' => false, 'controller' => 'user', 'action' => 'validEnable')) ?>" data-callback-function="afterValidQrCode">
+              <div class="ajax-msg"></div>
+
+              <div class="form-group text-center">
+                <label><?= $Lang->get('TWOFACTORAUTH__LOGIN_CODE') ?></label>
+                <div class="col-md-6" style="margin: 0 auto;float: none;">
+                  <input type="text" class="form-control" name="code" placeholder="<?= $Lang->get('TWOFACTORAUTH__LOGIN_CODE_PLACEHOLDER') ?>">
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-success"><?= $Lang->get('TWOFACTORAUTH__VALID_CODE') ?></button>
+            </form>
+          </div>
+
+
+        </div>
+        <script type="text/javascript">
+          $('#toggleTwoFactorAuth').on('click', function (e) {
+            e.preventDefault()
+            var btn = $(this)
+            var status = parseInt(btn.attr('data-status'))
+
+            // disable
+            btn.html('<i class="fa fa-refresh fa-spin"></i>').addClass('disabled')
+
+            // request to server
+            if (!status) { // enable
+              $.get('<?= $this->Html->url(array('controller' => 'user', 'action' => 'generateSecret', 'plugin' => 'TwoFactorAuth')) ?>', function (data) {
+                // add qrcode
+                $('#two-factor-auth-qrcode').attr('src', data.qrcode_url)
+                $('#two-factor-auth-secret').html(data.secret)
+                // edit display
+                $('#twoFactorAuthStatus').slideUp(150)
+                $('#twoFactorAuthValid').slideDown(150)
+              })
+            } else { // disable
+              $.get('<?= $this->Html->url(array('controller' => 'user', 'action' => 'disable', 'plugin' => 'TwoFactorAuth')) ?>', function (data) {
+                // edit display
+                $('#toggleTwoFactorAuth').html('Activer').removeClass('disabled').removeClass('btn-danger').addClass('btn-success').attr('data-status', 0)
+                $('#twoFactorAuthStatusInfos').html('activer')
+              })
+            }
+          })
+          function afterValidQrCode(req, res) {
+            // edit display
+            $('#toggleTwoFactorAuth').html('Désactiver').removeClass('disabled').removeClass('btn-success').addClass('btn-danger').attr('data-status', 1)
+            $('#twoFactorAuthStatusInfos').html('désactiver')
+            $('#twoFactorAuthValid').slideUp(150)
+            $('#twoFactorAuthStatus').slideDown(150)
+          }
+        </script>
+        <!-- /TwoFactorAuth TAB -->
+
 
 			</div>
 
