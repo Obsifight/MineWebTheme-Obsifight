@@ -1,82 +1,83 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta name="viewport" content="width=device-width"/>
-    <style>#outlook a{padding:0;}body{width:100%!important;min-width:100%;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;margin:0;padding:0;}.ExternalClass{width:100%;}.ExternalClass,.ExternalClass p,.ExternalClass span,.ExternalClass font,.ExternalClass td,.ExternalClass div{line-height:100%;}#backgroundTable{margin:0;padding:0;width:100%!important;line-height:100%!important;}img{outline:none;text-decoration:none;-ms-interpolation-mode:bicubic;width:auto;max-width:100%;float:left;clear:both;display:block;}center{width:100%;min-width:580px;}a img{border:none;}p{margin:0 0 0 10px;}table{border-spacing:0;border-collapse:collapse;}td{word-break:break-word;-webkit-hyphens:auto;-moz-hyphens:auto;hyphens:auto;border-collapse:collapse!important;}table,tr,td{padding:0;vertical-align:top;text-align:left;}hr{color:#d9d9d9;background-color:#d9d9d9;height:1px;border:none;}table.body{height:100%;width:100%;}table.container{width:580px;margin:0 auto;text-align:inherit;}table.row{padding:0px;width:100%;position:relative;}table.container table.row{display:block;}td.wrapper{padding:10px 20px 0px 0px;position:relative;}table.columns,table.column{margin:0 auto;}table.columns td,table.column td{padding:0px 0px 10px;}table.columns td.sub-columns,table.column td.sub-columns,table.columns td.sub-column,table.column td.sub-column{padding-right:10px;}td.sub-column,td.sub-columns{min-width:0px;}table.row td.last,table.container td.last{padding-right:0px;}table.one{width:30px;}table.two{width:80px;}table.three{width:130px;}table.four{width:180px;}table.five{width:230px;}table.six{width:280px;}table.seven{width:330px;}table.eight{width:380px;}table.nine{width:430px;}table.ten{width:480px;}table.eleven{width:530px;}table.twelve{width:580px;}table.one center{min-width:30px;}table.two center{min-width:80px;}table.three center{min-width:130px;}table.four center{min-width:180px;}table.five center{min-width:230px;}table.six center{min-width:280px;}table.seven center{min-width:330px;}table.eight center{min-width:380px;}table.nine center{min-width:430px;}table.ten center{min-width:480px;}table.eleven center{min-width:530px;}table.twelve center{min-width:580px;}table.one .panel center{min-width:10px;}table.two .panel center{min-width:60px;}table.three .panel center{min-width:110px;}table.four .panel center{min-width:160px;}table.five .panel center{min-width:210px;}table.six .panel center{min-width:260px;}table.seven .panel center{min-width:310px;}table.eight .panel center{min-width:360px;}table.nine .panel center{min-width:410px;}table.ten .panel center{min-width:460px;}table.eleven .panel center{min-width:510px;}table.twelve .panel center{min-width:560px;}.body .columns td.one,.body .column td.one{width:8.333333%;}.body .columns td.two,.body .column td.two{width:16.666666%;}.body .columns td.three,.body .column td.three{width:25%;}.body .columns td.four,.body .column td.four{width:33.333333%;}.body .columns td.five,.body .column td.five{width:41.666666%;}.body .columns td.six,.body .column td.six{width:50%;}.body .columns td.seven,.body .column td.seven{width:58.333333%;}.body .columns td.eight,.body .column td.eight{width:66.666666%;}.body .columns td.nine,.body .column td.nine{width:75%;}.body .columns td.ten,.body .column td.ten{width:83.333333%;}.body .columns td.eleven,.body .column td.eleven{width:91.666666%;}.body .columns td.twelve,.body .column td.twelve{width:100%;}td.offset-by-one{padding-left:50px;}td.offset-by-two{padding-left:100px;}td.offset-by-three{padding-left:150px;}td.offset-by-four{padding-left:200px;}td.offset-by-five{padding-left:250px;}td.offset-by-six{padding-left:300px;}td.offset-by-seven{padding-left:350px;}td.offset-by-eight{padding-left:400px;}td.offset-by-nine{padding-left:450px;}td.offset-by-ten{padding-left:500px;}td.offset-by-eleven{padding-left:550px;}td.expander{visibility:hidden;width:0px;padding:0!important;}table.columns .text-pad,table.column .text-pad{padding-left:10px;padding-right:10px;}table.columns .left-text-pad,table.columns .text-pad-left,table.column .left-text-pad,table.column .text-pad-left{padding-left:10px;}table.columns .right-text-pad,table.columns .text-pad-right,table.column .right-text-pad,table.column .text-pad-right{padding-right:10px;}.block-grid{width:100%;max-width:580px;}.block-grid td{display:inline-block;padding:10px;}.two-up td{width:270px;}.three-up td{width:173px;}.four-up td{width:125px;}.five-up td{width:96px;}.six-up td{width:76px;}.seven-up td{width:62px;}.eight-up td{width:52px;}table.center,td.center{text-align:center;}h1.center,h2.center,h3.center,h4.center,h5.center,h6.center{text-align:center;}span.center{display:block;width:100%;text-align:center;}img.center{margin:0 auto;float:none;}.show-for-small,.hide-for-desktop{display:none;}body,table.body,h1,h2,h3,h4,h5,h6,p,td{color:#222222;font-family:"Helvetica","Arial",sans-serif;font-weight:normal;padding:0;margin:0;text-align:left;line-height:1.3;}h1,h2,h3,h4,h5,h6{word-break:normal;}h1{font-size:40px;}h2{font-size:36px;}h3{font-size:32px;}h4{font-size:28px;}h5{font-size:24px;}h6{font-size:20px;}body,table.body,p,td{font-size:14px;line-height:19px;}p.lead,p.lede,p.leed{font-size:18px;line-height:21px;}p{margin-bottom:10px;}small{font-size:10px;}a{color:#2ba6cb;text-decoration:none;}a:hover{color:#2795b6!important;}a:active{color:#2795b6!important;}a:visited{color:#2ba6cb!important;}h1 a,h2 a,h3 a,h4 a,h5 a,h6 a{color:#2ba6cb;}h1 a:active,h2 a:active,h3 a:active,h4 a:active,h5 a:active,h6 a:active{color:#2ba6cb!important;}h1 a:visited,h2 a:visited,h3 a:visited,h4 a:visited,h5 a:visited,h6 a:visited{color:#2ba6cb!important;}.panel{background:#f2f2f2;border:1px solid #d9d9d9;padding:10px!important;}.sub-grid table{width:100%;}.sub-grid td.sub-columns{padding-bottom:0;}table.button,table.tiny-button,table.small-button,table.medium-button,table.large-button{width:100%;overflow:hidden;}table.button td,table.tiny-button td,table.small-button td,table.medium-button td,table.large-button td{display:block;width:auto!important;text-align:center;background:#2ba6cb;border:1px solid #2284a1;color:#ffffff;padding:8px 0;}table.tiny-button td{padding:5px 0 4px;}table.small-button td{padding:8px 0 7px;}table.medium-button td{padding:12px 0 10px;}table.large-button td{padding:21px 0 18px;}table.button td a,table.tiny-button td a,table.small-button td a,table.medium-button td a,table.large-button td a{font-weight:bold;text-decoration:none;font-family:Helvetica,Arial,sans-serif;color:#ffffff;font-size:16px;}table.tiny-button td a{font-size:12px;font-weight:normal;}table.small-button td a{font-size:16px;}table.medium-button td a{font-size:20px;}table.large-button td a{font-size:24px;}table.button:hover td,table.button:visited td,table.button:active td{background:#2795b6!important;}table.button:hover td a,table.button:visited td a,table.button:active td a{color:#fff!important;}table.button:hover td,table.tiny-button:hover td,table.small-button:hover td,table.medium-button:hover td,table.large-button:hover td{background:#2795b6!important;}table.button:hover td a,table.button:active td a,table.button td a:visited,table.tiny-button:hover td a,table.tiny-button:active td a,table.tiny-button td a:visited,table.small-button:hover td a,table.small-button:active td a,table.small-button td a:visited,table.medium-button:hover td a,table.medium-button:active td a,table.medium-button td a:visited,table.large-button:hover td a,table.large-button:active td a,table.large-button td a:visited{color:#ffffff!important;}table.secondary td{background:#e9e9e9;border-color:#d0d0d0;color:#555;}table.secondary td a{color:#555;}table.secondary:hover td{background:#d0d0d0!important;color:#555;}table.secondary:hover td a,table.secondary td a:visited,table.secondary:active td a{color:#555!important;}table.success td{background:#5da423;border-color:#457a1a;}table.success:hover td{background:#457a1a!important;}table.alert td{background:#c60f13;border-color:#970b0e;}table.alert:hover td{background:#970b0e!important;}table.radius td{-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;}table.round td{-webkit-border-radius:500px;-moz-border-radius:500px;border-radius:500px;}body.outlook p{display:inline!important;}@media only screen and (max-width: 600px) {table[class="body"] img{width:auto!important;height:80px!important;}table[class="body"] center{min-width:0!important;}table[class="body"] .container{width:95%!important;}table[class="body"] .row{width:100%!important;display:block!important;}table[class="body"] .wrapper{display:block!important;padding-right:0!important;}table[class="body"] .columns,table[class="body"] .column{table-layout:fixed!important;float:none!important;width:100%!important;padding-right:0px!important;padding-left:0px!important;display:block!important;}table[class="body"] .wrapper.first .columns,table[class="body"] .wrapper.first .column{display:table!important;}table[class="body"] table.columns td,table[class="body"] table.column td{width:100%!important;}table[class="body"] .columns td.one,table[class="body"] .column td.one{width:8.333333%!important;}table[class="body"] .columns td.two,table[class="body"] .column td.two{width:16.666666%!important;}table[class="body"] .columns td.three,table[class="body"] .column td.three{width:25%!important;}table[class="body"] .columns td.four,table[class="body"] .column td.four{width:33.333333%!important;}table[class="body"] .columns td.five,table[class="body"] .column td.five{width:41.666666%!important;}table[class="body"] .columns td.six,table[class="body"] .column td.six{width:50%!important;}table[class="body"] .columns td.seven,table[class="body"] .column td.seven{width:58.333333%!important;}table[class="body"] .columns td.eight,table[class="body"] .column td.eight{width:66.666666%!important;}table[class="body"] .columns td.nine,table[class="body"] .column td.nine{width:75%!important;}table[class="body"] .columns td.ten,table[class="body"] .column td.ten{width:83.333333%!important;}table[class="body"] .columns td.eleven,table[class="body"] .column td.eleven{width:91.666666%!important;}table[class="body"] .columns td.twelve,table[class="body"] .column td.twelve{width:100%!important;}table[class="body"] td.offset-by-one,table[class="body"] td.offset-by-two,table[class="body"] td.offset-by-three,table[class="body"] td.offset-by-four,table[class="body"] td.offset-by-five,table[class="body"] td.offset-by-six,table[class="body"] td.offset-by-seven,table[class="body"] td.offset-by-eight,table[class="body"] td.offset-by-nine,table[class="body"] td.offset-by-ten,table[class="body"] td.offset-by-eleven{padding-left:0!important;}table[class="body"] table.columns td.expander{width:1px!important;}table[class="body"] .right-text-pad,table[class="body"] .text-pad-right{padding-left:10px!important;}table[class="body"] .left-text-pad,table[class="body"] .text-pad-left{padding-right:10px!important;}table[class="body"] .hide-for-small,table[class="body"] .show-for-desktop{display:none!important;}table[class="body"] .show-for-small,table[class="body"] .hide-for-desktop{display:inherit!important;}}</style>
-    <style>table.facebook td{background:#3b5998;border-color:#2d4473;}table.facebook:hover td{background:#2d4473!important;}table.twitter td{background:#00acee;border-color:#0087bb;}table.twitter:hover td{background:#0087bb!important;}table.google-plus td{background-color:#DB4A39;border-color:#CC0000;}table.google-plus:hover td{background:#CC0000!important;}.template-label{color:#ffffff;font-weight:bold;font-size:11px;}.callout .panel{background:#ECF8FF;border-color:#b9e5ff;}.header{background:#999999;}.footer .wrapper{background:#ebebeb;}.footer h5{padding-bottom:10px;}table.columns .text-pad{padding-left:10px;padding-right:10px;}table.columns .left-text-pad{padding-left:10px;}table.columns .right-text-pad{padding-right:10px;}@media only screen and (max-width: 600px) {table[class="body"] .right-text-pad{padding-left:10px!important;}table[class="body"] .left-text-pad{padding-right:10px!important;}}</style>
-    <style>table.facebook td{background:#3b5998;border-color:#2d4473;}table.facebook:hover td{background:#2d4473!important;}table.twitter td{background:#00acee;border-color:#0087bb;}table.twitter:hover td{background:#0087bb!important;}table.google-plus td{background-color:#DB4A39;border-color:#CC0000;}table.google-plus:hover td{background:#CC0000!important;}.template-label{color:#ffffff;font-weight:bold;font-size:11px;}.callout .wrapper{padding-bottom:20px;}.callout .panel{background:#ECF8FF;border-color:#b9e5ff;}.header{background:#999999;}.footer .wrapper{background:#ebebeb;}.footer h5{padding-bottom:10px;}table.columns .text-pad{padding-left:10px;padding-right:10px;}table.columns .left-text-pad{padding-left:10px;}table.columns .right-text-pad{padding-right:10px;}@media only screen and (max-width: 600px) {table[class="body"] .right-text-pad{padding-left:10px!important;}table[class="body"] .left-text-pad{padding-right:10px!important;}}</style>
-  </head>
-  <body>
-    <table class="body">
-      <tr>
-        <td class="center" align="center" valign="top" style="background-color:#ebebeb;">
-          <center>
-            <table class="row header" style="background-color: #fff;border-bottom: rgba(0,0,0,0.05) 1px solid;-webkit-box-shadow: 0 0 2px rgba(0,0,0,.1) !important;-moz-box-shadow: 0 0 2px rgba(0,0,0,.1) !important;box-shadow: 0 0 2px rgba(0,0,0,.1) !important;">
-              <tr>
-                <td class="center" align="center" style="border-bottom-color:transparent;">
-                  <center>
-                    <table class="container">
-                      <tr>
-                        <td class="wrapper last">
-                          <table class="twelve columns">
-                            <tr>
-                              <td class="six sub-columns">
-                                <img src="http://dev.obsifight.eywek.fr/theme/Obsifight/img/logo.png" style="height:80px;">
-                              </td>
-                              <td class="six sub-columns last" style="text-align:right; vertical-align:middle;">
-                                <span class="template-label">ObsiFight</span>
-                              </td>
-                              <td class="expander"></td>
-                            </tr>
-                          </table>
-                        </td>
-                      </tr>
-                    </table>
-                  </center>
-                </td>
-              </tr>
-            </table>
-            <table class="container">
-              <tr>
-                <td>
-                  <table class="row">
-                    <tr>
-                      <td class="wrapper last">
-                        <table class="twelve columns">
-                          <tr>
-                            <td>
-                              <?php echo $this->fetch('content'); ?>
-                            </td>
-                            <td class="expander"></td>
-                          </tr>
-                        </table>
-                      </td>
-                    </tr>
-                  </table>
-                  <table class="row">
-                    <tr>
-                      <td class="wrapper last">
-                        <table class="twelve columns">
-                          <tr>
-                            <td align="center">
-                              <center>
-                                <p style="text-align:center;"><a href="http://obsifight.net">Site</a> | <a href="https://forum.obsifight.fr">Forum</a> | <a href="http://www.obsifight.fr/forum/index.php?threads/c-g-u-dobsifight.15819/">CGU</a></p>
-                                <p style="text-align:center;">Ceci est un message automatique. Il est inutile d'y répondre.</p>
-                              </center>
-                            </td>
-                            <td class="expander"></td>
-                          </tr>
-                        </table>
-                      </td>
-                    </tr>
-                  </table>
-                </td>
-              </tr>
-            </table>
-          </center>
-        </td>
-      </tr>
-    </table>
-  </body>
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+  <title></title>
+  <!--[if !mso]><!-- -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!--<![endif]-->
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<style type="text/css">
+  #outlook a { padding: 0; }
+  .ReadMsgBody { width: 100%; }
+  .ExternalClass { width: 100%; }
+  .ExternalClass * { line-height:100%; }
+  body { margin: 0; padding: 0; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+  table, td { border-collapse:collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+  img { border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; }
+  p { display: block; margin: 13px 0; }
+</style>
+<!--[if !mso]><!-->
+<style type="text/css">
+  @media only screen and (max-width:480px) {
+    @-ms-viewport { width:320px; }
+    @viewport { width:320px; }
+  }
+</style>
+<!--<![endif]-->
+<!--[if mso]>
+<xml>
+  <o:OfficeDocumentSettings>
+    <o:AllowPNG/>
+    <o:PixelsPerInch>96</o:PixelsPerInch>
+  </o:OfficeDocumentSettings>
+</xml>
+<![endif]-->
+<!--[if lte mso 11]>
+<style type="text/css">
+  .outlook-group-fix {
+    width:100% !important;
+  }
+</style>
+<![endif]-->
+<style type="text/css">
+  @media only screen and (min-width:480px) {
+    .mj-column-per-100, * [aria-labelledby="mj-column-per-100"] { width:100%!important; }
+  }
+</style>
+</head>
+<body style="background: #e6e6e6;">
+  <div style="background-color:#e6e6e6;"><!--[if mso | IE]>
+      <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="600" align="center" style="width:600px;">
+        <tr>
+          <td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;">
+      <![endif]--><div style="margin:0px auto;max-width:600px;background:#ffffff;"><table role="presentation" cellpadding="0" cellspacing="0" style="font-size:0px;width:100%;background:#ffffff;" align="center" border="0"><tbody><tr><td style="text-align:center;vertical-align:top;direction:ltr;font-size:0px;padding:0px 0px 0px 0px;padding-bottom:40px;padding-top:40px;"><!--[if mso | IE]>
+      <table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td style="vertical-align:top;width:600px;">
+      <![endif]--><div aria-labelledby="mj-column-per-100" class="mj-column-per-100 outlook-group-fix" style="vertical-align:top;display:inline-block;direction:ltr;font-size:13px;text-align:left;width:100%;"><table role="presentation" cellpadding="0" cellspacing="0" style="vertical-align:top;" width="100%" border="0"><tbody><tr><td style="word-break:break-word;font-size:0px;padding:0px 0px 0px 0px;padding-top:10px;padding-bottom:10px;padding-right:25px;padding-left:25px;" align="center"><table role="presentation" cellpadding="0" cellspacing="0" style="border-collapse:collapse;border-spacing:0px;" align="center" border="0"><tbody><tr><td style="width:313px;"><img alt="" title="" height="auto" src="http://hxy2.mjt.lu/img/hxy2/b/1rr90/s2pq7.png" style="border:none;border-radius:;display:block;outline:none;text-decoration:none;width:100%;height:auto;" width="313"></td></tr></tbody></table></td></tr></tbody></table></div><!--[if mso | IE]>
+      </td></tr></table>
+      <![endif]--></td></tr></tbody></table></div><!--[if mso | IE]>
+      </td></tr></table>
+      <![endif]-->
+      <!--[if mso | IE]>
+      <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="600" align="center" style="width:600px;">
+        <tr>
+          <td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;">
+      <![endif]--><div style="margin:0px auto;max-width:600px;background:#ffffff;"><table role="presentation" cellpadding="0" cellspacing="0" style="font-size:0px;width:100%;background:#ffffff;" align="center" border="0"><tbody><tr><td style="text-align:center;vertical-align:top;direction:ltr;font-size:0px;padding:0px 0px 0px 0px;padding-bottom:20px;padding-top:0px;"><!--[if mso | IE]>
+      <table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td style="vertical-align:top;width:600px;">
+      <![endif]--><div aria-labelledby="mj-column-per-100" class="mj-column-per-100 outlook-group-fix" style="vertical-align:top;display:inline-block;direction:ltr;font-size:13px;text-align:left;width:100%;"><table role="presentation" cellpadding="0" cellspacing="0" style="vertical-align:top;" width="100%" border="0"><tbody><tr><td style="word-break:break-word;font-size:0px;padding:0px 0px 0px 0px;padding-top:10px;padding-bottom:0px;padding-right:25px;padding-left:25px;" align="left"><div style="cursor:auto;color:#5E6977;font-family:Arial, sans-serif;font-size:13px;line-height:18px;text-align:left;"><h1 style="text-align:center;"><span style="color:#a94545"><span style="font-family:Arial,sans-serif">ObsiFight</span></span></h1></div></td></tr><tr><td style="word-break:break-word;font-size:0px;padding:0px 0px 0px 0px;padding-top:0px;padding-bottom:10px;padding-right:25px;padding-left:25px;" align="left"><div style="cursor:auto;color:#5E6977;font-family:Arial, sans-serif;font-size:13px;line-height:22px;text-align:left;"><p style="margin: 10px 0;"><span style="font-family:Arial,sans-serif"><span style="color:#55575d"><span style="font-size:15px"><?php echo $this->fetch('content'); ?></span></span></span></p></div></td></tr><tr><td style="word-break:break-word;font-size:0px;padding:15px 30px;padding-top:10px;padding-bottom:10px;padding-right:25px;padding-left:25px;" align="center"><table role="presentation" cellpadding="0" cellspacing="0" style="border-collapse:separate;" align="center" border="0"><tbody><tr><td style="border:none;border-radius:60px;color:#FFFFFF;cursor:auto;padding:15px 30px;" align="center" valign="middle" bgcolor="#A94545"><a href="https://obsifight.net" style="text-decoration:none;line-height:100%;background:#A94545;color:#FFFFFF;font-family:Arial, sans-serif;font-size:13px;font-weight:normal;text-transform:none;margin:0px;margin-top: 30px;" target="_blank"><span style="font-family:Arial,sans-serif"><span style="font-size:15px"><b>Se rendre sur le site</b></span></span></a></td></tr></tbody></table></td></tr></tbody></table></div><!--[if mso | IE]>
+      </td></tr></table>
+      <![endif]--></td></tr></tbody></table></div><!--[if mso | IE]>
+      </td></tr></table>
+      <![endif]-->
+      <!--[if mso | IE]>
+      <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="600" align="center" style="width:600px;">
+        <tr>
+          <td style="line-height:0px;font-size:0px;mso-line-height-rule:exactly;">
+      <![endif]--><div style="margin:0px auto;max-width:600px;"><table role="presentation" cellpadding="0" cellspacing="0" style="font-size:0px;width:100%;" align="center" border="0"><tbody><tr><td style="text-align:center;vertical-align:top;direction:ltr;font-size:0px;padding:20px 0px 20px 0px;"><!--[if mso | IE]>
+      <table role="presentation" border="0" cellpadding="0" cellspacing="0"><tr><td style="vertical-align:top;width:600px;">
+      <![endif]--><div aria-labelledby="mj-column-per-100" class="mj-column-per-100 outlook-group-fix" style="vertical-align:top;display:inline-block;direction:ltr;font-size:13px;text-align:left;width:100%;"><table role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0"><tbody><tr><td style="word-break:break-word;font-size:0px;padding:0px 20px 0px 20px;padding-top:0px;padding-bottom:0px;" align="center"><div style="cursor:auto;color:#5E6977;font-family:Arial, sans-serif;font-size:11px;line-height:22px;text-align:center;"><p style="margin: 10px 0;">Cet email est automatique, il est inutile d'y répondre.</p></div></td></tr><tr><td style="word-break:break-word;font-size:0px;padding:0px 20px 0px 20px;padding-top:0px;padding-bottom:0px;" align="center"><div style="cursor:auto;color:#5E6977;font-family:Arial, sans-serif;font-size:11px;line-height:22px;text-align:center;"></div></td></tr></tbody></table></div><!--[if mso | IE]>
+      </td></tr></table>
+      <![endif]--></td></tr></tbody></table></div><!--[if mso | IE]>
+      </td></tr></table>
+      <![endif]--></div>
+</body>
 </html>

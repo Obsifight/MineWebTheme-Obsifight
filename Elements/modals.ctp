@@ -65,7 +65,7 @@
     if (res['two-factor-auth'] === undefined) // no two factor auth
       return window.location = '?t_' + Date.now()
     // remember_me
-    $('#login-two-factor-auth input[name="remember_me"]').val($('#login-before-two-factor-auth input[name="remember_me"]').val())
+    $('#login-two-factor-auth input[name="remember_me"]').attr('checked', $('#login-before-two-factor-auth input[name="remember_me"]').is(':checked'))
     // display code form
     $('#login-before-two-factor-auth').slideUp(150)
     $('#login-two-factor-auth').slideDown(150)
