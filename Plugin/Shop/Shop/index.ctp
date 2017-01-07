@@ -196,23 +196,21 @@
 										echo '<ul class="pricing-table list-unstyled">';
 
 											foreach ($ranks_desc as $carac => $spec) {
-
-												echo '<li>';
-
-													$bool = $spec[$i_item];
-													if(is_bool($bool)) {
-														if($bool) {
-															echo '<span class="item-have"></span>';
-														} else {
-															echo '<span class="item-no-have"></span>';
-														}
-													} else {
-														echo '<div class="text-center">'.$bool.'</div>';
-													}
-
-													echo '<span>'.$carac.'</span>';
-
-												echo '</li>';
+                        $bool = $spec[$i_item];
+                        if ($bool !== null) {
+  												echo '<li>';
+  													if(is_bool($bool)) {
+  														if($bool) {
+  															echo '<span class="item-have"></span>';
+  														} else {
+  															echo '<span class="item-no-have"></span>';
+  														}
+  													} else {
+  														echo '<div class="text-center">'.$bool.'</div>';
+  													}
+  													echo '<span>'.$carac.'</span>';
+  												echo '</li>';
+                        }
 
 											}
 
