@@ -346,7 +346,7 @@
 
             // request to server
             if (!status) { // enable
-              $.get('<?= $this->Html->url(array('controller' => 'user', 'action' => 'generateSecret', 'plugin' => 'TwoFactorAuth')) ?>', function (data) {
+              $.get('<?= $this->Html->url(array('controller' => 'UserLogin', 'action' => 'generateSecret', 'plugin' => 'TwoFactorAuth')) ?>', function (data) {
                 // add qrcode
                 $('#two-factor-auth-qrcode').attr('src', data.qrcode_url)
                 $('#two-factor-auth-secret').html(data.secret)
@@ -355,7 +355,7 @@
                 $('#twoFactorAuthValid').slideDown(150)
               })
             } else { // disable
-              $.get('<?= $this->Html->url(array('controller' => 'user', 'action' => 'disable', 'plugin' => 'TwoFactorAuth')) ?>', function (data) {
+              $.get('<?= $this->Html->url(array('controller' => 'UserLogin', 'action' => 'disable', 'plugin' => 'TwoFactorAuth')) ?>', function (data) {
                 // edit display
                 $('#toggleTwoFactorAuth').html('Activer').removeClass('disabled').removeClass('btn-danger').addClass('btn-success').attr('data-status', 0)
                 $('#twoFactorAuthStatusInfos').html('activer')
