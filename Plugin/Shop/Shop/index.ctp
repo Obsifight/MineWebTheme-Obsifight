@@ -176,25 +176,10 @@
 
 							echo '<div class="row mega-price-table">';
 
-								echo '<div class="col-md-3 col-sm-6 hidden-sm hidden-xs pricing-desc">';
-									echo '<div class="pricing-title">';
-										echo '<h3>Grades</h3>';
-										echo '<p class="text-muted">Pour chaque budget</p>';
-									echo '</div>';
-									echo '<ul class="list-unstyled">';
-										foreach ($ranks_desc as $carac => $spec) {
-											echo '<li>'.$carac.'</li>';
-										}
-									echo '</ul>';
-								echo '</div>';
-
 								$i_item = 0;
 								foreach ($ranks as $id => $data) {
 
-                  if ($i_item+1 == count($ranks))
-									  echo '<div class="col-md-12 col-sm-6 block">';
-                  else
-                    echo '<div class="col-md-3 col-sm-6 block">';
+                  echo '<div class="col-md-3 col-sm-6 block">';
 										echo '<div class="pricing">';
 
 											echo '<div class="pricing-head">';
@@ -225,7 +210,7 @@
 														echo '<div class="text-center">'.$bool.'</div>';
 													}
 
-													echo '<span class="hidden-md hidden-lg">'.$carac.'</span>';
+													echo '<span>'.$carac.'</span>';
 
 												echo '</li>';
 
