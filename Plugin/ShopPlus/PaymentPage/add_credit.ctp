@@ -279,9 +279,9 @@
                   <input name="currency_code" type="hidden" value="EUR" />
                   <input name="shipping" type="hidden" value="0.00" />
                   <input name="tax" type="hidden" value="0.00" />
-                  <input name="return" type="hidden" value="<?= $this->Html->url(array('controller' => 'shop', 'action' => 'index', 'return', 'plugin' => 'Shop'), true) ?>" />
-                  <input name="cancel_return" type="hidden" value="<?= $this->Html->url(array('controller' => 'shop', 'action' => 'index', 'error', 'plugin' => 'Shop'), true) ?>" />
-                  <input name="notify_url" type="hidden" value="<?= $this->Html->url(array('controller' => 'payment', 'action' => 'ipn', 'plugin' => 'Shop'), true) ?>" />
+                  <input name="return" type="hidden" value="<?= $this->Html->url(array('controller' => 'shop', 'action' => 'index', 'return', 'plugin' => 'shop'), true) ?>" />
+                  <input name="cancel_return" type="hidden" value="<?= $this->Html->url(array('controller' => 'shop', 'action' => 'index', 'error', 'plugin' => 'shop'), true) ?>" />
+                  <input name="notify_url" type="hidden" value="<?= $this->Html->url(array('controller' => 'payment', 'action' => 'ipn', 'plugin' => 'shop'), true) ?>" />
                   <input name="cmd" type="hidden" value="_xclick" />
                   <input name="business" type="hidden" value="" />
                   <input name="amount" type="hidden" value="" />
