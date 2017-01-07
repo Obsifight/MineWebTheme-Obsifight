@@ -191,7 +191,10 @@
 								$i_item = 0;
 								foreach ($ranks as $id => $data) {
 
-									echo '<div class="col-md-3 col-sm-6 block">';
+                  if ($i_item+1 == count($ranks))
+									  echo '<div class="col-md-12 col-sm-6 block">';
+                  else
+                    echo '<div class="col-md-3 col-sm-6 block">';
 										echo '<div class="pricing">';
 
 											echo '<div class="pricing-head">';

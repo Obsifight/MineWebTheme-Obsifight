@@ -23,179 +23,119 @@
         	<i class="fa fa-users"></i>
         </div>
 
-        <div class="heading-title heading-border-bottom">
-        	<h3 style="border-bottom: 2px solid #DA3737;margin-bottom: -2px;">Administrateurs</h3>
-        </div>
-
         <?php
-        foreach ($staff['administrators'] as $key => $value) {
-          echo '<a href="'.$this->Html->url('/stats/'.$value).'">';
-            echo '<img width="64" heigt="64"';
-            if(in_array($value, $usersOnlines)) {
-              echo ' style="border-color:#27ae60;" ';
-            }
-            echo 'data-toggle="tooltip" data-placement="top" title="'.$value.'" src="http://web.skins.obsifight.fr/head/'.$value.'" class="img-rounded staff-img" alt="">';
-          echo '</a>';
+        $colors = array('DA3737', 'DA3737', '2ecc71', 'f1c40f', '9b59b6');
+        $i = 0;
+        foreach ($ranks as $name => $users) {
+          echo '<div class="heading-title heading-border-bottom">';
+            echo '<h3 style="border-bottom: 2px solid #'.$colors[$i].';margin-bottom: -2px;">'.$name.'</h3>';
+          echo '</div>';
+          foreach ($users as $user) {
+            echo '<a href="'.$this->Html->url('/stats/'.$user).'">';
+              echo '<img width="64" heigt="64"';
+              if(in_array($user, $usersOnlines)) {
+                echo ' style="border-color:#27ae60;" ';
+              }
+              echo 'data-toggle="tooltip" data-placement="top" title="'.$user.'" src="http://web.skins.obsifight.fr/head/'.$user.'" class="img-rounded staff-img" alt="">';
+            echo '</a>';
+          }
+          $i++;
         }
         ?>
 
-        <div class="heading-title heading-border-bottom margin-top-30">
-        	<h3 style="border-bottom: 2px solid #DA3737;margin-bottom: -2px;">Développeurs</h3>
+			</div>
+
+  		<!-- RIGHT -->
+  		<div class="col-md-9 col-sm-9">
+
+        <div class="row margin-bottom-30">
+          <div class="col-md-4">
+            <div class="stats-block">
+              <h4 class="countTo" data-speed="5000"><?= $maxPlayers ?></h4>
+              <p>Record de joueurs</p>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="stats-block">
+              <h4 class="countTo" data-speed="5000"><?= $server_infos['getPlayerCount'] ?></h4>
+              <p>Joueurs en ligne</p>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="stats-block">
+              <h4 class="countTo" data-speed="5000"><?= $usersRegistered ?></h4>
+              <p>Joueurs inscrits</p>
+            </div>
+          </div>
         </div>
 
-        <?php
-        foreach ($staff['developers'] as $key => $value) {
-          echo '<a href="'.$this->Html->url('/stats/'.$value).'">';
-            echo '<img width="64" heigt="64"';
-            if(in_array($value, $usersOnlines)) {
-              echo ' style="border-color:#27ae60;" ';
-            }
-            echo 'data-toggle="tooltip" data-placement="top" title="'.$value.'" src="http://web.skins.obsifight.fr/head/'.$value.'" class="img-rounded staff-img" alt="">';
-          echo '</a>';
-        }
-        ?>
-
-        <div class="heading-title heading-border-bottom margin-top-30">
-        	<h3 style="border-bottom: 2px solid #2ecc71;margin-bottom: -2px;">Modérateurs</h3>
+        <div class="heading-title heading-border">
+        	<h2>Statistiques des <span>joueurs</span></h2>
+        	<p class="font-lato size-17">Calculés sur les 7 derniers jours</p>
         </div>
 
-        <?php
-        foreach ($staff['moderators'] as $key => $value) {
-          echo '<a href="'.$this->Html->url('/stats/'.$value).'">';
-            echo '<img width="64" heigt="64"';
-            if(in_array($value, $usersOnlines)) {
-              echo ' style="border-color:#27ae60;" ';
-            }
-            echo 'data-toggle="tooltip" data-placement="top" title="'.$value.'" src="http://web.skins.obsifight.fr/head/'.$value.'" class="img-rounded staff-img" alt="">';
-          echo '</a>';
-        }
-        ?>
+          <div class="margin-bottom-30" id="players">
+            <div class="alert alert-info">Chargement du graphique en cours ...</div>
+          </div>
 
-        <div class="heading-title heading-border-bottom margin-top-30">
-        	<h3 style="border-bottom: 2px solid #f1c40f;margin-bottom: -2px;">Supports</h3>
-        </div>
-
-        <?php
-        foreach ($staff['supports'] as $key => $value) {
-          echo '<a href="'.$this->Html->url('/stats/'.$value).'">';
-            echo '<img width="64" heigt="64"';
-            if(in_array($value, $usersOnlines)) {
-              echo ' style="border-color:#27ae60;" ';
-            }
-            echo 'data-toggle="tooltip" data-placement="top" title="'.$value.'" src="http://web.skins.obsifight.fr/head/'.$value.'" class="img-rounded staff-img" alt="">';
-          echo '</a>';
-        }
-        ?>
-
-        <div class="heading-title heading-border-bottom margin-top-30">
-        	<h3 style="border-bottom: 2px solid #9b59b6;margin-bottom: -2px;">Animateurs</h3>
-        </div>
-
-        <?php
-        foreach ($staff['animators'] as $key => $value) {
-          echo '<a href="'.$this->Html->url('/stats/'.$value).'">';
-            echo '<img width="64" heigt="64"';
-            if(in_array($value, $usersOnlines)) {
-              echo ' style="border-color:#27ae60;" ';
-            }
-            echo 'data-toggle="tooltip" data-placement="top" title="'.$value.'" src="http://web.skins.obsifight.fr/head/'.$value.'" class="img-rounded staff-img" alt="">';
-          echo '</a>';
-        }
-        ?>
-
-  			</div>
-
-    		<!-- RIGHT -->
-    		<div class="col-md-9 col-sm-9">
+          <div class="heading-title heading-line-single">
+          	<h4>Les heures avec le <span>plus de connectés</span></h4>
+          </div>
 
           <div class="row margin-bottom-30">
-            <div class="col-md-4">
-              <div class="stats-block">
-                <h4 class="countTo" data-speed="5000"><?= $maxPlayers ?></h4>
-                <p>Record de joueurs</p>
+
+            <div class="col-md-6">
+              <div id="peakTimesHours">
+                <div class="alert alert-info">Chargement du graphique en cours ...</div>
               </div>
             </div>
 
-            <div class="col-md-4">
-              <div class="stats-block">
-                <h4 class="countTo" data-speed="5000"><?= $server_infos['getPlayerCount'] ?></h4>
-                <p>Joueurs en ligne</p>
+            <div class="col-md-6">
+              <div id="peakTimesDays">
+                <div class="alert alert-info">Chargement du graphique en cours ...</div>
               </div>
             </div>
 
-            <div class="col-md-4">
-              <div class="stats-block">
-                <h4 class="countTo" data-speed="5000"><?= $usersRegistered ?></h4>
-                <p>Joueurs inscrits</p>
-              </div>
-            </div>
           </div>
 
-          <div class="heading-title heading-border">
-          	<h2>Statistiques des <span>joueurs</span></h2>
-          	<p class="font-lato size-17">Calculés sur les 7 derniers jours</p>
+        <div class="heading-title heading-border">
+        	<h2>Statistiques des <span>visites</span></h2>
+        	<p class="font-lato size-17">Calculés sur les 7 derniers jours</p>
+        </div>
+
+          <div class="margin-bottom-30" id="visits">
+            <div class="alert alert-info">Chargement du graphique en cours ...</div>
           </div>
 
-            <div class="margin-bottom-30" id="players">
-              <div class="alert alert-info">Chargement du graphique en cours ...</div>
-            </div>
+        <div class="heading-title heading-border">
+        	<h2>Statistiques des <span>inscriptions</span></h2>
+        	<p class="font-lato size-17">Calculés sur les 7 derniers jours</p>
+        </div>
 
-            <div class="heading-title heading-line-single">
-            	<h4>Les heures avec le <span>plus de connectés</span></h4>
-            </div>
-
-            <div class="row margin-bottom-30">
-
-              <div class="col-md-6">
-                <div id="peakTimesHours">
-                  <div class="alert alert-info">Chargement du graphique en cours ...</div>
-                </div>
-              </div>
-
-              <div class="col-md-6">
-                <div id="peakTimesDays">
-                  <div class="alert alert-info">Chargement du graphique en cours ...</div>
-                </div>
-              </div>
-
-            </div>
-
-          <div class="heading-title heading-border">
-          	<h2>Statistiques des <span>visites</span></h2>
-          	<p class="font-lato size-17">Calculés sur les 7 derniers jours</p>
+          <div class="margin-bottom-30" id="register">
+            <div class="alert alert-info">Chargement du graphique en cours ...</div>
           </div>
 
-            <div class="margin-bottom-30" id="visits">
-              <div class="alert alert-info">Chargement du graphique en cours ...</div>
-            </div>
+          <div class="row countTo-lg text-center">
 
-          <div class="heading-title heading-border">
-          	<h2>Statistiques des <span>inscriptions</span></h2>
-          	<p class="font-lato size-17">Calculés sur les 7 derniers jours</p>
+          	<div class="col-xs-6 col-sm-4">
+          		<span class="count" style="color:#9b59b6"><span class="countTo" data-speed="3000"><?= $percentageRegisteredUsersOnV6 ?></span>%</span>
+          		<h4>Joueurs inscrit lors de la V6</h4>
+          	</div>
+
+          	<div class="col-xs-6 col-sm-4">
+          		<span class="count" style="color:#9b59b6"><span class="countTo" data-speed="3000"><?= $percentageConnectedUsersOnV6 ?></span>%</span>
+          		<h4>Joueurs s'étant connecté lors de la V6</h4>
+          	</div>
+
+          	<div class="col-xs-6 col-sm-4">
+          		<span class="count" style="color:#9b59b6">+<span class="countTo" data-speed="3000"><?= $percentageRegisteredUsersThisWeek ?></span>%</span>
+          		<h4>Joueurs inscrits cette semaine</h4>
+          	</div>
+
           </div>
-
-            <div class="margin-bottom-30" id="register">
-              <div class="alert alert-info">Chargement du graphique en cours ...</div>
-            </div>
-
-            <div class="row countTo-lg text-center">
-
-            	<div class="col-xs-6 col-sm-4">
-            		<span class="count" style="color:#9b59b6"><span class="countTo" data-speed="3000"><?= $percentageRegisteredUsersOnV6 ?></span>%</span>
-            		<h4>Joueurs inscrit lors de la V6</h4>
-            	</div>
-
-            	<div class="col-xs-6 col-sm-4">
-            		<span class="count" style="color:#9b59b6"><span class="countTo" data-speed="3000"><?= $percentageConnectedUsersOnV6 ?></span>%</span>
-            		<h4>Joueurs s'étant connecté lors de la V6</h4>
-            	</div>
-
-            	<div class="col-xs-6 col-sm-4">
-            		<span class="count" style="color:#9b59b6">+<span class="countTo" data-speed="3000"><?= $percentageRegisteredUsersThisWeek ?></span>%</span>
-            		<h4>Joueurs inscrits cette semaine</h4>
-            	</div>
-
-            </div>
 
   		  </div>
       </div>
