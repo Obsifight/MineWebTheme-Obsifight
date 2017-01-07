@@ -217,7 +217,7 @@
 									<h4>Voulez-vous <?= ($obsiguardStatus) ? 'désactiver' : 'activer' ?> <strong>ObsiGuard</strong> ?</h4>
 									<p>
 										Cette fonctionnalité vous permet plus de sécurité sur votre compte.
-										<br><a href="#">En savoir plus</a>.
+										<br><a href="http://forum.obsifight.net/threads/utiliser-obsiguard.17946/">En savoir plus</a>.
 									</p>
 								</div><!-- /left text -->
 
@@ -305,7 +305,7 @@
                 <h4>Voulez-vous <span id="twoFactorAuthStatusInfos"><?= ($twoFactorAuthStatus) ? 'désactiver' : 'activer' ?></span> la <strong>double authentification</strong> ?</h4>
                 <p>
                   Cette fonctionnalité vous permet plus de sécurité sur votre compte site.
-                  <br><a href="#">En savoir plus</a>.
+                  <br><a href="http://forum.obsifight.net/threads/la-double-authentification.20892/">En savoir plus</a>.
                 </p>
               </div><!-- /left text -->
               <div class="col-md-4 col-sm-4 text-right"><!-- right btn -->
