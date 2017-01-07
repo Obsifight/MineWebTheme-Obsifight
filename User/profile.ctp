@@ -319,7 +319,7 @@
               <small class="text-muted">Secret: <em id="two-factor-auth-secret"></em></small>
             </p>
 
-            <form class="form-horizontal" method="POST" data-ajax="true" action="<?= $this->Html->url(array('plugin' => 'TwoFactorAuth', 'admin' => false, 'controller' => 'user', 'action' => 'validEnable')) ?>" data-callback-function="afterValidQrCode">
+            <form class="form-horizontal" method="POST" data-ajax="true" action="<?= $this->Html->url(array('plugin' => 'TwoFactorAuth', 'admin' => false, 'controller' => 'UserLogin', 'action' => 'validEnable')) ?>" data-callback-function="afterValidQrCode">
               <div class="ajax-msg"></div>
 
               <div class="form-group text-center">

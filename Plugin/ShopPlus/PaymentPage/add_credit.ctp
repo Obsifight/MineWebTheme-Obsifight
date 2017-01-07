@@ -362,7 +362,7 @@
                             <div class="col-xs-7 col-md-7">
                               <div class="form-group">
                                 <label for="expityMonth"><?= $Lang->get('SHOPPLUS__STRIPE_FORM_EXPIRY') ?></label>
-                                <input type="text" class="form-control" name="expiry" placeholder="MM/YY" required>
+                                <input type="text" class="form-control" name="expiry" placeholder="MM/YYYY" required>
                               </div>
                             </div>
                             <div class="col-xs-5 col-md-5 pull-right">
