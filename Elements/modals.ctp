@@ -39,7 +39,7 @@
           <button type="submit" class="btn btn-primary"><?= $Lang->get('USER__LOGIN') ?></button>
         </div>
       </form>
-      <form id="login-two-factor-auth" style="display:none;" class="form-horizontal" method="POST" data-ajax="true" action="<?= $this->Html->url(array('plugin' => 'TwoFactorAuth', 'admin' => false, 'controller' => 'user', 'action' => 'validLogin')) ?>" data-redirect-url="?">
+      <form id="login-two-factor-auth" style="display:none;" class="form-horizontal" method="POST" data-ajax="true" action="<?= $this->Html->url(array('plugin' => 'TwoFactorAuth', 'admin' => false, 'controller' => 'UserLogin', 'action' => 'validLogin')) ?>" data-redirect-url="?">
         <div class="modal-body">
           <div class="ajax-msg"></div>
           <input type="checkbox" style="display: none;" name="remember_me">
