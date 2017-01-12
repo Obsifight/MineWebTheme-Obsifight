@@ -398,12 +398,21 @@
 		  </div>
 
       <!-- ===================== -->
-      <a href="<?= $this->Html->url(array('controller' => 'google', 'action' => 'auth', 'plugin' => 'obsi')) ?>" class="btn btn-block btn-social btn-google">
-      	<i class="fa fa-youtube"></i> Lier mon compte YouTube
-      </a>
-      <p class="text-danger">
-        <small><em>Lier votre compte YouTube vous permet d'obtenir automatiquement le grade YouTubeur en jeu si vous disposez de plus de 750 abonnés.</em></small>
-      </p>
+      <?php if(!$youtuber): ?>
+        <a href="<?= $this->Html->url(array('controller' => 'google', 'action' => 'auth', 'plugin' => 'obsi')) ?>" class="btn btn-block btn-social btn-google">
+        	<i class="fa fa-youtube"></i> Lier mon compte YouTube
+        </a>
+        <p class="text-danger">
+          <small><em>Lier votre compte YouTube vous permet d'obtenir automatiquement le grade YouTubeur en jeu si vous disposez de plus de 750 abonnés.</em></small>
+        </p>
+      <?php else: ?>
+        <a href="<?= $this->Html->url(array('controller' => 'google', 'action' => 'manageVideos', 'plugin' => 'obsi')) ?>" class="btn btn-block btn-social btn-google">
+        	<i class="fa fa-youtube"></i> Voir mes vidéos
+        </a>
+        <p class="text-danger">
+          <small><em>Votre compte YouTube est lié, en cliquant sur le bouton ci-dessus, vous pourrez être rémunéré selon vos vidéos.</em></small>
+        </p>
+      <?php endif; ?>
       <!-- ===================== -->
 
 		</div>
