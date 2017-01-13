@@ -1,4 +1,4 @@
-<?php if ($restrictAccount): ?>
+<?php if (isset($restrictAccount) && $restrictAccount): ?>
   <section>
     <div class="container">
       <div class="alert alert-warning">
