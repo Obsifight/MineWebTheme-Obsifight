@@ -18,7 +18,7 @@
         echo '<div class="col-md-8">';
           echo '<p>';
             echo '<strong>'.$video['YoutubeVideo']['title'].'</strong>';
-            if ($video['YoutubeVideo']['eligible'] && $video['YoutubeVideo']['payed'])
+            if ($video['YoutubeVideo']['eligible'] && !$video['YoutubeVideo']['payed'])
               echo '<a data-toggle="tooltip" data-placement="left" title="! Attention ! <br>Une fois la vidéo rémunéré, celle-ci ne sera plus éligible." href="'.$this->Html->url('/user/youtube/videos/remuneration/').$video['YoutubeVideo']['id'].'" class="pull-right"><em><u>Recevoir la rémunération</u></em></a>';
           echo '</p>';
           echo '<p>';
