@@ -302,14 +302,14 @@
           <div class="callout alert alert-success margin-bottom-30" id="twoFactorAuthStatus">
             <div class="row">
               <div class="col-md-8 col-sm-8"><!-- left text -->
-                <h4>Voulez-vous <span id="twoFactorAuthStatusInfos"><?= ($twoFactorAuthStatus) ? 'désactiver' : 'activer' ?></span> la <strong>double authentification</strong> ?</h4>
+                <h4>Voulez-vous <span id="twoFactorAuthStatusInfos"><?= (isset($twoFactorAuthStatus) && $twoFactorAuthStatus) ? 'désactiver' : 'activer' ?></span> la <strong>double authentification</strong> ?</h4>
                 <p>
                   Cette fonctionnalité vous permet plus de sécurité sur votre compte site.
                   <br><a href="http://forum.obsifight.net/threads/la-double-authentification.20892/">En savoir plus</a>.
                 </p>
               </div><!-- /left text -->
               <div class="col-md-4 col-sm-4 text-right"><!-- right btn -->
-                <a id="toggleTwoFactorAuth" data-status="<?= ($twoFactorAuthStatus) ? '1' : '0' ?>" class="btn btn-<?= ($twoFactorAuthStatus) ? 'danger' : 'success' ?> btn-lg"><?= ($twoFactorAuthStatus) ? 'Désactiver' : 'Activer' ?></a>
+                <a id="toggleTwoFactorAuth" data-status="<?= (isset($twoFactorAuthStatus) && $twoFactorAuthStatus) ? '1' : '0' ?>" class="btn btn-<?= (isset($twoFactorAuthStatus) && $twoFactorAuthStatus) ? 'danger' : 'success' ?> btn-lg"><?= (isset($twoFactorAuthStatus) && $twoFactorAuthStatus) ? 'Désactiver' : 'Activer' ?></a>
               </div><!-- /right btn -->
             </div>
           </div>
