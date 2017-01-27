@@ -5,45 +5,51 @@
         <div class="alert alert-info">
           <b>Informations : </b>Les articles affichés ici sont mis en vente depuis le jeu. Vous pouvez acheter des items aux autres joueurs depuis cette interface.
         </div>
-        <?php foreach ($sales as $sale) { ?>
+        <div class="row">
+          <?php
+          $i = 0;
+          foreach ($sales as $sale) {
+            $i++;
+          ?>
 
-          <div class="col-md-3 col-sm-3 sale" data-selling-id="<?= $sale['id_selling'] ?>">
-            <div class="price-clean">
-              <h4>
-                <?= $this->Html->image($sale['icon_texture_path'], array('class' => 'img-rounded', 'style' => 'width: 100px;margin-bottom: 10px;')) ?>
-              </h4>
-              <h5><small>Par</small> <?= $sale['seller'] ?> </h5>
-              <hr>
-              <div style="text-align: left;">
-                <p><b>Contient :</b></p>
-                <ul>
-                  <?php
-                  foreach ($sale['items'] as $item) {
-                    echo '<li>';
-                      echo $item['custom_name'];
-                    echo '</li>';
-                  }
-                  ?>
-                </ul>
+            <div class="col-md-3 col-sm-3 sale" data-selling-id="<?= $sale['id_selling'] ?>">
+              <div class="price-clean">
+                <h4>
+                  <?= $this->Html->image($sale['icon_texture_path'], array('class' => 'img-rounded', 'style' => 'width: 100px;margin-bottom: 10px;')) ?>
+                </h4>
+                <h5><small>Par</small> <?= $sale['seller'] ?> </h5>
+                <hr>
+                <div style="text-align: left;">
+                  <p><b>Contient :</b></p>
+                  <ul>
+                    <?php
+                    foreach ($sale['items'] as $item) {
+                      echo '<li>';
+                        echo $item['name'];
+                      echo '</li>';
+                    }
+                    ?>
+                  </ul>
+                </div>
+                <hr>
+                <?php if (/*$sale['price_money'] > 0 && $isConnected*/false): ?>
+                  <a href="#" class="btn btn-3d btn-reveal btn-red buy-with-money" data-toggle="tooltip" data-placement="top" title="Acheter en dollars (monnaie du jeu)">
+                    <i class="fa fa-dollar"></i>
+                    <span><?= $sale['price_money'] ?>$</span>
+                  </a>
+                  &nbsp;
+                <?php endif; ?>
+                <?php if ($sale['price_point'] > 0 && $isConnected): ?>
+                  <a href="#" class="btn btn-3d btn-reveal btn-red buy-with-points" data-selling-id="<?= $sale['id_selling'] ?>" data-price="<?= $sale['price_point'] ?>" data-toggle="tooltip" data-placement="top" title="Acheter en points boutique">
+                    <i class="fa fa-shopping-cart"></i>
+                    <span><?= $sale['price_point'] ?> <?= $Configuration->getMoneyName() ?></span>
+                  </a>
+                <?php endif; ?>
               </div>
-              <hr>
-              <?php if (/*$sale['price_money'] > 0*/false): ?>
-                <a href="#" class="btn btn-3d btn-reveal btn-red buy-with-money" data-toggle="tooltip" data-placement="top" title="Acheter en dollars (monnaie du jeu)">
-                  <i class="fa fa-dollar"></i>
-                  <span><?= $sale['price_money'] ?>$</span>
-                </a>
-                &nbsp;
-              <?php endif; ?>
-              <?php if ($sale['price_point'] > 0): ?>
-                <a href="#" class="btn btn-3d btn-reveal btn-red buy-with-points" data-selling-id="<?= $sale['id_selling'] ?>" data-price="<?= $sale['price_point'] ?>" data-toggle="tooltip" data-placement="top" title="Acheter en points boutique">
-                  <i class="fa fa-shopping-cart"></i>
-                  <span><?= $sale['price_point'] ?> <?= $Configuration->getMoneyName() ?></span>
-                </a>
-              <?php endif; ?>
             </div>
-          </div>
-
-        <?php } ?>
+            <?= ($i % 4 == 0) ? '</div><div class="row" style="margin-top: 10px;">' : ''; ?>
+          <?php } ?>
+        </div>
 
       </div>
     </div>
@@ -60,7 +66,7 @@ $(function () {
     var id = parseInt(btn.attr('data-selling-id'))
 
     $('#confirmBuy #confirmBtn').removeClass('disabled').attr('disabled', false)
-    if (price <= '<?= $user['money'] ?>') {
+    if (price <= '<?= ($user) ? $user['money'] : 0 ?>') {
       $('#confirmBuy #confirmBtn').attr('data-selling-id', id)
       $('#confirmBuy .cant').hide()
       $('#confirmBuy .can').show()
