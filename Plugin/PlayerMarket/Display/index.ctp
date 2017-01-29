@@ -24,23 +24,28 @@
                   <ul>
                     <?php
                     foreach ($sale['items'] as $item) {
-                      echo '<li>';
+                      echo '<li data-toggle="tooltip" data-placement="top" title="'.$item['durability'].'% de durabilité">';
                         echo $item['name'];
+                        if (!empty($item['enchantments'])) {
+                          echo '&nbsp;(<em>'.implode(', ', array_map(function ($enchant) {
+                            return implode(' ', $enchant);
+                          }, $item['enchantments'])).'</em>)';
+                        }
                       echo '</li>';
                     }
                     ?>
                   </ul>
                 </div>
                 <hr>
-                <?php if (/*$sale['price_money'] > 0 && $isConnected*/false): ?>
-                  <a href="#" class="btn btn-3d btn-reveal btn-red buy-with-money" data-toggle="tooltip" data-placement="top" title="Acheter en dollars (monnaie du jeu)">
+                <?php if ($sale['price_money'] > 0 && $isConnected && strtolower(trim($sale['seller'])) != strtolower(trim($user['pseudo']))): ?>
+                  <a href="#" class="btn btn-3d btn-reveal btn-red buy" data-pay-mode="money" data-selling-id="<?= $sale['id_selling'] ?>" data-price="<?= $sale['price_money'] ?>" data-toggle="tooltip" data-placement="top" title="Acheter en dollars (monnaie du jeu)">
                     <i class="fa fa-dollar"></i>
                     <span><?= $sale['price_money'] ?>$</span>
                   </a>
                   &nbsp;
                 <?php endif; ?>
-                <?php if ($sale['price_point'] > 0 && $isConnected): ?>
-                  <a href="#" class="btn btn-3d btn-reveal btn-red buy-with-points" data-selling-id="<?= $sale['id_selling'] ?>" data-price="<?= $sale['price_point'] ?>" data-toggle="tooltip" data-placement="top" title="Acheter en points boutique">
+                <?php if ($sale['price_point'] > 0 && $isConnected && strtolower(trim($sale['seller'])) != strtolower(trim($user['pseudo']))): ?>
+                  <a href="#" class="btn btn-3d btn-reveal btn-red buy" data-pay-mode="point" data-selling-id="<?= $sale['id_selling'] ?>" data-price="<?= $sale['price_point'] ?>" data-toggle="tooltip" data-placement="top" title="Acheter en points boutique">
                     <i class="fa fa-shopping-cart"></i>
                     <span><?= $sale['price_point'] ?> <?= $Configuration->getMoneyName() ?></span>
                   </a>
@@ -59,33 +64,55 @@
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()
 
-  $('.buy-with-points').on('click', function (e) {
+  $('.buy[data-pay-mode]').on('click', function (e) {
     e.preventDefault()
     var btn = $(this)
     var price = parseFloat(btn.attr('data-price'))
     var id = parseInt(btn.attr('data-selling-id'))
+    var payMode = btn.attr('data-pay-mode')
 
     $('#confirmBuy #confirmBtn').removeClass('disabled').attr('disabled', false)
-    if (price <= '<?= ($user) ? $user['money'] : 0 ?>') {
-      $('#confirmBuy #confirmBtn').attr('data-selling-id', id)
-      $('#confirmBuy .cant').hide()
-      $('#confirmBuy .can').show()
+    if (payMode == 'point') {
+      if (price <= '<?= ($user) ? $user['money'] : 0 ?>') {
+        $('#confirmBuy #confirmBtn').attr('data-selling-id', id).attr('data-pay-mode', payMode)
+        $('#confirmBuy .cant').hide()
+        $('#confirmBuy .can').show()
+      } else {
+        $('#confirmBuy #confirmBtn').addClass('disabled').attr('disabled', true)
+        $('#confirmBuy .can').hide()
+        $('#confirmBuy .cant').show()
+      }
+      $('#confirmBuy #confirmBtn span').html(price + ' <?= $Configuration->getMoneyName() ?>')
     } else {
-      $('#confirmBuy #confirmBtn').addClass('disabled').attr('disabled', true)
-      $('#confirmBuy .can').hide()
-      $('#confirmBuy .cant').show()
+      $.get('<?= $this->Html->url('/market/user/money') ?>', function (data) {
+        if (!data.status || data.money >= price) {
+          $('#confirmBuy #confirmBtn').attr('data-selling-id', id).attr('data-pay-mode', payMode)
+          $('#confirmBuy .cant').hide()
+          $('#confirmBuy .can').show()
+        } else {
+          $('#confirmBuy #confirmBtn').addClass('disabled').attr('disabled', true)
+          $('#confirmBuy .can').hide()
+          $('#confirmBuy .cant').show()
+        }
+        $('#confirmBuy #confirmBtn span').html(price + '$')
+      })
     }
-    $('#confirmBuy #confirmBtn span').html(price + ' <?= $Configuration->getMoneyName() ?>')
     $('#confirmBuy').modal('show')
   })
   $('#confirmBuy #confirmBtn').on('click', function (e) {
     e.preventDefault();
     var btn = $(this)
     var id = parseInt(btn.attr('data-selling-id'))
+    var payMode = btn.attr('data-pay-mode')
     $('#confirmBuy').modal('hide')
 
+    if (payMode == 'point')
+      var url = '<?= $this->Html->url(array('controller' => 'purchase', 'action' => 'buyWithPoints', 'plugin' => 'PlayerMarket', 'id' => '{ID}')) ?>'
+    else
+      var url = '<?= $this->Html->url(array('controller' => 'purchase', 'action' => 'buyWithMoney', 'plugin' => 'PlayerMarket', 'id' => '{ID}')) ?>'
+
     // request to server
-    $.get('<?= $this->Html->url(array('controller' => 'purchase', 'action' => 'buyWithPoints', 'plugin' => 'PlayerMarket', 'id' => '{ID}')) ?>'.replace('{ID}', id), function (data) {
+    $.get(url.replace('{ID}', id), function (data) {
       if (data.status) {
         // success
         $('.sale[data-selling-id="' + id + '"]').fadeOut(150)
@@ -93,6 +120,8 @@ $(function () {
       } else {
         toastr.error(data.msg)
       }
+    }).error(function () {
+      toastr.error("L'article demandé est introuvable.")
     })
   })
 })
