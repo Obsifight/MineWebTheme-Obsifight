@@ -1,10 +1,15 @@
 <section>
   <div class="container">
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-10">
         <div class="alert alert-info">
           <b>Informations : </b>Les articles affichés ici sont mis en vente depuis le jeu. Vous pouvez acheter des items aux autres joueurs depuis cette interface.
         </div>
+      </div>
+      <div class="col-md-2">
+        <a href="#mySales" data-toggle="modal" class="btn btn-info btn-lg btn-block">Mes ventes</a>
+      </div>
+      <div class="col-md-12">
         <div class="row">
           <?php
           $i = 0;
@@ -124,6 +129,27 @@ $(function () {
       toastr.error("L'article demandé est introuvable.")
     })
   })
+  $('#mySales .get').on('click', function (e) {
+    e.preventDefault();
+    var btn = $(this)
+    var id = parseInt(btn.attr('data-selling-id'))
+    btn.attr('disabled').addClass('disabled')
+
+    // request to server
+    $.get('<?= $this->Html->url(array('controller' => 'purchase', 'action' => 'recovery', 'id' => '{ID}')) ?>'.replace('{ID}', id), function (data) {
+      btn.attr('disabled', false).removeClass('disabled')
+      if (data.status) {
+        // success
+        $('.sale[data-selling-id="' + id + '"]').fadeOut(150)
+        toastr.success('Vous avez récupéré ces articles !')
+      } else {
+        toastr.error(data.msg)
+      }
+    }).error(function () {
+      btn.attr('disabled', false).removeClass('disabled')
+      toastr.error("L'article demandé est introuvable.")
+    })
+  })
 })
 </script>
 <div class="modal fade" tabindex="-1" id="confirmBuy" role="dialog">
@@ -147,6 +173,59 @@ $(function () {
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
         <button type="button" class="btn btn-success" id="confirmBtn">Acheter et payer <span></span></button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" tabindex="-1" id="mySales" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Mes ventes</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <?php
+          if (empty($mySales))
+            echo '<div class="alert alert-danger">Aucune vente en cours.</div>';
+          foreach ($mySales as $sale) {
+          ?>
+            <div class="col-md-6 col-sm-6 sale" data-selling-id="<?= $sale['id_selling'] ?>">
+              <div class="price-clean">
+                <h4>
+                  <?= $this->Html->image($sale['icon_texture_path'], array('class' => 'img-rounded', 'style' => 'width: 100px;margin-bottom: 10px;')) ?>
+                </h4>
+                <hr>
+                <div style="text-align: left;">
+                  <p><b>Contient :</b></p>
+                  <ul>
+                    <?php
+                    foreach ($sale['items'] as $item) {
+                      echo '<li data-toggle="tooltip" data-placement="top" title="'.$item['durability'].'% de durabilité">';
+                        echo $item['name'];
+                        if (!empty($item['enchantments'])) {
+                          echo '&nbsp;(<em>'.implode(', ', array_map(function ($enchant) {
+                            return implode(' ', $enchant);
+                          }, $item['enchantments'])).'</em>)';
+                        }
+                      echo '</li>';
+                    }
+                    ?>
+                  </ul>
+                </div>
+                <hr>
+                <?php if (strtotime('+48 hours', strtotime($sale['start_of_sale'])) < time()): ?>
+                  <a href="#" class="btn btn-3d btn-reveal btn-red get" data-selling-id="<?= $sale['id_selling'] ?>" data-toggle="tooltip" data-placement="top" title="Supprime la mise en vente">
+                    <i class="fa fa-hand-rock-o"></i>
+                    <span>Récupérer</span>
+                  </a>
+                <?php endif; ?>
+              </div>
+            </div>
+          <?php } ?>
+        </div>
+        <div class="clearfix"></div>
       </div>
     </div>
   </div>
