@@ -30,7 +30,7 @@
                     <?php
                     foreach ($sale['items'] as $item) {
                       echo '<li data-toggle="tooltip" data-placement="top" title="'.$item['durability'].'% de durabilité">';
-                        echo $item['name'];
+                        echo $item['amount'].' '.$item['name'];
                         if (!empty($item['enchantments'])) {
                           echo '&nbsp;(<em>'.implode(', ', array_map(function ($enchant) {
                             return implode(' ', $enchant);
@@ -203,7 +203,7 @@ $(function () {
                     <?php
                     foreach ($sale['items'] as $item) {
                       echo '<li data-toggle="tooltip" data-placement="top" title="'.$item['durability'].'% de durabilité">';
-                        echo $item['name'];
+                        echo $item['amount'].' '.$item['name'];
                         if (!empty($item['enchantments'])) {
                           echo '&nbsp;(<em>'.implode(', ', array_map(function ($enchant) {
                             return implode(' ', $enchant);
