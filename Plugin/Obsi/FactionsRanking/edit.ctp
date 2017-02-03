@@ -244,7 +244,7 @@
   })
 </script>
 <script type="text/javascript">
-  $.get('http://factions.api.obsifight.net/data/<?= $factionId ?>', function (response) {
+  $.get('https://factions-api.obsifight.net/data/<?= $factionId ?>', function (response) {
     // error
     if (!response.status)
       return $('#factionData').html('<div class="alert alert-danger">Un problème est survenu lors de la récupération des données de la faction.</div>')

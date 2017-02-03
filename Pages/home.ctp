@@ -24,7 +24,7 @@
         <img id="firstFactionLogo" width="64" class="img-rounded" alt="" />
         <span style="font-size: 20px;margin-left: 10px;" id="firstFactionName"><i class="fa fa-refresh fa-spin"></i> Chargement...</span>
         <script type="text/javascript">
-          $.get('http://factions.api.obsifight.net/data', function (data) {
+          $.get('https://factions-api.obsifight.net/data', function (data) {
             var faction = data[0]
             $('#firstFactionName').html(faction.name)
             $('#firstFactionLogo').attr('src', '<?= $this->Html->url('/img/uploads/factions-logo/faction-logo') ?>' + faction.id + '.png')

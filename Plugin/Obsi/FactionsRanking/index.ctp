@@ -56,7 +56,7 @@ $(function () {
     },
   })
 
-  $.get('http://factions.api.obsifight.net/data', function (data, textStatus, jqXHR) {
+  $.get('https://factions-api.obsifight.net/data', function (data, textStatus, jqXHR) {
     var lastModified = new Date(jqXHR.getResponseHeader('Last-Modified'))
     lastModified = (lastModified.getHours().toString().length === 1 ? '0' + lastModified.getHours() : lastModified.getHours()) + 'h' + (lastModified.getMinutes().toString().length === 1 ? '0' + lastModified.getMinutes() : lastModified.getMinutes())
     $('#lastModified').html(lastModified)

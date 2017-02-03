@@ -16,7 +16,7 @@
             <th>Icône</th>
             <th>Vendeur</th>
             <th>Nombre d'articles</th>
-            <th></th>
+            <th>Fin de l'achat</th>
             <th></th>
           </thead>
           <tbody>
@@ -26,22 +26,14 @@
                   echo '<td>' . $this->Html->image($sale['icon_texture_path'], array('class' => 'img-rounded', 'width' => '32', 'onerror' => '$(this).parent().html(\'<i class="fa fa-question"></i>\')')) . '</td>';
                   echo '<td><span class="uuid" data-uuid="' . $sale['seller'] . '"></span>';
                   echo '<td>' . count($sale['items']) . ' article(s)</td>';
-                  echo '<td>';
-                    if ($sale['price_money'] > 0 && $isConnected && strtolower(trim($sale['seller'])) != strtolower(trim($user['pseudo']))):
-                      echo '<a href="#" class="btn btn-3d btn-reveal btn-red buy" data-pay-mode="money" data-selling-id="' . $sale['id_selling'] . '" data-price="' . $sale['price_money'] . '" data-toggle="tooltip" data-placement="top" title="Acheter en dollars (monnaie du jeu)">';
-                        echo '<i class="fa fa-dollar"></i>';
-                        echo '<span>' . $sale['price_money'] . '$</span>';
-                      echo '</a>';
-                      echo '&nbsp;';
-                    endif;
+                  echo '<td class="moment-to" style="font-weight: bold;">';
+                    echo date('Y-m-d H:i:s', strtotime('+72 hours', strtotime($sale['start_of_sale'])));
                   echo '</td>';
                   echo '<td>';
-                    if ($sale['price_point'] > 0 && $isConnected && strtolower(trim($sale['seller'])) != strtolower(trim($user['pseudo']))):
-                      echo '<a href="#" class="btn btn-3d btn-reveal btn-red buy" data-pay-mode="point" data-selling-id="' . $sale['id_selling'] . '" data-price="' . $sale['price_point'] . '" data-toggle="tooltip" data-placement="top" title="Acheter en points boutique">';
-                        echo '<i class="fa fa-shopping-cart"></i>';
-                        echo '<span>' . $sale['price_point'] . ' ' . $Configuration->getMoneyName() . '</span>';
-                      echo '</a>';
-                    endif;
+                    echo '<a href="#" class="btn btn-3d btn-reveal btn-red view" data-selling-id="' . $sale['id_selling'] . '" data-price-money="' . $sale['price_money'] . '" data-price-point="' . $sale['price_point'] . '">';
+                      echo '<i class="fa fa-eye"></i>';
+                      echo '<span>Voir la vente</span>';
+                    echo '</a>';
                   echo '</td>';
                 echo '</tr>';
               }
@@ -53,6 +45,35 @@
     </div>
   </div>
 </section>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/locale/fr.js"></script>
+<script type="text/javascript">
+  var date = moment()
+  var currentTime = Date.now()
+  date.locale('fr')
+  $('.moment-to').each(function () {
+    var element = $(this)
+    var eventTime = (new Date(element.html())).getTime()
+    var calcul = function () {
+      currentTime = Date.now()
+      var diffTime = eventTime - currentTime
+      var duration = moment.duration(diffTime, 'milliseconds')
+      element.html(
+        duration.days() +
+        ' jours ' +
+        (duration.hours().toString().length === 1 ? '0' : '') + duration.hours() +
+        ' heures ' +
+        (duration.minutes().toString().length === 1 ? '0' : '') + duration.minutes() +
+        ' minutes ' +
+        (duration.seconds().toString().length === 1 ? '0' : '') + duration.seconds() +
+        ' secondes'
+      )
+    }
+    calcul()
+
+    setInterval(calcul, 1000) // each seconds
+  })
+</script>
 <script type="text/javascript">
 function uuid() {
   console.log('Update uuid')
@@ -76,58 +97,84 @@ uuid()
 $(function () {
   $('[data-toggle="tooltip"]').tooltip()
 
-  $('.buy[data-pay-mode]').on('click', function (e) {
+  $('.view').on('click', function (e) {
+    // vars
     e.preventDefault()
     var btn = $(this)
-    var price = parseFloat(btn.attr('data-price'))
     var id = parseInt(btn.attr('data-selling-id'))
-    var payMode = btn.attr('data-pay-mode')
+    var priceMoney = parseFloat(btn.attr('data-price-money'))
+    var pricePoint = parseFloat(btn.attr('data-price-point'))
     var saleDiv = $('.sale[data-selling-id="' + id + '"]')
     var itemsList = JSON.parse(saleDiv.attr('data-items-list'))
 
+    // btns
     $('#confirmBuy #confirmBtn').removeClass('disabled').attr('disabled', false)
-    if (payMode == 'point') {
-      next((price <= '<?= ($user) ? $user['money'] : 0 ?>'))
-    } else {
-      $.get('<?= $this->Html->url('/market/user/money') ?>', function (data) {
-        next((!data.status || data.money >= price))
-      })
-    }
-
-    function next(can) {
-      // display
-      if (can) {
-        $('#confirmBuy #confirmBtn').attr('data-selling-id', id).attr('data-pay-mode', payMode)
-        $('#confirmBuy .cant').hide()
-        $('#confirmBuy .can').show()
-        // items list
-        $('#confirmBuy .can .items-list').html('<table class="table"><tbody></tbody></table>')
-        var content = ''
-        for (var i = 0; i < itemsList.length; i++) {
-          content = '<tr>'
-            content += '<td>'
-              content += itemsList[i].name_parsed
-              if (itemsList[i].durability > 0)
-                content += '</td><td>' + itemsList[i].durability + '% de durabilité'
-            content += '</td>'
-          content += '</tr>'
-          $('#confirmBuy .can .items-list table tbody').append(content)
-        }
-      } else {
-        $('#confirmBuy #confirmBtn').addClass('disabled').attr('disabled', true)
-        $('#confirmBuy .can').hide()
-        $('#confirmBuy .cant').show()
-      }
-      // price unity
-      if (payMode == 'point')
-        $('#confirmBuy #confirmBtn span').html(price + ' <?= $Configuration->getMoneyName() ?>')
+    if (priceMoney <= '<?= ($user) ? $user['money'] : 0 ?>')
+      $('#confirmBuy .buy[data-pay-mode="point"]').attr('data-selling-id', id)
+    else
+      $('#confirmBuy .buy[data-pay-mode="point"]').addClass('disabled').attr('disabled', true)
+    $.get('<?= $this->Html->url('/market/user/money') ?>', function (data) {
+      if ((!data.status || data.money >= pricePoint) && <?= ($user) ? 'true' : 'false' ?>)
+        $('#confirmBuy .buy[data-pay-mode="money"]').attr('data-selling-id', id)
       else
-        $('#confirmBuy #confirmBtn span').html(price + '$')
+        $('#confirmBuy .buy[data-pay-mode="money"]').addClass('disabled').attr('disabled', true)
+      next()
+    })
+
+    //
+    function next() {
+      // items list
+      $('#confirmBuy .items-list').html('<table class="table"><tbody></tbody></table>')
+      var content = ''
+      for (var i = 0; i < itemsList.length; i++) {
+        content = '<tr>'
+          content += '<td>'
+            if (itemsList[i].img_path)
+              content += '<img src="' + itemsList[i].img_path + '" width="32">&nbsp;&nbsp;'
+            else
+              content += '<i class="fa fa-question"></i>&nbsp;&nbsp;'
+            content += itemsList[i].name_parsed
+            console.log(itemsList[i])
+            if (itemsList[i].durability > 0) {
+              if (itemsList[i].durability < 25)
+                var progressClass = 'danger'
+              else if (itemsList[i].durability < 50)
+                var progressClass = 'warning'
+              else if (itemsList[i].durability < 75)
+                var progressClass = 'info'
+              else
+                var progressClass = 'success'
+              content += '</td><td style="width: 30%"><div class="progress" style="margin-top: 5px;">'
+                content += '<div class="progress-bar progress-bar-' + progressClass + '" role="progressbar" style="width: ' + itemsList[i].durability + '%">'
+                  content += '<span>' + itemsList[i].durability + '% de durabilité</span>'
+                content += '</div>'
+              content += '</div></td>'
+            }
+          content += '</td>'
+        content += '</tr>'
+        $('#confirmBuy .items-list table tbody').append(content)
+      }
+
+      // price
+      $('#confirmBuy .buy').show()
+      if (pricePoint > 0)
+        $('#confirmBuy .buy[data-pay-mode="point"] .price').html(pricePoint + ' <?= $Configuration->getMoneyName() ?>')
+      else
+        $('#confirmBuy .buy[data-pay-mode="point"]').hide()
+      if (priceMoney > 0)
+        $('#confirmBuy .buy[data-pay-mode="money"] .price').html(priceMoney + '$')
+      else
+        $('#confirmBuy .buy[data-pay-mode="money"]').hide()
+      $('#confirmBuy .buy[data-pay-mode="point"]').attr('data-price', pricePoint)
+      $('#confirmBuy .buy[data-pay-mode="money"]').attr('data-price', priceMoney)
+      $('#confirmBuy .buy').attr('data-selling-id', id)
+
       // show
       $('#confirmBuy').modal('show')
     }
   })
-  $('#confirmBuy #confirmBtn').on('click', function (e) {
+
+  $('#confirmBuy .buy').on('click', function (e) {
     e.preventDefault();
     var btn = $(this)
     var id = parseInt(btn.attr('data-selling-id'))
@@ -183,22 +230,26 @@ $(function () {
         <h4 class="modal-title">Confirmer l'achat</h4>
       </div>
       <div class="modal-body">
-        <div class="can">
-          <em>Voulez-vous vraiment acheter ces articles ?</em>
-          <br>
-          <br>
-          <div class="items-list"></div>
-        </div>
-        <div class="cant">
-          <div class="alert alert-danger">
-            <b>Erreur : </b>
-            Vous n'avez pas assez de solde pour pouvoir acheter ces articles.
-          </div>
-        </div>
+        <em>Voulez-vous vraiment acheter ces articles ?</em>
+        <br>
+        <br>
+        <div class="items-list"></div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-        <button type="button" class="btn btn-success" id="confirmBtn">Acheter et payer <span></span></button>
+        <div class="row">
+          <div class="col-md-6">
+            <a href="#" class="btn btn-block btn-3d btn-reveal btn-red buy" data-pay-mode="money" data-selling-id data-price title="Acheter en dollars (monnaie du jeu)">
+              <i class="fa fa-dollar"></i>
+              <span>Acheter et payer <b class="price"></b></span>
+            </a>
+          </div>
+          <div class="col-md-6">
+            <a href="#" class="btn btn-block btn-3d btn-reveal btn-red buy" data-pay-mode="point" data-selling-id data-price title="Acheter en <?= $Configuration->getMoneyName() ?> (monnaie du site)">
+              <i class="fa fa-shopping-cart"></i>
+              <span>Acheter et payer <b class="price"></b></span>
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </div>

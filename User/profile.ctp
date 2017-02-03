@@ -827,7 +827,7 @@ setTimeout(function(){
 	}
 </script>
 <script type="text/javascript">
-  $.get('http://factions.api.obsifight.net/player/is-leader/<?= $user['pseudo'] ?>', function (data) {
+  $.get('https://factions-api.obsifight.net/player/is-leader/<?= $user['pseudo'] ?>', function (data) {
     if (data.status && data.isLeader) {
       $('#faction').html('<div class="alert alert-info">Tu es le chef d\'une faction, tu peux donc désormais configurer l\'affichage de ta faction sur le site. <a href="/faction/edit" class="pull-right">Configurer l\'affichage de ma faction</a></div>')
     }
