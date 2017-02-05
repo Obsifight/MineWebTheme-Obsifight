@@ -23,7 +23,7 @@
             <?php
               foreach ($sales as $sale) {
                 echo '<tr class="sale" data-selling-id=' . $sale['id_selling'] . ' data-items-list=\'' . json_encode($sale['items']) . '\'>';
-                  echo '<td>' . $this->Html->image($sale['icon_texture_path'], array('class' => 'img-rounded', 'width' => '32', 'onerror' => '$(this).parent().html(\'<i class="fa fa-question"></i>\')')) . '</td>';
+                  echo '<td>' . $this->Html->image($sale['icon_texture_path'], array('class' => 'img-rounded', 'width' => '32', 'onerror' => '$(this).parent().html(\'<div style="width:32px;text-align: center;"><i class="fa fa-question fa-2x"></i></div>\')')) . '</td>';
                   echo '<td><span class="uuid" data-uuid="' . $sale['seller'] . '"></span>';
                   echo '<td>' . count($sale['items']) . ' article(s)</td>';
                   echo '<td class="moment-to" style="font-weight: bold;">';
@@ -87,6 +87,7 @@ function uuid() {
       for (var uuid in data.body.users) {
         if (data.body.users.hasOwnProperty(uuid)) {
           $('.uuid[data-uuid="' + uuid + '"]').addClass('uuid-setted').html('<img class="img-rounded" src="http://web.skins.obsifight.fr/head/' + data.body.users[uuid] + '/32">&nbsp;&nbsp;' + data.body.users[uuid])
+          $('.uuid[data-uuid="' + uuid + '"]').parent().parent().attr('data-seller-username', data.body.users[uuid])
         }
       }
     })
@@ -106,6 +107,7 @@ $(function () {
     var pricePoint = parseFloat(btn.attr('data-price-point'))
     var saleDiv = $('.sale[data-selling-id="' + id + '"]')
     var itemsList = JSON.parse(saleDiv.attr('data-items-list'))
+    var seller = saleDiv.attr('data-seller-username')
 
     // btns
     $('#confirmBuy #confirmBtn').removeClass('disabled').attr('disabled', false)
@@ -114,7 +116,7 @@ $(function () {
     else
       $('#confirmBuy .buy[data-pay-mode="point"]').addClass('disabled').attr('disabled', true)
     $.get('<?= $this->Html->url('/market/user/money') ?>', function (data) {
-      if ((!data.status || data.money >= pricePoint) && <?= ($user) ? 'true' : 'false' ?>)
+      if ((!data.status || data.money >= priceMoney) && <?= ($user) ? 'true' : 'false' ?>)
         $('#confirmBuy .buy[data-pay-mode="money"]').attr('data-selling-id', id)
       else
         $('#confirmBuy .buy[data-pay-mode="money"]').addClass('disabled').attr('disabled', true)
@@ -132,9 +134,8 @@ $(function () {
             if (itemsList[i].img_path)
               content += '<img src="' + itemsList[i].img_path + '" width="32">&nbsp;&nbsp;'
             else
-              content += '<i class="fa fa-question"></i>&nbsp;&nbsp;'
+              content += '<div style="width:32px;display: inline-block;text-align: center;"><i class="fa fa-question fa-2x"></i></div>&nbsp;&nbsp;'
             content += itemsList[i].name_parsed
-            console.log(itemsList[i])
             if (itemsList[i].durability > 0) {
               if (itemsList[i].durability < 25)
                 var progressClass = 'danger'
@@ -144,9 +145,9 @@ $(function () {
                 var progressClass = 'info'
               else
                 var progressClass = 'success'
-              content += '</td><td style="width: 30%"><div class="progress" style="margin-top: 5px;">'
+              content += '</td><td style="width: 30%"><div class="progress" style="margin-top: 5px;text-align: center;">'
                 content += '<div class="progress-bar progress-bar-' + progressClass + '" role="progressbar" style="width: ' + itemsList[i].durability + '%">'
-                  content += '<span>' + itemsList[i].durability + '% de durabilité</span>'
+                  content += '<span>' + Math.round(itemsList[i].durability) + '% de durabilité</span>'
                 content += '</div>'
               content += '</div></td>'
             }
@@ -157,17 +158,21 @@ $(function () {
 
       // price
       $('#confirmBuy .buy').show()
-      if (pricePoint > 0)
+      if (pricePoint > 0 && (!seller || seller != '<?= ($user) ? $user['pseudo'] : 'null' ?>'))
         $('#confirmBuy .buy[data-pay-mode="point"] .price').html(pricePoint + ' <?= $Configuration->getMoneyName() ?>')
       else
         $('#confirmBuy .buy[data-pay-mode="point"]').hide()
-      if (priceMoney > 0)
+      if (priceMoney > 0 && (!seller || seller != '<?= ($user) ? $user['pseudo'] : 'null'  ?>'))
         $('#confirmBuy .buy[data-pay-mode="money"] .price').html(priceMoney + '$')
       else
         $('#confirmBuy .buy[data-pay-mode="money"]').hide()
       $('#confirmBuy .buy[data-pay-mode="point"]').attr('data-price', pricePoint)
       $('#confirmBuy .buy[data-pay-mode="money"]').attr('data-price', priceMoney)
       $('#confirmBuy .buy').attr('data-selling-id', id)
+
+      // seller
+      if (seller)
+        $('#confirmBuy .seller').html('<img class="img-rounded" src="http://web.skins.obsifight.fr/head/' + seller + '">')
 
       // show
       $('#confirmBuy').modal('show')
@@ -230,6 +235,7 @@ $(function () {
         <h4 class="modal-title">Confirmer l'achat</h4>
       </div>
       <div class="modal-body">
+        <div class="seller" style="text-align: center;margin-bottom: 20px;"></div>
         <em>Voulez-vous vraiment acheter ces articles ?</em>
         <br>
         <br>
