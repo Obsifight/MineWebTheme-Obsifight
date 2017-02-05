@@ -27,13 +27,17 @@
             <?php
             if(isset($nav) && !empty($nav)) {
 
+              $i = 0;
               foreach ($nav as $key => $value) { // On parcours la navbar
+                $i++;
 
                 if(empty($value['Navbar']['submenu'])) { // Menu normal
 
                   echo '<li>';
                     echo '<a href="'.$value['Navbar']['url'].'">';
 										echo $value['Navbar']['name'];
+                    if ($i === 3)
+                      echo '&nbsp;&nbsp;<sup><span class="label label-success">Nouveau</span></sup>';
 										echo '</a>';
                   echo '</li>';
 
