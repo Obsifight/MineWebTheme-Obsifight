@@ -1,47 +1,55 @@
 <section>
   <div class="container">
     <div class="row">
-      <div class="col-md-<?= $isConnected && $mySales ? '10' : '12' ?>">
-        <div class="alert alert-info">
-          <b>Informations : </b>Les articles affichés ici sont mis en vente depuis le jeu. Vous pouvez acheter des items aux autres joueurs depuis cette interface.
+      <?php if ($state): ?>
+        <div class="col-md-<?= $isConnected && $mySales ? '10' : '12' ?>">
+          <div class="alert alert-info">
+            <b>Informations : </b>Les articles affichés ici sont mis en vente depuis le jeu. Vous pouvez acheter des items aux autres joueurs depuis cette interface.
+          </div>
         </div>
-      </div>
-      <div class="col-md-2"<?= $isConnected && $mySales ? '' : ' style="display: none;"' ?>>
-        <a href="#mySales" data-toggle="modal" class="btn btn-info btn-lg btn-block">Mes ventes</a>
-      </div>
-      <div class="col-md-12">
+        <div class="col-md-2"<?= $isConnected && $mySales ? '' : ' style="display: none;"' ?>>
+          <a href="#mySales" data-toggle="modal" class="btn btn-info btn-lg btn-block">Mes ventes</a>
+        </div>
+        <div class="col-md-12">
 
-        <table class="table dataTable">
-          <thead>
-            <th>Icône</th>
-            <th>Vendeur</th>
-            <th>Nombre d'articles</th>
-            <th>Fin de l'achat</th>
-            <th></th>
-          </thead>
-          <tbody>
-            <?php
-              foreach ($sales as $sale) {
-                echo '<tr class="sale" data-selling-id=' . $sale['id_selling'] . ' data-items-list=\'' . json_encode($sale['items']) . '\'>';
-                  echo '<td>' . $this->Html->image($sale['icon_texture_path'], array('class' => 'img-rounded', 'width' => '32', 'onerror' => '$(this).parent().html(\'<div style="width:32px;text-align: center;"><i class="fa fa-question fa-2x"></i></div>\')')) . '</td>';
-                  echo '<td><span class="uuid" data-uuid="' . $sale['seller'] . '"></span>';
-                  echo '<td>' . count($sale['items']) . ' article(s)</td>';
-                  echo '<td class="moment-to" style="font-weight: bold;">';
-                    echo date('Y-m-d H:i:s', strtotime('+72 hours', strtotime($sale['start_of_sale'])));
-                  echo '</td>';
-                  echo '<td>';
-                    echo '<a href="#" class="btn btn-3d btn-reveal btn-red view" data-selling-id="' . $sale['id_selling'] . '" data-price-money="' . $sale['price_money'] . '" data-price-point="' . $sale['price_point'] . '">';
-                      echo '<i class="fa fa-eye"></i>';
-                      echo '<span>Voir la vente</span>';
-                    echo '</a>';
-                  echo '</td>';
-                echo '</tr>';
-              }
-            ?>
-          </tbody>
-        </table>
+          <table class="table dataTable">
+            <thead>
+              <th>Icône</th>
+              <th>Vendeur</th>
+              <th>Nombre d'articles</th>
+              <th>Fin de l'achat</th>
+              <th></th>
+            </thead>
+            <tbody>
+              <?php
+                foreach ($sales as $sale) {
+                  echo '<tr class="sale" data-selling-id=' . $sale['id_selling'] . ' data-items-list=\'' . json_encode($sale['items']) . '\'>';
+                    echo '<td>' . $this->Html->image($sale['icon_texture_path'], array('class' => 'img-rounded', 'width' => '32', 'onerror' => '$(this).parent().html(\'<div style="width:32px;text-align: center;"><i class="fa fa-question fa-2x"></i></div>\')')) . '</td>';
+                    echo '<td><span class="uuid" data-uuid="' . $sale['seller'] . '"></span>';
+                    echo '<td>' . count($sale['items']) . ' article(s)</td>';
+                    echo '<td class="moment-to" style="font-weight: bold;">';
+                      echo date('Y-m-d H:i:s', strtotime('+72 hours', strtotime($sale['start_of_sale'])));
+                    echo '</td>';
+                    echo '<td>';
+                      echo '<a href="#" class="btn btn-3d btn-reveal btn-red view" data-selling-id="' . $sale['id_selling'] . '" data-price-money="' . $sale['price_money'] . '" data-price-point="' . $sale['price_point'] . '">';
+                        echo '<i class="fa fa-eye"></i>';
+                        echo '<span>Voir la vente</span>';
+                      echo '</a>';
+                    echo '</td>';
+                  echo '</tr>';
+                }
+              ?>
+            </tbody>
+          </table>
 
-      </div>
+        </div>
+      <?php else: ?>
+        <div class="col-md-12">
+          <div class="alert alert-danger">
+            Le WebMarket est temporairement désactivé.
+          </div>
+        </div>
+      <?php endif; ?>
     </div>
   </div>
 </section>
