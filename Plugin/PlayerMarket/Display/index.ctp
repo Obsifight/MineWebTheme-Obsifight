@@ -96,7 +96,7 @@ function uuid() {
 uuid()
 
 $(function () {
-  $('[data-toggle="tooltip"]').tooltip()
+  $('[data-toggle="tooltip"]').tooltip({html: true})
 
   $('.view').on('click', function (e) {
     // vars
@@ -282,7 +282,13 @@ $(function () {
                 foreach ($mySales as $sale) {
                   echo '<tr class="sale" data-selling-id=' . $sale['id_selling'] . ' data-items-list=\'' . json_encode($sale['items']) . '\'>';
                     echo '<td>' . $this->Html->image($sale['icon_texture_path'], array('class' => 'img-rounded', 'width' => '32', 'onerror' => '$(this).parent().html(\'<i class="fa fa-question"></i>\')')) . '</td>';
-                    echo '<td>' . count($sale['items']) . ' article(s)</td>';
+                    echo '<td><span data-toggle="tooltip" data-title="';
+                      $items = array();
+                      foreach ($sale['items'] as $item) {
+                        $items[] = $item['amount'] . ' ' . $item['name'];
+                      }
+                      echo implode(', ', $items);
+                    echo '">' . count($sale['items']) . ' article(s)</span></td>';
                     echo '<td>';
                       if (strtotime('+48 hours', strtotime($sale['start_of_sale'])) < time()):
                         echo '<a href="#" class="btn btn-3d btn-reveal btn-red get" data-selling-id="' . $sale['id_selling'] . '" data-toggle="tooltip" data-placement="top" title="Supprime la mise en vente">';
