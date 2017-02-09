@@ -150,6 +150,15 @@
                 </div>
               <?php endif; ?>
 
+              <?php if($paymill): ?>
+                <div class="col-md-3 price-table" data-payment-method="paymill">
+                  <h3><?= $Lang->get('SHOPPLUS__PAYMENT_METHOD_PAYMILL') ?></h3>
+                  <p style="padding: 0px;">
+                    <?= $this->Html->image('/theme/Obsifight/img/credit-card-logo.png', array('style' => 'height: 150px')) ?>
+                  </p>
+                </div>
+              <?php endif; ?>
+
             </div>
           </div>
         </div>
@@ -210,6 +219,34 @@
                 <?= $this->Html->image('/theme/Obsifight/img/stripe-logo.png', array('height' => '40px')) ?>
                 <div class="pull-right">
                   <a href="#" class="btn btn-3d btn-lg btn-reveal btn-red step3" data-payment-method="stripe" style="font-size: 20px;width: 100%;">
+                    <i class="fa fa-credit-card"></i>
+                    <span><?= $Lang->get('SHOPPLUS__BTN_PAY_EMPTY') ?></span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="step-2-method" data-payment-method="paymill" style="display:none;">
+              <div class="col-md-offset-2 col-md-8 col-sm-offset-1 col-sm-10">
+                <div class="form-group">
+                  <label><?= $Lang->get('SHOPPLUS__PAYMILL_FORM__AMOUNT') ?></label>
+                  <div class="input-group">
+                    <input class="form-control input-lg" type="number" step="1.00" min="5" name="amount" value="5">
+                    <div class="input-group-addon">€</div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label><?= $Lang->get('SHOPPLUS__PAYMILL_FORM__CREDITS', array('{MONEY_NAME}' => $Configuration->getMoneyName())) ?></label>
+                  <div class="input-group">
+                    <input class="form-control input-lg" type="number" name="credits" value="<?= (isset($paymillCreditFor1)) ? floatval($paymillCreditFor1) * 5 : '' ?>" disabled>
+                    <div class="input-group-addon"><?= $Configuration->getMoneyName() ?></div>
+                  </div>
+                </div>
+
+                <?= $this->Html->image('/theme/Obsifight/img/paymill-logo.png', array('height' => '40px')) ?>
+                <div class="pull-right">
+                  <a href="#" class="btn btn-3d btn-lg btn-reveal btn-red step3" data-payment-method="paymill" style="font-size: 20px;width: 100%;">
                     <i class="fa fa-credit-card"></i>
                     <span><?= $Lang->get('SHOPPLUS__BTN_PAY_EMPTY') ?></span>
                   </a>
@@ -328,15 +365,15 @@
               <div class="success-message"></div>
               <div id="stripe-hide-after-success">
                 <div class="alert alert-info">
-                  <?= $Lang->get('SHOPPLUS_STRIPE_INFO_BEFORE_BUY', array('{MONEY_NAME}' => $Configuration->getMoneyName())) ?>
+                  <?= $Lang->get('SHOPPLUS__STRIPE_INFO_BEFORE_BUY', array('{MONEY_NAME}' => $Configuration->getMoneyName())) ?>
                 </div>
 
                 <div class="row text-center">
                   <div class="col-md-offset-2 col-md-4">
-                    <div class="card-wrapper"></div>
-                    <span style="color:#2C9600;margin-top:10px;display:block;" data-toggle="tooltip" data-placement="top" title="<?= $Lang->get('SHOPPLUS_STRIPE_INFO_SECURITY_PLUS_BEFORE_BUY') ?>">
+                    <div class="stripe-card-wrapper"></div>
+                    <span style="color:#2C9600;margin-top:10px;display:block;" data-toggle="tooltip" data-placement="top" title="<?= $Lang->get('SHOPPLUS__STRIPE_INFO_SECURITY_PLUS_BEFORE_BUY') ?>">
                       <i class="fa fa-lock"></i>&nbsp;
-                      <?= $Lang->get('SHOPPLUS_STRIPE_INFO_SECURITY_BEFORE_BUY') ?>
+                      <?= $Lang->get('SHOPPLUS__STRIPE_INFO_SECURITY_BEFORE_BUY') ?>
                     </span>
                   </div>
                   <form class="stripe">
@@ -372,7 +409,7 @@
                               </div>
                             </div>
                           </div>
-                          <small><em class="text-muted"><?= $Lang->get('SHOPPLUS_STRIPE_INFO_BEFORE_BUY_STORE') ?></em></small>
+                          <small><em class="text-muted"><?= $Lang->get('SHOPPLUS__STRIPE_INFO_BEFORE_BUY_STORE') ?></em></small>
                         </div>
                       </div>
                     </div>
@@ -387,13 +424,118 @@
               </div>
             </div>
 
+            <div class="step-3-method" data-payment-method="paymill" style="display:none;">
+              <div class="success-message"></div>
+              <div id="paymill-hide-after-success">
+                <div class="alert alert-info">
+                  <?= $Lang->get('SHOPPLUS__PAYMILL_INFO_BEFORE_BUY', array('{MONEY_NAME}' => $Configuration->getMoneyName())) ?>
+                </div>
+
+                <div class="row text-center">
+                  <div class="col-md-offset-2 col-md-4">
+                    <div class="paymill-card-wrapper"></div>
+                    <span style="color:#2C9600;margin-top:10px;display:block;" data-toggle="tooltip" data-placement="top" title="<?= $Lang->get('SHOPPLUS__PAYMILL_INFO_SECURITY_PLUS_BEFORE_BUY') ?>">
+                      <i class="fa fa-lock"></i>&nbsp;
+                      <?= $Lang->get('SHOPPLUS__PAYMILL_INFO_SECURITY_BEFORE_BUY') ?>
+                    </span>
+                  </div>
+                  <form class="paymill">
+                    <div class="col-md-4">
+                      <div class="panel panel-default">
+                        <div class="panel-body">
+                          <div class="error-message"></div>
+                          <div class="row">
+                            <div class="col-xs-7 col-md-7">
+                              <div class="form-group">
+                                <label for="cardNumber"><?= $Lang->get('SHOPPLUS__PAYMILL_FORM_NUMBER') ?></label>
+                                <input type="text" class="form-control" name="number" placeholder="<?= $Lang->get('SHOPPLUS__PAYMILL_FORM_NUMBER') ?>" required autofocus>
+                              </div>
+                            </div>
+                            <div class="col-xs-5 col-md-5 pull-right">
+                              <div class="form-group">
+                                <label for="cardNumber"><?= $Lang->get('SHOPPLUS__PAYMILL_FORM_NAME') ?></label>
+                                <input type="text" class="form-control" name="name" placeholder="<?= $Lang->get('SHOPPLUS__PAYMILL_FORM_NAME') ?>" required>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row" style="margin-bottom:0px;">
+                            <div class="col-xs-7 col-md-7">
+                              <div class="form-group">
+                                <label for="expityMonth"><?= $Lang->get('SHOPPLUS__PAYMILL_FORM_EXPIRY') ?></label>
+                                <input type="text" class="form-control" name="expiry" placeholder="MM/YYYY" required>
+                              </div>
+                            </div>
+                            <div class="col-xs-5 col-md-5 pull-right">
+                              <div class="form-group">
+                                <label for="cvCode"><?= $Lang->get('SHOPPLUS__PAYMILL_FORM_CVC') ?></label>
+                                <input type="text" class="form-control" name="cvc" placeholder="<?= $Lang->get('SHOPPLUS__PAYMILL_FORM_CVC') ?>" required>
+                              </div>
+                            </div>
+                          </div>
+                          <small><em class="text-muted"><?= $Lang->get('SHOPPLUS__PAYMILL_INFO_BEFORE_BUY_STORE') ?></em></small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-12 text-center">
+                      <button type="submit" class="btn btn-3d btn-lg btn-reveal btn-red disabled pay" data-payment-method="paymill" style="font-size: 25px;">
+                        <i class="fa fa-credit-card"></i>
+                        <span><?= $Lang->get('SHOPPLUS__BTN_PAY_EMPTY') ?></span>
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
     </div>
   </section>
-  <?= $this->Html->script('jquery.card') ?>
-  <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+  <?php if ($stripe || $paymill): ?>
+    <?= $this->Html->script('jquery.card') ?>
+  <?php endif; ?>
+  <?php if ($stripe): ?>
+    <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+  <?php endif; ?>
+  <?php if ($paymill): ?>
+    <script type="text/javascript" src="https://bridge.paymill.com/"></script>
+    <script type="text/javascript">
+      var PAYMILL_PUBLIC_KEY = '<?= $paymillPublicKey ?>'
+      // errors
+      var errorsTranslated = {
+        "internal_server_error": "<?= $Lang->get('SHOPPLUS__PAYMILL_ERROR_internal_server_error') ?>",
+        "invalid_public_key": "<?= $Lang->get('SHOPPLUS__PAYMILL_ERROR_invalid_public_key') ?>",
+        "invalid_payment_data": "<?= $Lang->get('SHOPPLUS__PAYMILL_ERROR_invalid_payment_data') ?>",
+        "unknown_error": "<?= $Lang->get('SHOPPLUS__PAYMILL_ERROR_unknown_error') ?>",
+        "3ds_cancelled": "<?= $Lang->get('SHOPPLUS__PAYMILL_ERROR_3ds_cancelled') ?>",
+        "field_invalid_card_number": "<?= $Lang->get('SHOPPLUS__PAYMILL_ERROR_field_invalid_card_number') ?>",
+        "field_invalid_card_exp_year": "<?= $Lang->get('SHOPPLUS__PAYMILL_ERROR_field_invalid_card_exp_year') ?>",
+        "field_invalid_card_exp_month": "<?= $Lang->get('SHOPPLUS__PAYMILL_ERROR_field_invalid_card_exp_month') ?>",
+        "field_invalid_card_exp": "<?= $Lang->get('SHOPPLUS__PAYMILL_ERROR_field_invalid_card_exp') ?>",
+        "field_invalid_card_cvc": "<?= $Lang->get('SHOPPLUS__PAYMILL_ERROR_field_invalid_card_cvc') ?>",
+        "field_invalid_card_holder": "<?= $Lang->get('SHOPPLUS__PAYMILL_ERROR_field_invalid_card_holder') ?>",
+        "field_invalid_email": "<?= $Lang->get('SHOPPLUS__PAYMILL_ERROR_field_invalid_email') ?>",
+        "field_invalid_amount_int": "<?= $Lang->get('SHOPPLUS__PAYMILL_ERROR_field_invalid_amount_int') ?>",
+        "field_invalid_currency": "<?= $Lang->get('SHOPPLUS__PAYMILL_ERROR_field_invalid_currency') ?>"
+      }
+    </script>
+    <div class="modal fade" tabindex="-1" role="dialog" id="paymill3DSecureModal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">3D Secure</h4>
+          </div>
+          <div class="modal-body">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Annuler</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div>
+  <?php endif; ?>
   <script type="text/javascript">
   $(document).ready(function() {
     // =====
@@ -459,6 +601,18 @@
       // edit btn
       $('.step3[data-payment-method="stripe"] span').html('<?= $Lang->get('SHOPPLUS__BTN_PAY') ?>'.replace('{AMOUNT}', amount))
     })
+    // paymill
+    $('.step-2-method[data-payment-method="paymill"] input[name="amount"]').on('keyup mouseup', function (e) {
+      var input = $(this)
+      amount = parseFloat(input.val())
+      var credits = Math.round(amount * parseFloat('<?= (isset($paymillCreditFor1)) ? $paymillCreditFor1 : '' ?>'))
+
+      // edit credits
+      $('.step-2-method[data-payment-method="paymill"] input[name="credits"]').val(credits)
+
+      // edit btn
+      $('.step3[data-payment-method="paymill"] span').html('<?= $Lang->get('SHOPPLUS__BTN_PAY') ?>'.replace('{AMOUNT}', amount))
+    })
     // global
     $('.step3').on('click', function (e) {
       e.preventDefault()
@@ -489,13 +643,27 @@
           infos.credits = parseFloat($('.step-2-method[data-payment-method="stripe"] input[name="credits"]').val())
           // form
           $('form.stripe').card({
-            container: '.card-wrapper',
+            container: '.stripe-card-wrapper',
           });
           $('[data-toggle="tooltip"]').tooltip()
           // stripe
           Stripe.setPublishableKey('<?= (isset($stripePublishableKey)) ? $stripePublishableKey : '' ?>');
           // info
           var alertDiv = $('.step-3-method[data-payment-method="stripe"] .alert.alert-info')
+          var alertContent = alertDiv.html()
+          alertDiv.html(alertContent.replace('{AMOUNT}', amount).replace('{CREDITS}', infos.credits))
+        }
+        if (paymentMethod == 'paymill') {
+          // amount
+          amount = parseFloat($('.step-2-method[data-payment-method="paymill"] input[name="amount"]').val())
+          infos.credits = parseFloat($('.step-2-method[data-payment-method="paymill"] input[name="credits"]').val())
+          // form
+          $('form.paymill').card({
+            container: '.paymill-card-wrapper',
+          });
+          $('[data-toggle="tooltip"]').tooltip()
+          // info
+          var alertDiv = $('.step-3-method[data-payment-method="paymill"] .alert.alert-info')
           var alertContent = alertDiv.html()
           alertDiv.html(alertContent.replace('{AMOUNT}', amount).replace('{CREDITS}', infos.credits))
         }
@@ -517,10 +685,111 @@
         $('.pay[data-payment-method="paypal"]').addClass('disabled')
     })
 
+    // paymill form inputs
+    $('form.paymill input').on('keyup', function () {
+      if ($('form.paymill').find('input[name="number"]').val().length >= 18 && $('form.paymill').find('input[name="name"]').val().length >= 3 && $('form.paymill').find('input[name="expiry"]').val().length === 9 && $('form.paymill').find('input[name="cvc"]').val().length >= 3) {
+        var expiry = $('form.paymill').find('input[name="expiry"]').val().split(' / ')
+        var expiryMonth = expiry[0]
+        var expiryYear = expiry[1]
+        if (
+          expiryYear < ((new Date()).getFullYear() + 10) && // 10years max
+          (
+            (expiryYear == (new Date()).getFullYear() && expiryMonth > ((new Date()).getMonth())) // expire this year but in next months
+            ||
+            (expiryYear > (new Date()).getFullYear()) // expire in future
+          )
+        )
+          $('.pay[data-payment-method="paymill"]').removeClass('disabled')
+        else
+          $('.pay[data-payment-method="paymill"]').addClass('disabled')
+      } else {
+        $('.pay[data-payment-method="paymill"]').addClass('disabled')
+      }
+    })
+    $('form.paymill').on('submit', function (e) {
+      e.preventDefault()
+      var form = $(this)
+      var btn = form.find('[type="submit"]')
+      var btnContent = btn.html()
+
+      btn.addClass('disabled')
+      btn.html('<?= $Lang->get('SHOPPLUS__BTN_PAY_LOADING') ?>').removeClass('btn-reveal')
+
+      paymill.createToken({
+        cardholder: form.find('input[name="name"]').val(),
+        number: form.find('input[name="number"]').val().replace(/ /g,''),
+        cvc: form.find('input[name="cvc"]').val(),
+        exp_month: form.find('input[name="expiry"]').val().split(' / ')[0],
+        exp_year: form.find('input[name="expiry"]').val().split(' / ')[1],
+        amount_int: parseInt(amount * 100), // 49.00 -> 4900
+        currency: 'EUR',
+        email: '<?= $user['email'] ?>'
+      }, function (error, result) {
+        // hide 3d secure modal
+        $('#paymill3DSecureModal').modal('hide')
+        if (error) {
+          form.find('.error-message').hide().html('<div class="alert alert-danger"><b><?= $Lang->get('GLOBAL__ERROR') ?> : </b>' + errorsTranslated[error.apierror] + '</div>').fadeIn(150)
+          btn.removeClass('disabled').html(btnContent).addClass('btn-reveal')
+          return
+        }
+        var token = result.token
+        console.log(token)
+        // post to check it
+        $.post('<?= $this->Html->url(array('controller' => 'paymill', 'action' => 'createPayment', 'plugin' => 'ShopPlus')) ?>', {
+          token: token,
+          amount: amount,
+          'data[_Token][key]': '<?= $csrfToken ?>'
+        }, function (data) {
+          if (data.status) {
+            $('a[href="#step-3"]').parent().removeClass('active').addClass('checked')
+            $('#paymill-hide-after-success').slideUp(150)
+            $('.step-3-method[data-payment-method="paymill"] .success-message').hide().html('<div class="alert alert-success"><b><?= $Lang->get('GLOBAL__SUCCESS') ?> : </b><b>' + data.msg + '</b></div>').slideDown(150)
+          } else {
+            form.find('.error-message').hide().html('<div class="alert alert-danger"><b><?= $Lang->get('GLOBAL__ERROR') ?> : </b><b>' + data.msg + '</b></div>').fadeIn(150)
+            btn.removeClass('disabled').html(btnContent).addClass('btn-reveal')
+          }
+        }).error(function () {
+          form.find('.error-message').hide().html('<div class="alert alert-danger"><b><?= $Lang->get('GLOBAL__ERROR') ?> : </b><b><?= $Lang->get('ERROR__INTERNAL_ERROR') ?></b></div>').fadeIn(150)
+          btn.removeClass('disabled').html(btnContent).addClass('btn-reveal')
+        })
+      }, function (redirect, cancelFn) { // tdsInit
+        // == need open 3D secure page (modal+iframe) ==
+        var modal = $('#paymill3DSecureModal')
+        // set iframe to modal
+        var iframe = document.createElement('iframe');
+        iframe.style = 'width:100%;height:100%;'
+        modal.find('.modal-body').html(iframe)
+        // add post params
+        var iframeDoc = iframe.contentWindow ||  iframe.contentDocument;
+        if (iframeDoc.document) iframeDoc = iframeDoc.document;
+
+        var form = iframeDoc.createElement('form');
+        form.method = 'post';
+        form.action = redirect.url;
+
+        for (var k in redirect.params) {
+          var input = iframeDoc.createElement('input');
+          input.type = 'hidden';
+          input.name = k;
+          input.value = decodeURIComponent(redirect.params[k]);
+          form.appendChild(input);
+        }
+
+        if (iframeDoc.body) iframeDoc.body.appendChild(form);
+        else iframeDoc.appendChild(form);
+
+        form.submit();
+        // show modal
+        modal.modal('show')
+        // if cancel, call cancelFn()
+        modal.on('hide.bs.modal', cancelFn)
+      })
+    })
+
     // stripe form inputs
     $('form.stripe input').on('keyup', function () {
-      if ($('input[name="number"]').val().length >= 18 && $('input[name="name"]').val().length >= 3 && $('input[name="expiry"]').val().length === 9 && $('input[name="cvc"]').val().length >= 3) {
-        var expiry = $('input[name="expiry"]').val().split(' / ')
+      if ($('form.stripe').find('input[name="number"]').val().length >= 18 && $('form.stripe').find('input[name="name"]').val().length >= 3 && $('form.stripe').find('input[name="expiry"]').val().length === 9 && $('form.stripe').find('input[name="cvc"]').val().length >= 3) {
+        var expiry = $('form.stripe').find('input[name="expiry"]').val().split(' / ')
         var expiryMonth = expiry[0]
         var expiryYear = expiry[1]
         if (
