@@ -216,7 +216,7 @@ $(function () {
     e.preventDefault();
     var btn = $(this)
     var id = parseInt(btn.attr('data-selling-id'))
-    btn.attr('disabled').addClass('disabled')
+    btn.attr('disabled', true).addClass('disabled')
 
     // request to server
     $.get('<?= $this->Html->url(array('controller' => 'purchase', 'action' => 'recovery', 'id' => '{ID}')) ?>'.replace('{ID}', id), function (data) {
