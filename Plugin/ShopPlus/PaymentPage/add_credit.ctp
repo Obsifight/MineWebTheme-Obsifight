@@ -159,6 +159,15 @@
                 </div>
               <?php endif; ?>
 
+              <?php if($hipayWallet): ?>
+                <div class="col-md-3 price-table" data-payment-method="hipayWallet">
+                  <h3><?= $Lang->get('SHOPPLUS__PAYMENT_METHOD_HIPAY_WALLET') ?></h3>
+                  <p style="padding: 0px;">
+                    <?= $this->Html->image('/theme/Obsifight/img/credit-card-logo.png', array('style' => 'height: 150px')) ?>
+                  </p>
+                </div>
+              <?php endif; ?>
+
             </div>
           </div>
         </div>
@@ -197,6 +206,38 @@
                 </div>
               </div>
             </div>
+
+            <div class="step-2-method" data-payment-method="hipayWallet" style="display:none;">
+              <div class="row">
+
+                <?php
+                foreach ($hipayWalletOffers as $offer) {
+                  echo '<div class="col-md-3" style="padding: 5px;">';
+                    echo '<a class="btn-pay" data-amount="'.$offer['amount'].'" data-offer-data=\''.json_encode(array('sign' => $offer['md5Sign'], 'data' => $offer['encodedData'])).'\'>';
+                      echo '<i class="pull-left fa fa-eur"></i>';
+                      echo '<h5>'.$offer['amount'].' €</h5>';
+                      echo '<span>Obtenez '.number_format($offer['credits'], 0, ',', ' ').' '.$Configuration->getMoneyName().'</span>';
+                    echo '</a>';
+                  echo '</div>';
+                }
+                ?>
+
+              </div>
+              <div class="row margin-top-20">
+                <div class="col-md-9">
+                  <div class="alert alert-info">
+                    <?= $Lang->get('SHOPPLUS__HIPAY_WALLET_INFO') ?>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <a href="#" class="btn btn-3d btn-lg btn-reveal btn-red disabled step3" data-payment-method="hipayWallet" style="font-size: 20px;width: 100%;">
+                    <i class="fa fa-credit-card"></i>
+                    <span><?= $Lang->get('SHOPPLUS__BTN_PAY_EMPTY') ?></span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
 
             <div class="step-2-method" data-payment-method="stripe" style="display:none;">
               <div class="col-md-offset-2 col-md-8 col-sm-offset-1 col-sm-10">
@@ -284,6 +325,49 @@
       <div class="row setup-content" id="step-3" style="display: none;">
         <div class="col-xs-12">
           <div class="col-md-12">
+
+            <div class="step-3-method" data-payment-method="hipayWallet" style="display:none;">
+
+              <h3>
+                <?= $Lang->get('SHOPPLUS__HIPAY_WALLET_TERMS_TITLE') ?>
+                <br><small class="text-muted"><em><?= $Lang->get('SHOPPLUS__HIPAY_WALLET_TERMS_SUBTITLE') ?></em></small>
+              </h3>
+
+              <label class="checkbox nomargin" style="padding-top:0;">
+                <input class="checked-agree" type="checkbox" name="hipay_wallet_term_1"><i></i>
+                <?= $Lang->get('SHOPPLUS__HIPAY_WALLET_TERM_1') ?>
+              </label>
+
+              <label class="checkbox nomargin" style="padding-top:0;">
+                <input class="checked-agree" type="checkbox" name="hipay_wallet_term_2"><i></i>
+                <?= $Lang->get('SHOPPLUS__HIPAY_WALLET_TERM_2') ?>
+              </label>
+
+              <label class="checkbox nomargin" style="padding-top:0;">
+                <input class="checked-agree" type="checkbox" name="hipay_wallet_term_3"><i></i>
+                <?= $Lang->get('SHOPPLUS__HIPAY_WALLET_TERM_3', array('{MONEY_NAME}' => $Configuration->getMoneyName(), '{WEBSITE_NAME}' => $Configuration->getKey('name'))) ?>
+              </label>
+
+              <div class="alert alert-info margin-top-10">
+                <?= $Lang->get('SHOPPLUS__HIPAY_WALLET_TERMS_INFO') ?>
+              </div>
+
+              <div class="text-center">
+                <?php
+                 echo "<form target='_blank' action='https://" . ($hipayWalletTestMode ? 'test-' : '') . "payment.hipay.com/index/form/' method='post'>";
+                  echo "<input type='hidden' name='mode' value='MODE_C' />";
+                  echo "<input type='hidden' name='website_id' value='{$hipayWalletWebsiteId}' />";
+                  echo "<input type='hidden' name='sign' value='' />";
+                  echo "<input type='hidden' name='data' value='' />";
+                  echo '<button type="submit" class="btn btn-3d btn-lg btn-reveal btn-red disabled pay" data-payment-method="hipayWallet" style="font-size: 25px;">';
+                    echo '<i class="fa fa-credit-card"></i>';
+                    echo '<span>' . $Lang->get('SHOPPLUS__BTN_PAY_EMPTY') . '</span>';
+                  echo '</button>';
+                echo "</form>";
+               ?>
+              </div>
+
+            </div>
 
             <div class="step-3-method" data-payment-method="paypal" style="display:none;">
 
@@ -589,6 +673,20 @@
       $('.step3[data-payment-method="paypal"]').removeClass('disabled')
       $('.step3[data-payment-method="paypal"] span').html('<?= $Lang->get('SHOPPLUS__BTN_PAY') ?>'.replace('{AMOUNT}', amount))
     })
+    // hipay-wallet
+    $('.step-2-method[data-payment-method="hipayWallet"] .btn-pay').on('click', function (e) {
+      var btn = $(this)
+      amount = parseFloat(btn.attr('data-amount'))
+      infos.offer = JSON.parse(btn.attr('data-offer-data'))
+
+      // edit classess
+      $('.step-2-method[data-payment-method="hipayWallet"] .btn-pay').removeClass('active')
+      btn.addClass('active')
+
+      // edit btn
+      $('.step3[data-payment-method="hipayWallet"]').removeClass('disabled')
+      $('.step3[data-payment-method="hipayWallet"] span').html('<?= $Lang->get('SHOPPLUS__BTN_PAY') ?>'.replace('{AMOUNT}', amount))
+    })
     // stripe
     $('.step-2-method[data-payment-method="stripe"] input[name="amount"]').on('keyup mouseup', function (e) {
       var input = $(this)
@@ -622,6 +720,11 @@
       $('#step-2').fadeOut(150, function () {
         $('a[href="#step-2"]').parent().removeClass('active').addClass('checked')
         // display step 2
+        if (paymentMethod == 'hipayWallet') {
+          // edit form
+          $('.step-3-method[data-payment-method="hipayWallet"] form input[name="sign"]').val(infos.offer.sign)
+          $('.step-3-method[data-payment-method="hipayWallet"] form input[name="data"]').val(infos.offer.data)
+        }
         if (paymentMethod == 'paypal') {
           $('.step-3-method[data-payment-method="paypal"] form input[name="amount"]').val(amount)
           $('.step-3-method[data-payment-method="paypal"] form input[name="business"]').val(infos.paypalEmail)
@@ -683,6 +786,14 @@
         $('.pay[data-payment-method="paypal"]').removeClass('disabled')
       else
         $('.pay[data-payment-method="paypal"]').addClass('disabled')
+    })
+
+    // hipay wallet terms
+    $('input[name^="hipay_wallet_term_"]').on('change', function () {
+      if ($('input[name="hipay_wallet_term_1"]:checked').length === 1 && $('input[name="hipay_wallet_term_2"]:checked').length === 1 && $('input[name="hipay_wallet_term_3"]:checked').length === 1)
+        $('.pay[data-payment-method="hipayWallet"]').removeClass('disabled')
+      else
+        $('.pay[data-payment-method="hipayWallet"]').addClass('disabled')
     })
 
     // paymill form inputs
