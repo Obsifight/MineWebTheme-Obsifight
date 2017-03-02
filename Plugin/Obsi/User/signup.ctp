@@ -76,7 +76,7 @@
                 <?php } ?>
 
 								<div class="margin-top-20">
-									<label class="checkbox nomargin"><input class="checked-agree" type="checkbox" name="terms"><i></i>J'accepte le <a href="http://forum.obsifight.fr/index.php?threads/c-g-u-dobsifight.15819/">réglement</a> d'ObsiFight</label>
+									<label class="checkbox nomargin"><input class="checked-agree" type="checkbox" name="terms"><i></i>J'accepte le <a href="http://forum.obsifight.net/threads/cgv-conditions-g%C3%A9n%C3%A9rales-de-vente-cgu-conditions-g%C3%A9n%C3%A9rales-dutilisation.20598/">réglement</a> d'ObsiFight</label>
 								</div>
 							</fieldset>
 
