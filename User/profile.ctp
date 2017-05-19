@@ -382,7 +382,7 @@
 		<div class="col-lg-3 col-md-3 col-lg-pull-9 col-md-pull-9 hidden-sm hidden-xs" id="side-left" style="display:none;">
 
 			<div class="thumbnail text-center">
-				<img src="http://web.skins.obsifight.fr/head/<?= $user['pseudo'] ?>/230" alt="">
+				<img src="https://skins.obsifight.net/head/<?= $user['pseudo'] ?>/230" alt="">
 			</div>
 
       <div class="box-image text-center">
@@ -411,6 +411,23 @@
         </a>
         <p class="text-danger">
           <small><em>Votre compte YouTube est lié, en cliquant sur le bouton ci-dessus, vous pourrez être rémunéré selon vos vidéos.</em></small>
+        </p>
+      <?php endif; ?>
+      <!-- ===================== -->
+      <!-- ===================== -->
+      <?php if(!$twitter): ?>
+        <a href="<?= $this->Html->url(array('controller' => 'twitter', 'action' => 'link', 'plugin' => 'obsi')) ?>" class="btn btn-block btn-social btn-twitter">
+        	<i class="fa fa-twitter"></i> Lier mon compte Twitter
+        </a>
+        <p class="text-info">
+          <small><em>Lier votre compte Twitter vous permet de débloquer certains succès.</em></small>
+        </p>
+      <?php else: ?>
+        <button class="btn btn-block btn-social btn-twitter">
+        	<i class="fa fa-twitter"></i> @<?= $twitter['screen_name'] ?>
+        </button>
+        <p class="text-info">
+          <small><em>Pour lier un nouveau compte <a class="text-info" href="<?= $this->Html->url(array('controller' => 'twitter', 'action' => 'link', 'plugin' => 'obsi')) ?>">cliquez-ici</a>.</em></small>
         </p>
       <?php endif; ?>
       <!-- ===================== -->

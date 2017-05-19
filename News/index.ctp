@@ -58,7 +58,7 @@
           <?php foreach ($news['Comment'] as $k => $v) { ?>
             <div class="media" id="comment-<?= $v['id'] ?>">
               <span class="user-avatar">
-                <img class="pull-left media-object" src="http://web.skins.obsifight.fr/head/<?= $v['author'] ?>/64" width="64" height="64" alt="">
+                <img class="pull-left media-object" src="https://skins.obsifight.net/head/<?= $v['author'] ?>/64" width="64" height="64" alt="">
               </span>
               <div class="media-body">
                 <?php if($Permissions->can('DELETE_COMMENT') OR $Permissions->can('DELETE_HIS_COMMENT') AND $user['pseudo'] == $v['Comment']['author']) { ?>
@@ -167,7 +167,7 @@
       var comment = '';
       comment += '<div class="media"';
         comment +='<span class="user-avatar">';
-          comment +='<img class="pull-left media-object" src="http://web.skins.obsifight.fr/head/<?= $user['pseudo'] ?>/64" width="64" height="64" alt="">';
+          comment +='<img class="pull-left media-object" src="https://skins.obsifight.net/head/<?= $user['pseudo'] ?>/64" width="64" height="64" alt="">';
         comment += '</span>';
         comment += '<div class="media-body">';
           comment += '<h4 class="media-heading bold"><?= $user['pseudo'] ?></h4>';

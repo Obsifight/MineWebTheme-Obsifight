@@ -271,10 +271,10 @@
     if (typeof data.players.leader !== 'object')
       data.players.leader = [data.players.leader]
     for (var i = 0; i < data.players.leader.length; i++) {
-      $('#leadersList').append('<a href="<?= $this->Html->url('/stats') ?>/' + data.players.leader[i] + '"><img width="64" heigt="64" data-toggle="tooltip" data-placement="top" class="img-rounded staff-img" title="' + data.players.leader[i] + '" src="http://web.skins.obsifight.fr/head/' + data.players.leader[i] + '"></a>')
+      $('#leadersList').append('<a href="<?= $this->Html->url('/stats') ?>/' + data.players.leader[i] + '"><img width="64" heigt="64" data-toggle="tooltip" data-placement="top" class="img-rounded staff-img" title="' + data.players.leader[i] + '" src="https://skins.obsifight.net/head/' + data.players.leader[i] + '"></a>')
     }
     for (var i = 0; i < data.players.list.length; i++) {
-      $('#membersList').append('<a href="<?= $this->Html->url('/stats') ?>/' + data.players.list[i] + '"><img width="64" heigt="64" data-toggle="tooltip" data-placement="top" class="img-rounded staff-img" title="' + data.players.list[i] + '" src="http://web.skins.obsifight.fr/head/' + data.players.list[i] + '"></a>')
+      $('#membersList').append('<a href="<?= $this->Html->url('/stats') ?>/' + data.players.list[i] + '"><img width="64" heigt="64" data-toggle="tooltip" data-placement="top" class="img-rounded staff-img" title="' + data.players.list[i] + '" src="https://skins.obsifight.net/head/' + data.players.list[i] + '"></a>')
     }
     $('[data-toggle="tooltip"]').tooltip()
   })

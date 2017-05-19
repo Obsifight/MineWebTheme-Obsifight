@@ -101,7 +101,7 @@ function uuid() {
 
       for (var uuid in data.body.users) {
         if (data.body.users.hasOwnProperty(uuid)) {
-          $('.uuid[data-uuid="' + uuid + '"]').addClass('uuid-setted').html('<img class="img-rounded" src="http://web.skins.obsifight.fr/head/' + data.body.users[uuid] + '/32">&nbsp;&nbsp;' + data.body.users[uuid])
+          $('.uuid[data-uuid="' + uuid + '"]').addClass('uuid-setted').html('<img class="img-rounded" src="https://skins.obsifight.net/head/' + data.body.users[uuid] + '/32">&nbsp;&nbsp;' + data.body.users[uuid])
           $('.uuid[data-uuid="' + uuid + '"]').parent().parent().attr('data-seller-username', data.body.users[uuid])
         }
       }
@@ -187,7 +187,7 @@ $(function () {
 
       // seller
       if (seller)
-        $('#confirmBuy .seller').html('<img class="img-rounded" src="http://web.skins.obsifight.fr/head/' + seller + '">')
+        $('#confirmBuy .seller').html('<img class="img-rounded" src="https://skins.obsifight.net/head/' + seller + '">')
 
       // show
       $('#confirmBuy').modal('show')

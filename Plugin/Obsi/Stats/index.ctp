@@ -12,11 +12,11 @@
   		<div class="col-md-3 col-sm-3">
 
   			<!-- INLINE SEARCH -->
-  			<div class="inline-search clearfix margin-bottom-30">
+  			<?php /*<div class="inline-search clearfix margin-bottom-30">
           <div class="autosuggest" data-minLength="2" data-queryURL="<?= $this->Html->url('/stats/search/user/') ?>">
   					<input type="search" placeholder="Chercher un joueur" name="src" class="form-control typeahead">
           </div>
-  			</div>
+  			</div>*/ ?>
   			<!-- /INLINE SEARCH -->
 
         <div class="divider divider-circle divider-center"><!-- divider -->
@@ -36,7 +36,7 @@
               if(in_array($user, $usersOnlines)) {
                 echo ' style="border-color:#27ae60;" ';
               }
-              echo 'data-toggle="tooltip" data-placement="top" title="'.$user.'" src="http://web.skins.obsifight.fr/head/'.$user.'" class="img-rounded staff-img" alt="">';
+              echo 'data-toggle="tooltip" data-placement="top" title="'.$user.'" src="https://skins.obsifight.net/head/'.$user.'" class="img-rounded staff-img" alt="">';
             echo '</a>';
           }
           $i++;
@@ -121,13 +121,13 @@
           <div class="row countTo-lg text-center">
 
           	<div class="col-xs-6 col-sm-4">
-          		<span class="count" style="color:#9b59b6"><span class="countTo" data-speed="3000"><?= $percentageRegisteredUsersOnV6 ?></span>%</span>
-          		<h4>Joueurs inscrit lors de la V6</h4>
+          		<span class="count" style="color:#9b59b6"><span class="countTo" data-speed="3000"><?= $percentageRegisteredUsersOnV7 ?></span>%</span>
+          		<h4>Joueurs inscrit lors de la V7</h4>
           	</div>
 
           	<div class="col-xs-6 col-sm-4">
-          		<span class="count" style="color:#9b59b6"><span class="countTo" data-speed="3000"><?= $percentageConnectedUsersOnV6 ?></span>%</span>
-          		<h4>Joueurs s'étant connecté lors de la V6</h4>
+          		<span class="count" style="color:#9b59b6"><span class="countTo" data-speed="3000"><?= $percentageConnectedUsersOnV7 ?></span>%</span>
+          		<h4>Joueurs s'étant connecté lors de la V7</h4>
           	</div>
 
           	<div class="col-xs-6 col-sm-4">
@@ -156,7 +156,7 @@
   /*
     Fonction de recherche
   */
-
+<?php /*
     function _autosuggest() {
       _container = jQuery("div.autosuggest"), _container.length > 0 && loadScript("/theme/Obsifight/js/typeahead.bundle.js", function() {
           jQuery().typeahead && _container.each(function() {
@@ -199,6 +199,7 @@
         }
       });
     });
+    */ ?>
   /*
     Tooltip des images du staff
   */

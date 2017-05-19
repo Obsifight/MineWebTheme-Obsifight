@@ -24,7 +24,7 @@
 								<i class="fa fa-users"></i> <?= $Lang->get('USER__REGISTER') ?>
 							</header>
 
-              <img src="http://web.skins.obsifight.fr/head/obsi-inscription-noob/100" class="img-rounded block-center" style="margin-top:10px;" alt="">
+              <img src="https://skins.obsifight.net/head/obsi-inscription-noob/100" class="img-rounded block-center" style="margin-top:10px;" alt="">
 
               <div class="ajax-msg" style="padding: 10px;padding-bottom: 0;"></div>
 

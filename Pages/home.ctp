@@ -28,7 +28,7 @@
             var faction = data[0]
             $('#firstFactionName').html(faction.name)
             $('#firstFactionLogo').attr('src', '<?= $this->Html->url('/img/uploads/factions-logo/faction-logo') ?>' + faction.id + '.png')
-            $('#firstFactionLogo').attr('onerror', 'this.src=\'http://web.skins.obsifight.fr/head/' + faction.players.leader + '\'')
+            $('#firstFactionLogo').attr('onerror', 'this.src=\'https://skins.obsifight.net/head/' + faction.players.leader + '\'')
           })
         </script>
       </div>
@@ -41,13 +41,13 @@
 
 			<div class="col-md-9">
 
-        <?= $this->Html->image('logo.png', array('class' => 'pull-left')) ?>
+        <?= $this->Html->image('logo.png', array('class' => 'pull-left', 'style' => 'width:200px;')) ?>
 
 				<div class="heading-title">
 					<h2>ObsiFight ? C'est quoi ?</h2>
 				</div>
 
-        <p><b>ObsiFight</b> , tout d'abord, c'est plus de deux ans d'existence, sur cinq versions.</p>
+        <p><b>ObsiFight</b> , tout d'abord, c'est plus de deux ans d'existence, sur sept versions.</p>
         <p><b>ObsiFight</b>, c'est un serveur PvP Factions 1.7.10 moddé. Les mods ajoutent ou modifient de nombreux éléments du gameplay.</p>
         <h5><u>Comment décrire ObsiFight mieux qu'en décrivant votre arrivée ?</u></h5>
 
@@ -103,19 +103,19 @@
 	   </div>
   </div>
 </section>
-<section class="padding-md parallax parallax-2" style="background-image: url('/theme/Obsifight/img/spawn5.png'); background-position: 50% 50%;">
+<section class="padding-md parallax parallax-2" style="background-image: url('/theme/Obsifight/img/spawn4.png'); background-position: 50% 50%;">
 	<div class="overlay dark-4"><!-- dark overlay [1 to 9 opacity] --></div>
 
 	<div class="container">
 
 		<div class="text-center">
-			<h3 class="nomargin">Nous sommes actuellement en version 6 !</h3>
+			<h3 class="nomargin">Nous sommes actuellement en version 7 !</h3>
 			<p class="font-lato weight-300 lead nomargin-top">Découvrez dès maintenant notre trailer</p>
 
       <div class="col-md-3 hidden-sm hidden-xs"></div>
       <div class="col-md-6">
         <div class="embed-responsive embed-responsive-16by9">
-          <iframe class="embed-responsive-item" width="560" height="315" src="https://www.youtube.com/embed/42ELBJ4E_wE?autoplay=0&amp;loop=1&amp;autohide=1&amp;controls=0&amp;theme=light" frameborder="0" allowfullscreen=""></iframe>
+          <iframe class="embed-responsive-item" width="560" height="315" src="https://www.youtube.com/embed/lueGoo2InBo?autoplay=0&amp;loop=1&amp;autohide=1&amp;controls=0&amp;theme=light" frameborder="0" allowfullscreen=""></iframe>
         </div>
       </div>
       <div class="col-md-3 hidden-sm hidden-xs"></div>
@@ -164,7 +164,7 @@
     }
   });
 </script>
-<section class="alternate">
+<?php /*<section class="alternate">
 	<div class="container">
 
 		<div class="heading-title heading-dotted text-center">
@@ -204,7 +204,7 @@
     ?>
 
 	</div>
-</section>
+</section>*/ ?>
 <section class="padding-md parallax parallax-2" style="background-image: url('/theme/Obsifight/img/header.png'); background-position: 50% 50%;">
 
   <div class="overlay dark-2"><!-- dark overlay [1 to 9 opacity] --></div>
