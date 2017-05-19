@@ -1,7 +1,7 @@
 <section id="one" class="section">
 	<div class="container">
 
-		<p class="text-center"><?= $this->Html->image('logo.png') ?></p>
+		<p class="text-center"><?= $this->Html->image('logo-banner-min.png', array('style' => 'height:200px;')) ?></p>
 
     <p class="text-center"><u>ObsiFight, un serveur PvP Factions 1.7.10 avec des mods inédits !</u></p>
 
