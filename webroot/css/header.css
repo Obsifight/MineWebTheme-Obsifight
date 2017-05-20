@@ -6,8 +6,8 @@
 	color:#1F262D;
 	font-weight:400;
 	background-color:transparent;
-} 
-#topMain.nav-pills>li:hover>a, 
+}
+#topMain.nav-pills>li:hover>a,
 #topMain.nav-pills>li:focus>a {
 	color:#1F262D;
 	background-color:rgba(0,0,0,0.03);
@@ -65,6 +65,9 @@
 }
 
 @media only screen and (max-width: 992px) {
+  #header #topNav ul#topMain .dropdown-menu {
+    display: block!important;
+  }
 	/* Force 60px */
 	#header {
 		height:60px !important;
