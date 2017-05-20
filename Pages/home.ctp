@@ -15,7 +15,7 @@
     			<p class="font-lato size-19"><?= $didYouKnow[rand(0, (count($didYouKnow)-1))] ?></p>
     		</div>
       </div>
-      <div class="col-md-3" style="margin-top: -30px;">
+      <div class="col-md-3" style="margin-top: -30px;display:none;">
         <h4 style="padding-bottom: 3px;border-bottom: 2px solid #fff;display: inline-block;">
           <?= $this->Html->image('badge-first.png', array('width' => '32')) ?>
           <a href="<?= $this->Html->url('/factions') ?>" style="color: #fff;">Faction en 1<sup>ère</sup> position</a>
