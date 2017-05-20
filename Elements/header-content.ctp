@@ -11,7 +11,7 @@
 <script type="text/javascript">
   $("#open-date").countdown("2017/05/21 16:30:00", function(event) {
     $(this).text(
-      event.strftime('%D jours %H heures %M minutes %S secondes')
+      event.strftime('%H heures %M minutes %S secondes')
     )
   })
 </script>
