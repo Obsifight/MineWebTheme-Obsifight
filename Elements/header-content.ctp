@@ -9,7 +9,7 @@
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.countdown/2.2.0/jquery.countdown.min.js"></script>
 <script type="text/javascript">
-  $("#open-date").countdown("2017/05/21 19:30:00", function(event) {
+  $("#open-date").countdown("2017/05/21 16:30:00", function(event) {
     $(this).text(
       event.strftime('%D jours %H heures %M minutes %S secondes')
     )
