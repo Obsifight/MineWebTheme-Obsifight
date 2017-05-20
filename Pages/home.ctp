@@ -10,10 +10,7 @@
   <div class="container animated fadeInRight" style="margin-top:20px;">
     <div class="row">
       <div class="col-md-9">
-        <div class="heading-title heading-border">
-    			<h1 style="background-color:transparent;">Le saviez-vous ?</h1>
-    			<p class="font-lato size-19"><?= $didYouKnow[rand(0, (count($didYouKnow)-1))] ?></p>
-    		</div>
+        <?= $this->element('header-content') ?>
       </div>
       <div class="col-md-3" style="margin-top: -30px;display:none;">
         <h4 style="padding-bottom: 3px;border-bottom: 2px solid #fff;display: inline-block;">

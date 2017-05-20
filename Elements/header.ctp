@@ -18,9 +18,6 @@
 	</div>
 
   <div class="container animated fadeInRight" style="margin-top:20px;">
-    <div class="heading-title heading-border">
-			<h1 style="background-color:transparent;">Le saviez-vous ?</h1>
-			<p class="font-lato size-19"><?= $didYouKnow[rand(0, (count($didYouKnow)-1))] ?></p>
-		</div>
+    <?= $this->element('header-content') ?>
 	</div>
 </section>
