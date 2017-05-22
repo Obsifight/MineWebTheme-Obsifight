@@ -127,12 +127,12 @@ $(function () {
     // btns
     $('#confirmBuy #confirmBtn').removeClass('disabled').attr('disabled', false)
     if (priceMoney <= '<?= ($user) ? $user['money'] : 0 ?>')
-      $('#confirmBuy .buy[data-pay-mode="point"]').attr('data-selling-id', id)
+      $('#confirmBuy .buy[data-pay-mode="point"]').removeClass('disabled').attr('data-selling-id', id)
     else
       $('#confirmBuy .buy[data-pay-mode="point"]').addClass('disabled').attr('disabled', true)
     $.get('<?= $this->Html->url('/market/user/money') ?>', function (data) {
       if ((!data.status || data.money >= priceMoney) && <?= ($user) ? 'true' : 'false' ?>)
-        $('#confirmBuy .buy[data-pay-mode="money"]').attr('data-selling-id', id)
+        $('#confirmBuy .buy[data-pay-mode="money"]').removeClass('disabled').attr('data-selling-id', id)
       else
         $('#confirmBuy .buy[data-pay-mode="money"]').addClass('disabled').attr('disabled', true)
       next()
